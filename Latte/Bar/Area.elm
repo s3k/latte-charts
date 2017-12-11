@@ -27,14 +27,14 @@ makeLines model state =
 
 latteBarLine : Float -> String -> Svg msg
 latteBarLine pos label =
-    g [ transform ("translate(0, " ++ toString pos ++ ")") ]
+    g [ transform ("translate(10, " ++ toString pos ++ ")") ]
         [ barLine, barText label ]
 
 
 barLine =
     let
         attrs =
-            [ x1 "25"
+            [ x1 "15"
             , x2 "600"
             , y1 "0"
             , y2 "0"
@@ -52,6 +52,7 @@ barText label =
             , x "0"
             , y "0"
             , style barTextStyle
+            , textAnchor "end"
             ]
     in
         text_ attrs [ text label ]

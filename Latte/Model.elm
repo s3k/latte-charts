@@ -2,7 +2,7 @@ module Latte.Model exposing (..)
 
 
 type Msg
-    = Update Float
+    = Update Float Float
     | ShowTooltip
 
 
@@ -39,7 +39,8 @@ type alias Model =
     { chartType : ChartType
     , labels : List String
     , datasets : List Dataset
-    , pos : Float
+    , posX : Float
+    , posY : Float
     }
 
 

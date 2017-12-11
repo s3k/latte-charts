@@ -16,9 +16,10 @@ main =
 model : Model
 model =
     { chartType = Bar
-    , labels = [ "One", "Two", "Three", "Four", "Five", "Six" ]
-    , datasets = [ (Dataset "First" [ 110, 20, 13, 30, 130, 230 ]) ]
-    , pos = 100
+    , labels = [ "Io", "Europa", "Ganymede", "Callisto" ]
+    , datasets = [ (Dataset "Mass" (List.map (\n -> n / 1000) [ 8931900, 4800000, 14819000, 10759000 ])) ]
+    , posX = 100
+    , posY = 100
     }
 
 
@@ -29,12 +30,8 @@ model =
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        Update pos ->
-            let
-                x =
-                    Debug.log "msg" pos
-            in
-                { model | pos = pos }
+        Update posX posY ->
+            { model | posX = posX, posY = posY }
 
         ShowTooltip ->
             model

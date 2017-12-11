@@ -1,5 +1,6 @@
 module Latte.Layout exposing (latte)
 
+import Html exposing (Html, div)
 import Svg exposing (Svg, svg, g, text_, text)
 import Svg.Attributes exposing (..)
 import Latte.Model exposing (..)
@@ -46,14 +47,16 @@ makeBar model =
         view model state (Latte.Bar.Area.view model state) (Latte.Bar.Ticks.view model state)
 
 
-view : Model -> State -> Svg Msg -> Svg Msg -> Svg Msg
+view : Model -> State -> Svg Msg -> Svg Msg -> Html Msg
 view model state area ticks =
-    svg
-        [ width (toString state.width)
-        , height (toString state.height)
-        , viewBox (String.join " " [ "0", "0", toString state.width, toString (state.height + 20) ])
-        ]
-        [ g [ transform ("scale(1,-1) translate(0,-" ++ (toString state.height) ++ ")") ]
-            [ area, ticks ]
-        , g [ transform ("translate(" ++ toString model.pos ++ ",100)") ] [ text_ [] [ text "hello" ] ]
+    div []
+        [ svg
+            [ width (toString state.width)
+            , height (toString state.height)
+            , viewBox (String.join " " [ "0", "0", toString state.width, toString (state.height + 20) ])
+            ]
+            [ g [ transform ("scale(1,-1) translate(0,-" ++ (toString state.height) ++ ")") ]
+                [ area, ticks ]
+              --, g [ transform ("scale(1,1) translate(" ++ toString model.posX ++ "," ++ toString model.posY ++ ")") ] [ text_ [] [ text "hello" ] ]
+            ]
         ]

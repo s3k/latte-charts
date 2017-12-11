@@ -1,8 +1,8 @@
 module Latte.Bar.Ticks exposing (view)
 
-import Svg exposing (Svg, svg, rect, g, text_, text, animate)
+import Svg exposing (Svg, svg, rect, g, text_, text, animate, line)
 import Svg.Attributes exposing (..)
-import Svg.Events exposing (onClick)
+import Svg.Events exposing (onMouseOver)
 import Latte.Model exposing (..)
 
 
@@ -22,7 +22,7 @@ view model state =
 
 toBarTicks : State -> Dataset -> List String -> List (Svg Msg)
 toBarTicks state ds labels =
-    List.map3 (\i val label -> { i = (i * 50 + (leftAlign state)), val = val, label = label }) (List.range 0 (List.length ds.values)) ds.values labels
+    List.map3 (\i val label -> { i = (i * 70 + (leftAlign state)), val = val, label = label }) (List.range 0 (List.length ds.values)) ds.values labels
         |> List.map (\n -> barTick (toFloat n.i) (calcHeight state n.val) n.label)
 
 
@@ -50,17 +50,32 @@ barTick : Float -> Float -> String -> Svg Msg
 barTick right height label =
     g
         [ transform ("translate(" ++ toString right ++ ", 0)")
-        , onClick (Update right)
+        , onMouseOver (Update right height)
         ]
         [ rect barTickAttr
             [ barTickAnimate height ]
-        , text_ [ x "0", y "15", transform "scale(1,-1)", style textStyle ] [ text label ]
+        , line
+            [ x1 "17.5"
+            , x2 "17.5"
+            , y1 "-1"
+            , y2 "-5"
+            , style "stroke: #999; stroke-width: 0.7"
+            ]
+            []
+        , text_
+            [ x "17.5"
+            , y "15"
+            , transform "scale(1,-1)"
+            , style textStyle
+            , textAnchor "middle"
+            ]
+            [ text label ]
         ]
 
 
 barTickAttr =
-    [ style "fill: #f6a192"
-    , width "30"
+    [ style "fill: #C0D6E4"
+    , width "35"
     ]
 
 
@@ -88,5 +103,5 @@ textStyle =
         fill: rgb(85, 91, 81);
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
         font-size: 11px;
-        font-weight: 100;
+        font-weight: 300;
   """
