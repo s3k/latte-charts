@@ -16,8 +16,9 @@ main =
 model : Model
 model =
     { chartType = Bar
-    , labels = [ "One", "Two", "Three", "Four" ]
+    , labels = [ "One", "Two", "Three", "Four", "Five", "Six" ]
     , datasets = [ (Dataset "First" [ 110, 20, 13, 30, 130, 230 ]) ]
+    , pos = 100
     }
 
 
@@ -25,14 +26,17 @@ model =
 -- UPDATE
 
 
-type Msg
-    = Update
-
-
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        Update ->
+        Update pos ->
+            let
+                x =
+                    Debug.log "msg" pos
+            in
+                { model | pos = pos }
+
+        ShowTooltip ->
             model
 
 
