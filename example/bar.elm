@@ -24,10 +24,10 @@ model =
     { hello =
         "Hello"
     , latte =
-        latteMake 640 480 <|
+        latteMake 640 200 <|
             { chart = Bar
             , labels = [ "Io", "Europa", "Ganymede", "Callisto" ]
-            , datasets = [ (Dataset "Mass" [ 8931900, 4800000, 14819000, 10759000 ]) ]
+            , datasets = [ Dataset "Mass" [ 8931900, 4800000, 14819000, 10759000 ] ]
             , title = "Moons of Jupyter"
             }
     }

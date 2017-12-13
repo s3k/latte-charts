@@ -22,9 +22,9 @@ toS val =
 -- Model Helpers
 
 
-maxBarLines : Float -> Int
+maxBarLines : Float -> Float
 maxBarLines height =
-    floor (height / 40.0)
+    height / 40.0
 
 
 maxDsValue : UserData -> Float

@@ -32,7 +32,7 @@ type alias State =
     { width : Float
     , height : Float
     , maxDsValue : Float
-    , maxBarLines : Int
+    , maxBarLines : Float
     , elemCount : Int
     , tooltip : Tooltip
     }

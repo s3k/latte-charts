@@ -36,7 +36,7 @@ calcHeight : State -> Float -> Float
 calcHeight state val =
     let
         mbl =
-            toFloat state.maxBarLines
+            state.maxBarLines
 
         yMaxPx =
             mbl * state.height / (mbl + 1)
