@@ -12,7 +12,7 @@ import Svg.Attributes exposing (height, transform, viewBox, width)
 
 view : Model -> Svg msg
 view model =
-    div []
+    div [ boxStyle model ]
         [ div []
             [ text model.userData.title
             ]
@@ -46,6 +46,17 @@ ticks model =
 -- Styles
 
 
+boxStyle : Model -> Attribute msg
+boxStyle model =
+    style
+        [ ( "padding", "10px" )
+        , ( "margin", "10px" )
+        , ( "border", "1px solid #ccc" )
+        , ( "max-width", toPx model.state.width )
+        , ( "border-radius", "5px" )
+        ]
+
+
 viewportStyle : Model -> List (Attribute msg)
 viewportStyle model =
     [ transform ("scale(1,-1) translate(0,-" ++ toS model.state.height ++ ")") ]
@@ -55,14 +66,14 @@ chartStyle : Model -> List (Attribute msg)
 chartStyle model =
     [ width (toS model.state.width)
     , height (toS model.state.height)
-    , viewBox (String.join " " [ "0", "0", toS model.state.width, toS (model.state.height + 20) ])
+    , viewBox (String.join " " [ "0", "0", toS (model.state.width), toS (model.state.height + 30) ])
     ]
 
 
 tooltipStyle : Model -> Attribute msg
 tooltipStyle model =
     style
-        [ ( "position", "relative" )
+        [ ( "position", "absolute" )
         , ( "left", toPx model.state.tooltip.x )
         , ( "top", toPx model.state.tooltip.y )
         ]

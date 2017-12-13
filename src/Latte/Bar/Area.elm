@@ -22,9 +22,9 @@ makeLines model =
         yStep =
             model.state.maxDsValue / model.state.maxBarLines
     in
-    List.range 0 (floor model.state.maxBarLines)
-        |> List.map (\n -> BarArea (toFloat n) (toFloat (round (yStep * toFloat n))))
-        |> List.map (\n -> latteBarLine (model.state.height / (model.state.maxBarLines + 1) * n.i) (toString n.label))
+        List.range 0 (floor model.state.maxBarLines)
+            |> List.map (\n -> BarArea (toFloat n) (toFloat (round (yStep * toFloat n))))
+            |> List.map (\n -> latteBarLine (model.state.height / (model.state.maxBarLines + 1) * n.i) (toString n.label))
 
 
 latteBarLine : Float -> String -> Svg msg
@@ -43,12 +43,12 @@ barLine =
             , style
                 [ ( "stroke", "#bbb" )
                 , ( "stroke-width", "0.5" )
-                , ( "shape-rendering", "crispEdges" )
+                  -- , ( "shape-rendering", "crispEdges" )
                 , ( "fill", "none" )
                 ]
             ]
     in
-    line attrs []
+        line attrs []
 
 
 barText : String -> Svg msg
@@ -62,7 +62,7 @@ barText label =
             , textAnchor "end"
             ]
     in
-    text_ attrs [ text label ]
+        text_ attrs [ text label ]
 
 
 barTextStyle : Attribute msg
