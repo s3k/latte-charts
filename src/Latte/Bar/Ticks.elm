@@ -1,17 +1,17 @@
 module Latte.Bar.Ticks exposing (view)
 
-import Svg exposing (Svg, svg, rect, g, text_, text, animate, line)
-import Svg.Attributes exposing (..)
-import Svg.Events exposing (onMouseOver)
 import Latte.Model exposing (..)
 import Latte.Msg exposing (..)
+import Svg exposing (Svg, animate, g, line, rect, svg, text, text_)
+import Svg.Attributes exposing (..)
+import Svg.Events exposing (onMouseOver)
 
 
-view : Model -> State -> Svg Msg
-view model state =
-    case (List.head model.datasets) of
+view : Model -> Svg msg
+view model =
+    case List.head model.userData.datasets of
         Just ds ->
-            g [ class "ticks" ] (toBarTicks state ds model.labels)
+            g [ class "ticks" ] (toBarTicks model ds)
 
         Nothing ->
             g [ class "ticks" ] []
@@ -21,15 +21,15 @@ view model state =
 -- Bar ticks
 
 
-toBarTicks : State -> Dataset -> List String -> List (Svg Msg)
-toBarTicks state ds labels =
-    List.map3 (\i val label -> { i = (i * 70 + (leftAlign state)), val = val, label = label }) (List.range 0 (List.length ds.values)) ds.values labels
-        |> List.map (\n -> barTick (toFloat n.i) (calcHeight state n.val) n.label)
+toBarTicks : Model -> Dataset -> List (Svg msg)
+toBarTicks model ds =
+    List.map3 (\i val label -> { i = i * 70 + leftAlign model.state, val = val, label = label }) (List.range 0 (List.length ds.values)) ds.values model.userData.labels
+        |> List.map (\n -> barTick (toFloat n.i) (calcHeight model.state n.val) n.label)
 
 
 leftAlign : State -> Int
 leftAlign state =
-    round ((state.width - (toFloat state.elemCount) * 50) / 2)
+    round ((state.width - toFloat state.elemCount * 50) / 2)
 
 
 calcHeight : State -> Float -> Float
@@ -44,14 +44,15 @@ calcHeight state val =
         coeff =
             state.maxDsValue / yMaxPx
     in
-        val / coeff
+    val / coeff
 
 
-barTick : Float -> Float -> String -> Svg Msg
+barTick : Float -> Float -> String -> Svg msg
 barTick right height label =
     g
         [ transform ("translate(" ++ toString right ++ ", 0)")
-        , onMouseOver (Update right height)
+
+        -- , onMouseOver (Update right height)
         ]
         [ rect barTickAttr
             [ barTickAnimate height ]
@@ -80,7 +81,7 @@ barTickAttr =
     ]
 
 
-barTickAnimate : Float -> Svg Msg
+barTickAnimate : Float -> Svg msg
 barTickAnimate height =
     animate
         [ attributeName "height"

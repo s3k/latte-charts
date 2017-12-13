@@ -1,11 +1,6 @@
 module Latte.Model exposing (..)
 
 
-type Msg
-    = Update Float Float
-    | ShowTooltip
-
-
 type Chart
     = Bar
     | Line
@@ -55,25 +50,3 @@ type alias Model =
     { userData : UserData
     , state : State
     }
-
-
-
--- Helpers
-{-
-   maxDsValue : Model -> Float
-   maxDsValue model =
-       model.datasets
-           |> List.map (\n -> n.values)
-           |> List.concat
-           |> List.maximum
-           |> justNumber
-
-
-   justNumber item =
-       case item of
-           Just x ->
-               x
-
-           Nothing ->
-               0
--}

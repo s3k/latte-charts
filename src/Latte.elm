@@ -5,9 +5,10 @@
 
 module Latte exposing (latteDraw, latteMake)
 
-import Svg exposing (Svg, svg)
-import Latte.Model exposing (..)
 import Latte.Bar
+import Latte.Helper exposing (..)
+import Latte.Model exposing (..)
+import Svg exposing (Svg, svg)
 
 
 latteMake : Float -> Float -> UserData -> Model
@@ -17,9 +18,9 @@ latteMake width height data =
     , state =
         { width = width
         , height = height
-        , maxDsValue = 0
-        , maxBarLines = 5
-        , elemCount = 0
+        , maxDsValue = maxDsValue data
+        , maxBarLines = maxBarLines height
+        , elemCount = List.length data.labels
         , tooltip =
             { title = "Tooltip title"
             , x = 100

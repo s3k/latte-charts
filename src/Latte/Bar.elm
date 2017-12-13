@@ -2,13 +2,12 @@ module Latte.Bar exposing (view)
 
 import Html exposing (Attribute, div, text)
 import Html.Attributes exposing (style)
-import Svg exposing (Svg, svg, g)
-import Svg.Attributes exposing (width, height, viewBox, transform)
-import Latte.Model exposing (..)
 import Latte.Bar.Area exposing (view)
-
-
--- import Latte.Bar.Ticks
+import Latte.Bar.Ticks exposing (view)
+import Latte.Helper exposing (..)
+import Latte.Model exposing (..)
+import Svg exposing (Svg, g, svg)
+import Svg.Attributes exposing (height, transform, viewBox, width)
 
 
 view : Model -> Svg msg
@@ -22,7 +21,8 @@ view model =
             ]
         , svg (chartStyle model)
             [ g (viewportStyle model)
-                [ (area model)
+                [ area model
+                , ticks model
                 ]
             ]
         ]
@@ -37,13 +37,18 @@ area model =
     Latte.Bar.Area.view model
 
 
+ticks : Model -> Svg msg
+ticks model =
+    Latte.Bar.Ticks.view model
+
+
 
 -- Styles
 
 
 viewportStyle : Model -> List (Attribute msg)
 viewportStyle model =
-    [ transform ("scale(1,-1) translate(0,-" ++ (toS model.state.height) ++ ")") ]
+    [ transform ("scale(1,-1) translate(0,-" ++ toS model.state.height ++ ")") ]
 
 
 chartStyle : Model -> List (Attribute msg)
@@ -61,13 +66,3 @@ tooltipStyle model =
         , ( "left", toPx model.state.tooltip.x )
         , ( "top", toPx model.state.tooltip.y )
         ]
-
-
-toPx : a -> String
-toPx val =
-    toS val ++ "px"
-
-
-toS : a -> String
-toS val =
-    toString val
