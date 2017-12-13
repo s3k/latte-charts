@@ -4,6 +4,7 @@ import Svg exposing (Svg, svg, rect, g, text_, text, animate, line)
 import Svg.Attributes exposing (..)
 import Svg.Events exposing (onMouseOver)
 import Latte.Model exposing (..)
+import Latte.Msg exposing (..)
 
 
 view : Model -> State -> Svg Msg

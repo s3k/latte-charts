@@ -1,3 +1,9 @@
+{-| Convert a list of characters into a String. Can be useful if you
+want to create a string primarly by consing, perhaps for decoding
+something.
+
+    fromList ['e','l','m'] == "elm"
+-}
 module Latte.Layout exposing (latte)
 
 import Html exposing (Html, div)
@@ -7,6 +13,7 @@ import Latte.Model exposing (..)
 import Latte.Bar.Area
 import Latte.Bar.Ticks
 import Latte.Model exposing (..)
+import Latte.Msg exposing (..)
 
 
 latte : Model -> Svg Msg
@@ -50,13 +57,14 @@ makeBar model =
 view : Model -> State -> Svg Msg -> Svg Msg -> Html Msg
 view model state area ticks =
     div []
-        [ svg
+        [ div [] [ text model.title ]
+        , div [ style ("position: relative; left: " ++ toString model.posX ++ "px; top: " ++ toString (225 - model.posY) ++ "px;") ] [ text "tooltip" ]
+        , svg
             [ width (toString state.width)
             , height (toString state.height)
             , viewBox (String.join " " [ "0", "0", toString state.width, toString (state.height + 20) ])
             ]
             [ g [ transform ("scale(1,-1) translate(0,-" ++ (toString state.height) ++ ")") ]
                 [ area, ticks ]
-              --, g [ transform ("scale(1,1) translate(" ++ toString model.posX ++ "," ++ toString model.posY ++ ")") ] [ text_ [] [ text "hello" ] ]
             ]
         ]

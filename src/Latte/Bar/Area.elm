@@ -5,22 +5,22 @@ import Svg.Attributes exposing (..)
 import Latte.Model exposing (..)
 
 
-view : Model -> State -> Svg msg
-view model state =
-    g [ class "lines" ] (makeLines model state)
+view : Model -> Svg msg
+view model =
+    g [ class "lines" ] (makeLines model)
 
 
 
 -- Logic
 
 
-makeLines : Model -> State -> List (Svg msg)
-makeLines model state =
+makeLines : Model -> List (Svg msg)
+makeLines model =
     let
         yStep =
-            state.maxDsValue / toFloat state.maxBarLines
+            model.state.maxDsValue / toFloat model.state.maxBarLines
     in
-        List.range 0 state.maxBarLines
+        List.range 0 model.state.maxBarLines
             |> List.map (\n -> BarArea (toFloat n) (toFloat (round (yStep * toFloat n))))
             |> List.map (\n -> latteBarLine (240 / 6 * n.i) (toString n.label))
 
