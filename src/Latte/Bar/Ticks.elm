@@ -7,7 +7,7 @@ import Svg.Attributes exposing (..)
 import Svg.Events exposing (onMouseOver)
 
 
-view : Model -> Svg msg
+view : Model -> Svg Msg
 view model =
     case List.head model.userData.datasets of
         Just ds ->
@@ -21,7 +21,7 @@ view model =
 -- Bar ticks
 
 
-toBarTicks : Model -> Dataset -> List (Svg msg)
+toBarTicks : Model -> Dataset -> List (Svg Msg)
 toBarTicks model ds =
     List.map3 (\i val label -> { i = i * 70 + leftAlign model.state, val = val, label = label }) (List.range 0 (List.length ds.values)) ds.values model.userData.labels
         |> List.map (\n -> barTick (toFloat n.i) (calcHeight model.state n.val) n.label)
@@ -44,15 +44,14 @@ calcHeight state val =
         coeff =
             state.maxDsValue / yMaxPx
     in
-    val / coeff
+        val / coeff
 
 
-barTick : Float -> Float -> String -> Svg msg
+barTick : Float -> Float -> String -> Svg Msg
 barTick right height label =
     g
         [ transform ("translate(" ++ toString right ++ ", 0)")
-
-        -- , onMouseOver (Update right height)
+        , onMouseOver (Update right height)
         ]
         [ rect barTickAttr
             [ barTickAnimate height ]

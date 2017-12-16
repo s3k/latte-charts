@@ -6,11 +6,12 @@ import Latte.Bar.Area exposing (view)
 import Latte.Bar.Ticks exposing (view)
 import Latte.Helper exposing (..)
 import Latte.Model exposing (..)
+import Latte.Msg exposing (..)
 import Svg exposing (Svg, g, svg)
 import Svg.Attributes exposing (height, transform, viewBox, width)
 
 
-view : Model -> Svg msg
+view : Model -> Svg Msg
 view model =
     div [ boxStyle model ]
         [ div []
@@ -32,12 +33,12 @@ view model =
 -- Helpers
 
 
-area : Model -> Svg msg
+area : Model -> Svg Msg
 area model =
     Latte.Bar.Area.view model
 
 
-ticks : Model -> Svg msg
+ticks : Model -> Svg Msg
 ticks model =
     Latte.Bar.Ticks.view model
 

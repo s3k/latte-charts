@@ -3,12 +3,32 @@
 -}
 
 
-module Latte exposing (latteDraw, latteMake)
+module Latte exposing (latteDraw, latteMake, latteUpdate)
 
 import Latte.Bar
 import Latte.Helper exposing (..)
 import Latte.Model exposing (..)
 import Svg exposing (Svg, svg)
+import Latte.Msg exposing (..)
+
+
+latteUpdate : Msg -> Model -> Model
+latteUpdate msg model =
+    case msg of
+        Update x y ->
+            { model | state = updateTooltip x model.state }
+
+
+updateTooltip : Float -> State -> State
+updateTooltip x state =
+    let
+        tooltip =
+            state.tooltip
+
+        newTooltip =
+            { tooltip | x = x }
+    in
+        { state | tooltip = newTooltip }
 
 
 latteMake : Float -> Float -> UserData -> Model
@@ -30,7 +50,7 @@ latteMake width height data =
     }
 
 
-latteDraw : Model -> Svg msg
+latteDraw : Model -> Svg Msg
 latteDraw model =
     case model.userData.chart of
         Bar ->

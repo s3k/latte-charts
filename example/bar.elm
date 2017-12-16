@@ -2,7 +2,8 @@ module Bar exposing (..)
 
 import Html exposing (Html, div, text)
 import Latte exposing (..)
-import Latte.Model as Latte exposing (..)
+import Latte.Msg as Lat
+import Latte.Model as Lt exposing (..)
 
 
 main =
@@ -15,7 +16,7 @@ main =
 
 type alias Model =
     { hello : String
-    , latte : Latte.Model
+    , latte : Lt.Model
     }
 
 
@@ -38,14 +39,14 @@ model =
 
 
 type Msg
-    = Increment
+    = Latte Lat.Msg
 
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        Increment ->
-            model
+        Latte msg ->
+            { model | latte = (latteUpdate msg model.latte) }
 
 
 
@@ -55,5 +56,5 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ latteDraw model.latte
+        [ Html.map Latte (latteDraw model.latte)
         ]
