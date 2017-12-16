@@ -5,7 +5,7 @@
 
 module Latte.Helper exposing (..)
 
-import Latte.Model exposing (UserData)
+import Latte.Model exposing (Model, UserData)
 
 
 toPx : a -> String
@@ -36,6 +36,15 @@ maxDsValue model =
         |> justNumber
 
 
+tooltipName : Model -> String
+tooltipName model =
+    model.userData.datasets
+        |> List.map (\n -> n.title)
+        |> List.head
+        |> justString
+        |> (\title -> String.join " " [ title, model.state.tooltip.value ])
+
+
 justNumber item =
     case item of
         Just x ->
@@ -43,3 +52,35 @@ justNumber item =
 
         Nothing ->
             0
+
+
+justString item =
+    case item of
+        Just x ->
+            x
+
+        Nothing ->
+            ""
+
+
+
+-- Style Helpers
+
+
+commonSvgFont : List ( String, String )
+commonSvgFont =
+    ([ ( "text-rendering", "optimizeLegibility" )
+     , ( "color", "rgb(108, 118, 128)" )
+     , ( "display", "inline" )
+     , ( "fill", "rgb(85, 91, 81)" )
+     , ( "font-size", "11px" )
+     , ( "font-weight", "300" )
+     ]
+        ++ commonFont
+    )
+
+
+commonFont : List ( String, String )
+commonFont =
+    [ ( "font-family", "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif" )
+    ]

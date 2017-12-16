@@ -25,6 +25,7 @@ type alias Tooltip =
     { title : String
     , x : Float
     , y : Float
+    , value : String
     }
 
 

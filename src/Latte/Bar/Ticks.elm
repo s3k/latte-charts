@@ -3,8 +3,10 @@ module Latte.Bar.Ticks exposing (view)
 import Latte.Model exposing (..)
 import Latte.Msg exposing (..)
 import Svg exposing (Svg, animate, g, line, rect, svg, text, text_)
-import Svg.Attributes exposing (..)
 import Svg.Events exposing (onMouseOver)
+import Html.Attributes exposing (style)
+import Svg.Attributes exposing (width, class, transform, x1, x2, y1, y2, x, y, textAnchor, attributeName, from, to, dur, fill)
+import Latte.Helper exposing (..)
 
 
 view : Model -> Svg Msg
@@ -24,7 +26,7 @@ view model =
 toBarTicks : Model -> Dataset -> List (Svg Msg)
 toBarTicks model ds =
     List.map3 (\i val label -> { i = i * 70 + leftAlign model.state, val = val, label = label }) (List.range 0 (List.length ds.values)) ds.values model.userData.labels
-        |> List.map (\n -> barTick (toFloat n.i) (calcHeight model.state n.val) n.label)
+        |> List.map (\n -> barTick n.val (toFloat n.i) (calcHeight model.state n.val) n.label)
 
 
 leftAlign : State -> Int
@@ -47,11 +49,11 @@ calcHeight state val =
         val / coeff
 
 
-barTick : Float -> Float -> String -> Svg Msg
-barTick right height label =
+barTick : Float -> Float -> Float -> String -> Svg Msg
+barTick val right height label =
     g
         [ transform ("translate(" ++ toString right ++ ", 0)")
-        , onMouseOver (Update right height)
+        , onMouseOver (Update right height val)
         ]
         [ rect barTickAttr
             [ barTickAnimate height ]
@@ -60,14 +62,14 @@ barTick right height label =
             , x2 "17.5"
             , y1 "-1"
             , y2 "-5"
-            , style "stroke: #999; stroke-width: 0.7"
+            , style [ ( "stroke", "#999" ), ( "stroke-width", "0.7" ) ]
             ]
             []
         , text_
             [ x "17.5"
             , y "15"
             , transform "scale(1,-1)"
-            , style textStyle
+            , style commonSvgFont
             , textAnchor "middle"
             ]
             [ text label ]
@@ -75,7 +77,7 @@ barTick right height label =
 
 
 barTickAttr =
-    [ style "fill: #C0D6E4"
+    [ style [ ( "fill", "#C0D6E4" ) ]
     , width "35"
     ]
 
@@ -90,19 +92,3 @@ barTickAnimate height =
         , fill "freeze"
         ]
         []
-
-
-
--- Style
-
-
-textStyle =
-    """
-        text-rendering: optimizeLegibility;
-        color: rgb(108, 118, 128);
-        display: inline;
-        fill: rgb(85, 91, 81);
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-        font-size: 11px;
-        font-weight: 300;
-  """

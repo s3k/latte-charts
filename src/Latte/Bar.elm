@@ -9,17 +9,16 @@ import Latte.Model exposing (..)
 import Latte.Msg exposing (..)
 import Svg exposing (Svg, g, svg)
 import Svg.Attributes exposing (height, transform, viewBox, width)
+import Latte.Bar.Tooltip
 
 
 view : Model -> Svg Msg
 view model =
     div [ boxStyle model ]
-        [ div []
+        [ div [ titleStyle ]
             [ text model.userData.title
             ]
-        , div [ tooltipStyle model ]
-            [ text model.state.tooltip.title
-            ]
+        , Latte.Bar.Tooltip.view model
         , svg (chartStyle model)
             [ g (viewportStyle model)
                 [ area model
@@ -47,6 +46,11 @@ ticks model =
 -- Styles
 
 
+titleStyle : Attribute msg
+titleStyle =
+    style commonFont
+
+
 boxStyle : Model -> Attribute msg
 boxStyle model =
     style
@@ -69,12 +73,3 @@ chartStyle model =
     , height (toS model.state.height)
     , viewBox (String.join " " [ "0", "0", toS (model.state.width), toS (model.state.height + 30) ])
     ]
-
-
-tooltipStyle : Model -> Attribute msg
-tooltipStyle model =
-    style
-        [ ( "position", "absolute" )
-        , ( "left", toPx model.state.tooltip.x )
-        , ( "top", toPx model.state.tooltip.y )
-        ]

@@ -3,6 +3,7 @@ module Latte.Bar.Area exposing (view)
 import Html exposing (Attribute)
 import Html.Attributes exposing (style)
 import Latte.Model exposing (..)
+import Latte.Helper exposing (..)
 import Svg exposing (Svg, g, line, text, text_)
 import Svg.Attributes exposing (class, textAnchor, transform, x, x1, x2, y, y1, y2)
 
@@ -67,12 +68,4 @@ barText label =
 
 barTextStyle : Attribute msg
 barTextStyle =
-    style
-        [ ( "text-rendering", "optimizeLegibility" )
-        , ( "color", "rgb(108, 118, 128)" )
-        , ( "display", "inline" )
-        , ( "fill", "rgb(85, 91, 81)" )
-        , ( "font-family", "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif" )
-        , ( "font-size", "11px" )
-        , ( "font-weight", "100" )
-        ]
+    style commonSvgFont

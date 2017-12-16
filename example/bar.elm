@@ -2,8 +2,8 @@ module Bar exposing (..)
 
 import Html exposing (Html, div, text)
 import Latte exposing (..)
-import Latte.Msg as Lat
-import Latte.Model as Lt exposing (..)
+import Latte.Msg as LatteMsg
+import Latte.Model as LatteModel exposing (Chart(..), Dataset)
 
 
 main =
@@ -16,7 +16,7 @@ main =
 
 type alias Model =
     { hello : String
-    , latte : Lt.Model
+    , latte : LatteModel.Model
     }
 
 
@@ -39,7 +39,7 @@ model =
 
 
 type Msg
-    = Latte Lat.Msg
+    = Latte LatteMsg.Msg
 
 
 update : Msg -> Model -> Model
