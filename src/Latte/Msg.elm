@@ -2,4 +2,5 @@ module Latte.Msg exposing (..)
 
 
 type Msg
-    = Update Float Float Float
+    = ShowTooltip Float Float Float String String
+    | HideTooltip

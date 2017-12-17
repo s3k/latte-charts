@@ -29,10 +29,12 @@ latteMake width height data =
         , maxBarLines = maxBarLines height
         , elemCount = List.length data.labels
         , tooltip =
-            { title = "Tooltip"
-            , x = 100
-            , y = 100
-            , value = ""
+            { label = "Label"
+            , value = "Value"
+            , dsTitle = "Dataset Name"
+            , display = "none"
+            , x = 0
+            , y = 0
             }
         }
     }

@@ -1,9 +1,15 @@
+{-
+   Render bars
+   Refactoring needed
+-}
+
+
 module Latte.Bar.Ticks exposing (view)
 
 import Latte.Model exposing (..)
 import Latte.Msg exposing (..)
 import Svg exposing (Svg, animate, g, line, rect, svg, text, text_)
-import Svg.Events exposing (onMouseOver)
+import Svg.Events exposing (onMouseOver, onMouseOut)
 import Html.Attributes exposing (style)
 import Svg.Attributes exposing (width, class, transform, x1, x2, y1, y2, x, y, textAnchor, attributeName, from, to, dur, fill)
 import Latte.Helper exposing (..)
@@ -26,7 +32,7 @@ view model =
 toBarTicks : Model -> Dataset -> List (Svg Msg)
 toBarTicks model ds =
     List.map3 (\i val label -> { i = i * 70 + leftAlign model.state, val = val, label = label }) (List.range 0 (List.length ds.values)) ds.values model.userData.labels
-        |> List.map (\n -> barTick n.val (toFloat n.i) (calcHeight model.state n.val) n.label)
+        |> List.map (\n -> barTick ds.title n.val (toFloat n.i) (calcHeight model.state n.val) n.label)
 
 
 leftAlign : State -> Int
@@ -49,11 +55,12 @@ calcHeight state val =
         val / coeff
 
 
-barTick : Float -> Float -> Float -> String -> Svg Msg
-barTick val right height label =
+barTick : String -> Float -> Float -> Float -> String -> Svg Msg
+barTick dsTitle val right height label =
     g
         [ transform ("translate(" ++ toString right ++ ", 0)")
-        , onMouseOver (Update right height val)
+        , onMouseOver (ShowTooltip right height val label dsTitle)
+        , onMouseOut HideTooltip
         ]
         [ rect barTickAttr
             [ barTickAnimate height ]

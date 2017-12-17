@@ -9,14 +9,13 @@ import Latte.Msg exposing (..)
 
 view : Model -> Html Msg
 view model =
-    div [ tooltipStyle model ]
+    div [ tooltipStyle model.state ]
         [ div []
-            [ text "label"
-              -- text (tooltipName model)
+            [ text model.state.tooltip.label
             , ul [ ulStyle ]
                 [ li [ liStyle ]
-                    [ div [] [ text "value" ]
-                    , strong [] [ text "dataset name" ]
+                    [ div [] [ text model.state.tooltip.value ]
+                    , strong [] [ text model.state.tooltip.dsTitle ]
                     ]
                 ]
             ]
@@ -27,12 +26,13 @@ view model =
 -- Style
 
 
-tooltipStyle : Model -> Attribute msg
-tooltipStyle model =
+tooltipStyle : State -> Attribute msg
+tooltipStyle state =
     style
         ([ ( "position", "absolute" )
-         , ( "left", toPx model.state.tooltip.x )
-         , ( "top", toPx model.state.tooltip.y )
+         , ( "left", toPx state.tooltip.x )
+         , ( "top", toPx state.tooltip.y )
+         , ( "display", state.tooltip.display )
          ]
             ++ commonFont
         )

@@ -22,10 +22,12 @@ type alias BarArea =
 
 
 type alias Tooltip =
-    { title : String
+    { label : String
+    , value : String
+    , dsTitle : String
+    , display : String
     , x : Float
     , y : Float
-    , value : String
     }
 
 

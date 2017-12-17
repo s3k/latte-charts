@@ -8,21 +8,43 @@ import Latte.Helper exposing (..)
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        Update x y val ->
-            { model | state = updateTooltip x val model.state }
+        ShowTooltip x y val label dsTitle ->
+            { model | state = showTooltip x y val label dsTitle model.state }
+
+        HideTooltip ->
+            { model | state = hideTooltip model.state }
 
 
 
 -- Updaters
 
 
-updateTooltip : Float -> Float -> State -> State
-updateTooltip x val state =
+showTooltip : Float -> Float -> Float -> String -> String -> State -> State
+showTooltip x y val label dsTitle state =
     let
         tooltip =
             state.tooltip
 
         newTooltip =
-            { tooltip | x = x, value = (toS val) }
+            { tooltip
+                | x = x
+                , y = (state.height - y) - 40
+                , value = (toS val)
+                , label = label
+                , dsTitle = dsTitle
+                , display = "block"
+            }
+    in
+        { state | tooltip = newTooltip }
+
+
+hideTooltip : State -> State
+hideTooltip state =
+    let
+        tooltip =
+            state.tooltip
+
+        newTooltip =
+            { tooltip | display = "none" }
     in
         { state | tooltip = newTooltip }
