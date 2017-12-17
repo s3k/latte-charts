@@ -28,7 +28,7 @@ showTooltip x y val label dsTitle state =
         newTooltip =
             { tooltip
                 | x = x
-                , y = (state.height - y) - 40
+                , y = (state.height - y) - 70
                 , value = (toS val)
                 , label = label
                 , dsTitle = dsTitle

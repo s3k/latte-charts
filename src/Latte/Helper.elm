@@ -73,8 +73,6 @@ commonSvgFont =
      , ( "color", "rgb(108, 118, 128)" )
      , ( "display", "inline" )
      , ( "fill", "rgb(85, 91, 81)" )
-     , ( "font-size", "12px" )
-     , ( "font-weight", "300" )
      ]
         ++ commonFont
     )
@@ -83,4 +81,6 @@ commonSvgFont =
 commonFont : List ( String, String )
 commonFont =
     [ ( "font-family", "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif" )
+    , ( "font-size", "12px" )
+    , ( "font-weight", "300" )
     ]

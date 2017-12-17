@@ -11,11 +11,11 @@ view : Model -> Html Msg
 view model =
     div [ tooltipStyle model.state ]
         [ div []
-            [ text model.state.tooltip.label
+            [ div [ labelStyle ] [ text model.state.tooltip.label ]
             , ul [ ulStyle ]
                 [ li [ liStyle ]
                     [ div [] [ text model.state.tooltip.value ]
-                    , strong [] [ text model.state.tooltip.dsTitle ]
+                    , strong [ dsTitleStyle ] [ text model.state.tooltip.dsTitle ]
                     ]
                 ]
             ]
@@ -29,18 +29,43 @@ view model =
 tooltipStyle : State -> Attribute msg
 tooltipStyle state =
     style
-        ([ ( "position", "absolute" )
-         , ( "left", toPx state.tooltip.x )
-         , ( "top", toPx state.tooltip.y )
-         , ( "display", state.tooltip.display )
-         ]
-            ++ commonFont
+        (commonFont
+            ++ [ ( "position", "absolute" )
+               , ( "left", toPx state.tooltip.x )
+               , ( "top", toPx state.tooltip.y )
+               , ( "display", state.tooltip.display )
+               , ( "color", "white" )
+               , ( "background-color", "black" )
+               , ( "border-radius", "5px" )
+               , opacityStyle
+               , ( "min-width", "110px" )
+               , ( "height", "82px" )
+               ]
         )
+
+
+dsTitleStyle : Attribute msg
+dsTitleStyle =
+    style
+        [ opacityStyle
+        , ( "padding", "10px 0px" )
+        ]
+
+
+labelStyle : Attribute msg
+labelStyle =
+    style
+        [ ( "padding", "8px" )
+        , opacityStyle
+        ]
 
 
 liStyle : Attribute msg
 liStyle =
-    style [ ( "border-top", "2px solid #ff00ff" ) ]
+    style
+        [ ( "border-top", "3px solid #C0D6E4" )
+        , ( "padding", "8px" )
+        ]
 
 
 ulStyle : Attribute msg
@@ -50,3 +75,7 @@ ulStyle =
         , ( "padding", "0" )
         , ( "margin", "0" )
         ]
+
+
+opacityStyle =
+    ( "opacity", "0.7" )

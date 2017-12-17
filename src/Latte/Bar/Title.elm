@@ -21,9 +21,9 @@ view model =
 titleStyle : Attribute msg
 titleStyle =
     style
-        ([ ( "color", "#555" )
-         , ( "font-size", "14px" )
-         , ( "font-weight", "300" )
-         ]
-            ++ commonFont
+        (commonFont
+            ++ [ ( "color", "#333" )
+               , ( "font-size", "14px" )
+               , ( "font-weight", "400" )
+               ]
         )
