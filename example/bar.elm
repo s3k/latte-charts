@@ -1,6 +1,6 @@
 module Bar exposing (..)
 
-import Html exposing (Html, div, text)
+import Html exposing (Html, div, text, ol, li, strong)
 import Latte exposing (..)
 import Latte.Msg as LatteMsg
 import Latte.Model as LatteModel exposing (Chart(..), Dataset)
@@ -57,4 +57,10 @@ view : Model -> Html Msg
 view model =
     div []
         [ Html.map Latte (latteDraw model.latte)
+        , ol []
+            [ strong [] [ text "Todo:" ]
+            , li [] [ text "Aspect Bars by X" ]
+            , li [] [ text "Humanize dataset labels" ]
+            , li [] [ text "Tune fonts" ]
+            ]
         ]
