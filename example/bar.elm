@@ -23,7 +23,7 @@ type alias Model =
 model : Model
 model =
     { hello =
-        "Hello"
+        "Hello, this is a Latte Chart example"
     , latte =
         latteMake 640 200 <|
             { chart = Bar

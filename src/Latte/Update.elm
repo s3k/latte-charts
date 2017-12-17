@@ -12,6 +12,10 @@ update msg model =
             { model | state = updateTooltip x val model.state }
 
 
+
+-- Updaters
+
+
 updateTooltip : Float -> Float -> State -> State
 updateTooltip x val state =
     let

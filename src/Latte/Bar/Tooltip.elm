@@ -1,18 +1,25 @@
 module Latte.Bar.Tooltip exposing (view)
 
-import Html exposing (Attribute, div, text)
+import Html exposing (Attribute, Html, div, ul, li, text, strong)
 import Html.Attributes exposing (style)
 import Latte.Helper exposing (..)
 import Latte.Model exposing (..)
 import Latte.Msg exposing (..)
-import Svg exposing (Svg, g, svg)
-import Svg.Attributes exposing (height, transform, viewBox, width)
 
 
-view : Model -> Svg Msg
+view : Model -> Html Msg
 view model =
     div [ tooltipStyle model ]
-        [ text (tooltipName model)
+        [ div []
+            [ text "label"
+              -- text (tooltipName model)
+            , ul [ ulStyle ]
+                [ li [ liStyle ]
+                    [ div [] [ text "value" ]
+                    , strong [] [ text "dataset name" ]
+                    ]
+                ]
+            ]
         ]
 
 
@@ -29,3 +36,17 @@ tooltipStyle model =
          ]
             ++ commonFont
         )
+
+
+liStyle : Attribute msg
+liStyle =
+    style [ ( "border-top", "2px solid #ff00ff" ) ]
+
+
+ulStyle : Attribute msg
+ulStyle =
+    style
+        [ ( "list-style-type", "none" )
+        , ( "padding", "0" )
+        , ( "margin", "0" )
+        ]

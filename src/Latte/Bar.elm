@@ -10,14 +10,13 @@ import Latte.Msg exposing (..)
 import Svg exposing (Svg, g, svg)
 import Svg.Attributes exposing (height, transform, viewBox, width)
 import Latte.Bar.Tooltip
+import Latte.Bar.Title
 
 
 view : Model -> Svg Msg
 view model =
     div [ boxStyle model ]
-        [ div [ titleStyle ]
-            [ text model.userData.title
-            ]
+        [ Latte.Bar.Title.view model
         , Latte.Bar.Tooltip.view model
         , svg (chartStyle model)
             [ g (viewportStyle model)
@@ -44,11 +43,6 @@ ticks model =
 
 
 -- Styles
-
-
-titleStyle : Attribute msg
-titleStyle =
-    style commonFont
 
 
 boxStyle : Model -> Attribute msg
