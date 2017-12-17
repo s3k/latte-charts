@@ -1,7 +1,7 @@
 module Latte.Bar.Tooltip exposing (view)
 
-import Html exposing (Attribute, Html, div, ul, li, text, strong)
-import Html.Attributes exposing (style)
+import Html exposing (Attribute, Html, div, ul, li, text, strong, node)
+import Html.Attributes exposing (style, class)
 import Latte.Helper exposing (..)
 import Latte.Model exposing (..)
 import Latte.Msg exposing (..)
@@ -9,8 +9,12 @@ import Latte.Msg exposing (..)
 
 view : Model -> Html Msg
 view model =
-    div [ tooltipStyle model.state ]
-        [ div []
+    div
+        [ tooltipStyle model.state
+        , class "tooltip-latte"
+        ]
+        [ node "style" [] [ arrowStyle ]
+        , div []
             [ div [ labelStyle ] [ text model.state.tooltip.label ]
             , ul [ ulStyle ]
                 [ li [ liStyle ]
@@ -36,7 +40,7 @@ tooltipStyle state =
                , ( "display", state.tooltip.display )
                , ( "color", "white" )
                , ( "background-color", "black" )
-               , ( "border-radius", "5px" )
+               , ( "border-radius", "3px" )
                , opacityStyle
                , ( "min-width", "110px" )
                , ( "height", "82px" )
@@ -79,3 +83,19 @@ ulStyle =
 
 opacityStyle =
     ( "opacity", "0.7" )
+
+
+arrowStyle =
+    text
+        """
+.tooltip-latte::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+  """

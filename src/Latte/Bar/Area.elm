@@ -30,14 +30,14 @@ makeLines model =
 
 latteBarLine : Float -> String -> Svg msg
 latteBarLine pos label =
-    g [ transform ("translate(10, " ++ toString pos ++ ")") ]
+    g [ transform ("translate(10, " ++ toString (pos + 18) ++ ")") ]
         [ barLine, barText label ]
 
 
 barLine =
     let
         attrs =
-            [ x1 "15"
+            [ x1 "55"
             , x2 "600"
             , y1 "0"
             , y2 "0"
@@ -57,8 +57,8 @@ barText label =
     let
         attrs =
             [ transform "scale(1,-1)"
-            , x "0"
-            , y "0"
+            , x "50"
+            , y "3"
             , barTextStyle
             , textAnchor "end"
             ]

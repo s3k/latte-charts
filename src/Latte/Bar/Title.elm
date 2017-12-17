@@ -22,8 +22,7 @@ titleStyle : Attribute msg
 titleStyle =
     style
         (commonFont
-            ++ [ ( "color", "#333" )
-               , ( "font-size", "14px" )
-               , ( "font-weight", "400" )
+            ++ [ ( "margin-bottom", "10px" )
+               , ( "margin-top", "5px" )
                ]
         )

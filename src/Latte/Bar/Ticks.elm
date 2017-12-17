@@ -58,12 +58,16 @@ calcHeight state val =
 barTick : String -> Float -> Float -> Float -> String -> Svg Msg
 barTick dsTitle val right height label =
     g
-        [ transform ("translate(" ++ toString right ++ ", 0)")
-        , onMouseOver (ShowTooltip right height val label dsTitle)
-        , onMouseOut HideTooltip
+        [ transform ("translate(" ++ toString right ++ ", 18)")
         ]
-        [ rect barTickAttr
-            [ barTickAnimate height ]
+        [ rect
+            [ barTickStyle
+            , width "35"
+            , onMouseOut HideTooltip
+            , onMouseOver (ShowTooltip right height val label dsTitle)
+            ]
+            [ (barTickAnimate height)
+            ]
         , line
             [ x1 "17.5"
             , x2 "17.5"
@@ -83,10 +87,10 @@ barTick dsTitle val right height label =
         ]
 
 
-barTickAttr =
-    [ style [ ( "fill", "#C0D6E4" ) ]
-    , width "35"
-    ]
+barTickStyle =
+    style
+        [ ( "fill", "#C0D6E4" )
+        ]
 
 
 barTickAnimate : Float -> Svg msg

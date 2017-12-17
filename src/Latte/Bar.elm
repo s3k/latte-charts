@@ -52,7 +52,7 @@ boxStyle model =
         , ( "margin", "10px" )
         , ( "border", "1px solid #ccc" )
         , ( "max-width", toPx model.state.width )
-        , ( "border-radius", "5px" )
+        , ( "border-radius", "3px" )
         ]
 
 
@@ -65,5 +65,5 @@ chartStyle : Model -> List (Attribute msg)
 chartStyle model =
     [ width (toS model.state.width)
     , height (toS model.state.height)
-    , viewBox (String.join " " [ "0", "0", toS (model.state.width), toS (model.state.height + 30) ])
+      -- , viewBox (String.join " " [ "0", "0", toS (model.state.width), toS (model.state.height + 30) ])
     ]
