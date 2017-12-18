@@ -19,10 +19,10 @@ view : Model -> Svg Msg
 view model =
     case List.head model.userData.datasets of
         Just ds ->
-            g [ class "ticks" ] (toBarTicks model ds)
+            g [ class "bars-latte" ] (toBarTicks model ds)
 
         Nothing ->
-            g [ class "ticks" ] []
+            g [ class "bars-latte" ] []
 
 
 
@@ -31,13 +31,49 @@ view model =
 
 toBarTicks : Model -> Dataset -> List (Svg Msg)
 toBarTicks model ds =
-    List.map3 (\i val label -> { i = i * 70 + leftAlign model.state, val = val, label = label }) (List.range 0 (List.length ds.values)) ds.values model.userData.labels
-        |> List.map (\n -> barTick ds.title n.val (toFloat n.i) (calcHeight model.state n.val) n.label)
+    List.map3 (\i val label -> { position = leftAlign model.state i, val = val, label = label }) (List.range 0 (List.length ds.values)) ds.values model.userData.labels
+        |> List.map (\n -> barTick ds.title n.val n.position (calcHeight model.state n.val) n.label)
 
 
-leftAlign : State -> Int
-leftAlign state =
-    round ((state.width - toFloat state.elemCount * 50) / 2)
+
+-- Common
+
+
+barWidth : Float
+barWidth =
+    34
+
+
+barCenter : Float
+barCenter =
+    barWidth / 2
+
+
+leftAlign : State -> Int -> Float
+leftAlign state step_ =
+    let
+        barsCount =
+            toFloat state.elemCount
+
+        step =
+            toFloat step_
+
+        paddingLeft =
+            70
+
+        areaWidth =
+            state.width - paddingLeft
+
+        barMarginRight =
+            30
+
+        barWidthAndMargin =
+            barWidth + barMarginRight
+
+        centerShift =
+            areaWidth / 2 - (barsCount * 70 + barWidth) / 2
+    in
+        paddingLeft + (step * barWidthAndMargin) + centerShift
 
 
 calcHeight : State -> Float -> Float
@@ -62,15 +98,15 @@ barTick dsTitle val right height label =
         ]
         [ rect
             [ barTickStyle
-            , width "35"
+            , width (toS barWidth)
             , onMouseOut HideTooltip
             , onMouseOver (ShowTooltip right height val label dsTitle)
             ]
             [ (barTickAnimate height)
             ]
         , line
-            [ x1 "17.5"
-            , x2 "17.5"
+            [ x1 (toS barCenter)
+            , x2 (toS barCenter)
             , y1 "-1"
             , y2 "-5"
             , style [ ( "stroke", "#999" ), ( "stroke-width", "0.7" ) ]

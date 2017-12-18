@@ -10,7 +10,7 @@ import Svg.Attributes exposing (class, textAnchor, transform, x, x1, x2, y, y1, 
 
 view : Model -> Svg msg
 view model =
-    g [ class "lines" ] (makeLines model)
+    g [ class "lines-latte" ] (makeLines model)
 
 
 
@@ -25,20 +25,25 @@ makeLines model =
     in
         List.range 0 (floor model.state.maxBarLines)
             |> List.map (\n -> BarArea (toFloat n) (toFloat (round (yStep * toFloat n))))
-            |> List.map (\n -> latteBarLine (model.state.height / (model.state.maxBarLines + 1) * n.i) (toString n.label))
+            |> List.map (\n -> latteBarLine (model.state.height / (model.state.maxBarLines + 1) * n.i) (toString n.label) model.state)
 
 
-latteBarLine : Float -> String -> Svg msg
-latteBarLine pos label =
+latteBarLine : Float -> String -> State -> Svg msg
+latteBarLine pos label state =
     g [ transform ("translate(10, " ++ toString (pos + 18) ++ ")") ]
-        [ barLine, barText label ]
+        [ barLine state, barText label ]
 
 
-barLine =
+paddingLeft =
+    55
+
+
+barLine : State -> Svg msg
+barLine state =
     let
         attrs =
-            [ x1 "55"
-            , x2 "600"
+            [ x1 (toS paddingLeft)
+            , x2 (toS (state.width - paddingLeft * 1.1))
             , y1 "0"
             , y2 "0"
             , style
