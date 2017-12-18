@@ -24,7 +24,7 @@ toS val =
 
 maxBarLines : Float -> Float
 maxBarLines height =
-    height / 40.0
+    height / 35.0
 
 
 maxDsValue : UserData -> Float
@@ -81,6 +81,6 @@ commonSvgFont =
 commonFont : List ( String, String )
 commonFont =
     [ ( "font-family", "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif" )
-    , ( "font-size", "12px" )
+    , ( "font-size", "11px" )
     , ( "font-weight", "300" )
     ]

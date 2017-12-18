@@ -49,7 +49,6 @@ barLine state =
             , style
                 [ ( "stroke", "#bbb" )
                 , ( "stroke-width", "0.5" )
-                  -- , ( "shape-rendering", "crispEdges" )
                 , ( "fill", "none" )
                 ]
             ]
