@@ -84,3 +84,43 @@ commonFont =
     , ( "font-size", "11px" )
     , ( "font-weight", "300" )
     ]
+
+
+
+-- Scale Y Axis chart
+
+
+scaleY : Float -> Float
+scaleY n =
+    let
+        base =
+            toFloat (logBase 10 n |> ceiling)
+
+        n_ =
+            n / 10 ^ base
+    in
+        (roundNumberScale n_) * 10 ^ base
+
+
+roundNumberScale : Float -> Float
+roundNumberScale n =
+    if n <= 0.1 then
+        0.1
+    else if n <= 0.2 && n > 0.1 then
+        0.2
+    else if n <= 0.3 && n > 0.2 then
+        0.3
+    else if n <= 0.4 && n > 0.3 then
+        0.4
+    else if n <= 0.5 && n > 0.4 then
+        0.5
+    else if n <= 0.6 && n > 0.5 then
+        0.6
+    else if n <= 0.7 && n > 0.6 then
+        0.7
+    else if n <= 0.8 && n > 0.7 then
+        0.8
+    else if n <= 0.9 && n > 0.8 then
+        0.9
+    else
+        1.0
