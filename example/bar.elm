@@ -63,6 +63,7 @@ view model =
             , li [] [ s [] [ text "Aspect Bars by X" ] ]
             , li [] [ s [] [ text "Humanize dataset labels" ] ]
             , li [] [ text "Tune fonts" ]
+            , li [] [ text "Add onClick action to bar" ]
             , li [] [ text "Refactoring (clean up mess in code)" ]
             ]
         ]
