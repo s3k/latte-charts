@@ -32,8 +32,7 @@ type alias Tooltip =
 
 
 type alias BarChart =
-    { selected : Bool
-    , index : Int
+    { selected : Int
     }
 
 
@@ -44,6 +43,7 @@ type alias State =
     , maxBarLines : Float
     , elemCount : Int
     , tooltip : Tooltip
+    , barChart : BarChart
     }
 
 

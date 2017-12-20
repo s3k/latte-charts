@@ -36,8 +36,9 @@ latteMake width height data =
             , x = 0
             , y = 0
             }
-        , darkBar = False
-        , selectedBar = -1
+        , barChart =
+            { selected = -1
+            }
         }
     }
 

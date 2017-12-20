@@ -25,6 +25,9 @@ showTooltip ptr x y val label dsTitle state =
         tooltip =
             state.tooltip
 
+        barChart =
+            state.barChart
+
         newTooltip =
             { tooltip
                 | x = x - 17
@@ -34,8 +37,11 @@ showTooltip ptr x y val label dsTitle state =
                 , dsTitle = dsTitle
                 , display = "block"
             }
+
+        newBarChart =
+            { barChart | selected = ptr }
     in
-    { state | tooltip = newTooltip, darkBar = True, selectedBar = ptr }
+        { state | tooltip = newTooltip, barChart = newBarChart }
 
 
 hideTooltip : State -> State
@@ -46,5 +52,11 @@ hideTooltip state =
 
         newTooltip =
             { tooltip | display = "none" }
+
+        barChart =
+            state.barChart
+
+        newBarChart =
+            { barChart | selected = -1 }
     in
-    { state | tooltip = newTooltip, darkBar = False, selectedBar = -1 }
+        { state | tooltip = newTooltip, barChart = newBarChart }

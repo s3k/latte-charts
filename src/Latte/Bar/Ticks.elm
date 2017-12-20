@@ -74,7 +74,7 @@ leftAlign state step_ =
         centerShift =
             areaWidth / 2 - (barsCount * 70 + barWidth) / 2
     in
-    paddingLeft + (step * barWidthAndMargin) + centerShift
+        paddingLeft + (step * barWidthAndMargin) + centerShift
 
 
 calcHeight : State -> Float -> Float
@@ -89,7 +89,7 @@ calcHeight state val =
         coeff =
             state.maxDsValue / yMaxPx
     in
-    val / coeff
+        val / coeff
 
 
 barTick : Int -> String -> Float -> Float -> Float -> String -> State -> Svg Msg
@@ -130,14 +130,14 @@ barTickStyle state ptr =
         baseColor =
             "#C0D6E4"
     in
-    if state.darkBar && state.selectedBar == ptr then
-        style
-            [ ( "fill", darken baseColor )
-            ]
-    else
-        style
-            [ ( "fill", baseColor )
-            ]
+        if state.barChart.selected == ptr then
+            style
+                [ ( "fill", darken baseColor )
+                ]
+        else
+            style
+                [ ( "fill", baseColor )
+                ]
 
 
 barTickAnimate : Float -> Svg msg
