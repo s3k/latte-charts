@@ -8,9 +8,9 @@ module Latte exposing (latteDraw, latteMake, latteUpdate)
 import Latte.Bar
 import Latte.Helper exposing (..)
 import Latte.Model exposing (..)
+import Latte.Msg exposing (..)
 import Latte.Update exposing (update)
 import Svg exposing (Svg, svg)
-import Latte.Msg exposing (..)
 
 
 latteUpdate : Msg -> Model -> Model
@@ -37,6 +37,7 @@ latteMake width height data =
             , y = 0
             }
         , darkBar = False
+        , selectedBar = -1
         }
     }
 

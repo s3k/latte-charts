@@ -39,6 +39,7 @@ type alias State =
     , elemCount : Int
     , tooltip : Tooltip
     , darkBar : Bool
+    , selectedBar : Int
     }
 
 

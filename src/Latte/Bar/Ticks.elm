@@ -6,14 +6,14 @@
 
 module Latte.Bar.Ticks exposing (view)
 
+import Html
+import Html.Attributes exposing (style)
+import Latte.Helper exposing (..)
 import Latte.Model exposing (..)
 import Latte.Msg exposing (..)
 import Svg exposing (Svg, animate, g, line, rect, svg, text, text_)
-import Svg.Events exposing (onMouseOver, onMouseOut)
-import Html
-import Html.Attributes exposing (style)
-import Svg.Attributes exposing (width, class, transform, x1, x2, y1, y2, x, y, textAnchor, attributeName, from, to, dur, fill)
-import Latte.Helper exposing (..)
+import Svg.Attributes exposing (attributeName, class, dur, fill, from, textAnchor, to, transform, width, x, x1, x2, y, y1, y2)
+import Svg.Events exposing (onMouseOut, onMouseOver)
 
 
 view : Model -> Svg Msg
@@ -32,8 +32,8 @@ view model =
 
 toBarTicks : Model -> Dataset -> List (Svg Msg)
 toBarTicks model ds =
-    List.map3 (\i val label -> { position = leftAlign model.state i, val = val, label = label }) (List.range 0 (List.length ds.values)) ds.values model.userData.labels
-        |> List.map (\n -> barTick ds.title n.val n.position (calcHeight model.state n.val) n.label)
+    List.map3 (\i val label -> { ptr = i, position = leftAlign model.state i, val = val, label = label }) (List.range 0 (List.length ds.values)) ds.values model.userData.labels
+        |> List.map (\n -> barTick n.ptr ds.title n.val n.position (calcHeight model.state n.val) n.label model.state)
 
 
 
@@ -74,7 +74,7 @@ leftAlign state step_ =
         centerShift =
             areaWidth / 2 - (barsCount * 70 + barWidth) / 2
     in
-        paddingLeft + (step * barWidthAndMargin) + centerShift
+    paddingLeft + (step * barWidthAndMargin) + centerShift
 
 
 calcHeight : State -> Float -> Float
@@ -89,21 +89,21 @@ calcHeight state val =
         coeff =
             state.maxDsValue / yMaxPx
     in
-        val / coeff
+    val / coeff
 
 
-barTick : String -> Float -> Float -> Float -> String -> Svg Msg
-barTick dsTitle val right height label =
+barTick : Int -> String -> Float -> Float -> Float -> String -> State -> Svg Msg
+barTick ptr dsTitle val right height label state =
     g
         [ transform ("translate(" ++ toString right ++ ", 18)")
         ]
         [ rect
-            [ barTickStyle True
+            [ barTickStyle state ptr
             , width (toS barWidth)
             , onMouseOut HideTooltip
-            , onMouseOver (ShowTooltip right height val label dsTitle)
+            , onMouseOver (ShowTooltip ptr right height val label dsTitle)
             ]
-            [ (barTickAnimate height)
+            [ barTickAnimate height
             ]
         , line
             [ x1 (toS barCenter)
@@ -124,20 +124,20 @@ barTick dsTitle val right height label =
         ]
 
 
-barTickStyle : Bool -> Html.Attribute msg
-barTickStyle selected =
+barTickStyle : State -> Int -> Html.Attribute msg
+barTickStyle state ptr =
     let
         baseColor =
             "#C0D6E4"
     in
-        if selected == True then
-            style
-                [ ( "fill", Debug.log "color" <| darken baseColor )
-                ]
-        else
-            style
-                [ ( "fill", baseColor )
-                ]
+    if state.darkBar && state.selectedBar == ptr then
+        style
+            [ ( "fill", darken baseColor )
+            ]
+    else
+        style
+            [ ( "fill", baseColor )
+            ]
 
 
 barTickAnimate : Float -> Svg msg

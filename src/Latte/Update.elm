@@ -1,15 +1,15 @@
 module Latte.Update exposing (update)
 
+import Latte.Helper exposing (..)
 import Latte.Model exposing (..)
 import Latte.Msg exposing (..)
-import Latte.Helper exposing (..)
 
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        ShowTooltip x y val label dsTitle ->
-            { model | state = showTooltip x y val label dsTitle model.state }
+        ShowTooltip ptr x y val label dsTitle ->
+            { model | state = showTooltip ptr x y val label dsTitle model.state }
 
         HideTooltip ->
             { model | state = hideTooltip model.state }
@@ -19,8 +19,8 @@ update msg model =
 -- Updaters
 
 
-showTooltip : Float -> Float -> Float -> String -> String -> State -> State
-showTooltip x y val label dsTitle state =
+showTooltip : Int -> Float -> Float -> Float -> String -> String -> State -> State
+showTooltip ptr x y val label dsTitle state =
     let
         tooltip =
             state.tooltip
@@ -29,13 +29,13 @@ showTooltip x y val label dsTitle state =
             { tooltip
                 | x = x - 17
                 , y = (state.height - y) - 55
-                , value = (toS val)
+                , value = toS val
                 , label = label
                 , dsTitle = dsTitle
                 , display = "block"
             }
     in
-        { state | tooltip = newTooltip }
+    { state | tooltip = newTooltip, darkBar = True, selectedBar = ptr }
 
 
 hideTooltip : State -> State
@@ -47,4 +47,4 @@ hideTooltip state =
         newTooltip =
             { tooltip | display = "none" }
     in
-        { state | tooltip = newTooltip }
+    { state | tooltip = newTooltip, darkBar = False, selectedBar = -1 }
