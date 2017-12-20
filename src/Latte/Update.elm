@@ -32,10 +32,10 @@ showTooltip ptr x y val label dsTitle state =
             { tooltip
                 | x = x - 17
                 , y = (state.height - y) - 55
-                , value = toS val
                 , label = label
-                , dsTitle = dsTitle
                 , display = "block"
+                , ds =
+                    [ ( toS val, dsTitle ) ]
             }
 
         newBarChart =

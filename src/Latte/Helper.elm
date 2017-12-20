@@ -38,15 +38,6 @@ maxDsValue model =
         |> justNumber
 
 
-tooltipName : Model -> String
-tooltipName model =
-    model.userData.datasets
-        |> List.map (\n -> n.title)
-        |> List.head
-        |> justString
-        |> (\title -> String.join " " [ title, model.state.tooltip.value ])
-
-
 justNumber item =
     case item of
         Just x ->

@@ -16,13 +16,22 @@ view model =
         [ node "style" [] [ arrowStyle ]
         , div []
             [ div [ labelStyle ] [ text model.state.tooltip.label ]
-            , ul [ ulStyle ]
-                [ li [ liStyle ]
-                    [ div [] [ text model.state.tooltip.value ]
-                    , strong [ dsTitleStyle ] [ text model.state.tooltip.dsTitle ]
-                    ]
-                ]
+            , ul [ ulStyle ] (showDatasets model.state.tooltip)
             ]
+        ]
+
+
+showDatasets : Tooltip -> List (Html Msg)
+showDatasets tooltip =
+    tooltip.ds
+        |> List.map (\n -> showDataset (Tuple.first n) (Tuple.second n))
+
+
+showDataset : String -> String -> Html Msg
+showDataset val title =
+    li [ liStyle ]
+        [ div [] [ text val ]
+        , strong [ dsTitleStyle ] [ text title ]
         ]
 
 
@@ -69,6 +78,8 @@ liStyle =
     style
         [ ( "border-top", "3px solid #C0D6E4" )
         , ( "padding", "8px" )
+        , ( "display", "inline" )
+        , ( "float", "left" )
         ]
 
 
