@@ -30,7 +30,7 @@ model =
             , labels =
                 [ "Io", "Europa", "Ganymede", "Callisto" ]
             , datasets = [ Dataset "Mass" [ 8931900, 4800000, 14819000, 10759000 ] ]
-            , title = "Moons of Jupyter"
+            , title = "Moons of Jupiter"
             }
     }
 

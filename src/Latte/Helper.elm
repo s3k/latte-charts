@@ -6,6 +6,8 @@
 module Latte.Helper exposing (..)
 
 import Latte.Model exposing (Model, UserData)
+import Bitwise exposing (..)
+import Hex
 
 
 toPx : a -> String
@@ -84,6 +86,29 @@ commonFont =
     , ( "font-size", "11px" )
     , ( "font-weight", "300" )
     ]
+
+
+
+-- Darken color
+
+
+darken : String -> String
+darken strColor =
+    let
+        color =
+            String.dropLeft 1 strColor
+                |> (++) "0x"
+    in
+        case (String.toInt color) of
+            Ok intColor ->
+                intColor
+                    |> and 0x00FFFFFF
+                    |> shiftRightBy 1
+                    |> Hex.toString
+                    |> (++) "#"
+
+            Err msg ->
+                "#333333"
 
 
 

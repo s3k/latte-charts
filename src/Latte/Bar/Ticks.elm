@@ -10,6 +10,7 @@ import Latte.Model exposing (..)
 import Latte.Msg exposing (..)
 import Svg exposing (Svg, animate, g, line, rect, svg, text, text_)
 import Svg.Events exposing (onMouseOver, onMouseOut)
+import Html
 import Html.Attributes exposing (style)
 import Svg.Attributes exposing (width, class, transform, x1, x2, y1, y2, x, y, textAnchor, attributeName, from, to, dur, fill)
 import Latte.Helper exposing (..)
@@ -97,7 +98,7 @@ barTick dsTitle val right height label =
         [ transform ("translate(" ++ toString right ++ ", 18)")
         ]
         [ rect
-            [ barTickStyle
+            [ barTickStyle True
             , width (toS barWidth)
             , onMouseOut HideTooltip
             , onMouseOver (ShowTooltip right height val label dsTitle)
@@ -123,10 +124,20 @@ barTick dsTitle val right height label =
         ]
 
 
-barTickStyle =
-    style
-        [ ( "fill", "#C0D6E4" )
-        ]
+barTickStyle : Bool -> Html.Attribute msg
+barTickStyle selected =
+    let
+        baseColor =
+            "#C0D6E4"
+    in
+        if selected == True then
+            style
+                [ ( "fill", Debug.log "color" <| darken baseColor )
+                ]
+        else
+            style
+                [ ( "fill", baseColor )
+                ]
 
 
 barTickAnimate : Float -> Svg msg

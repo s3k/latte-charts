@@ -38,6 +38,7 @@ type alias State =
     , maxBarLines : Float
     , elemCount : Int
     , tooltip : Tooltip
+    , darkBar : Bool
     }
 
 
