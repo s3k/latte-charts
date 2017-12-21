@@ -69,6 +69,7 @@ labelStyle : Attribute msg
 labelStyle =
     style
         [ ( "padding", "8px" )
+        , ( "font-weight", "600" )
         , opacityStyle
         ]
 
