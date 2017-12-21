@@ -9,7 +9,7 @@ update : Msg -> Model -> Model
 update msg model =
     case msg of
         ShowTooltip ptr x y val label dsTitle ->
-            { model | state = showTooltip ptr x y val label dsTitle model.state }
+            { model | state = showTooltip ptr x y val label dsTitle model }
 
         HideTooltip ->
             { model | state = hideTooltip model.state }
@@ -19,9 +19,12 @@ update msg model =
 -- Updaters
 
 
-showTooltip : Int -> Float -> Float -> Float -> String -> String -> State -> State
-showTooltip ptr x y val label dsTitle state =
+showTooltip : Int -> Float -> Float -> Float -> String -> String -> Model -> State
+showTooltip ptr x y val label dsTitle model =
     let
+        state =
+            model.state
+
         tooltip =
             state.tooltip
 
@@ -34,14 +37,19 @@ showTooltip ptr x y val label dsTitle state =
                 , y = (state.height - y) - 55
                 , label = label
                 , display = "block"
-                , ds =
-                    [ ( toS val, dsTitle ) ]
+                , ds = makeTooltipDataset ptr model.userData.datasets
             }
 
         newBarChart =
             { barChart | selected = ptr }
     in
-        { state | tooltip = newTooltip, barChart = newBarChart }
+    { state | tooltip = newTooltip, barChart = newBarChart }
+
+
+makeTooltipDataset : Int -> List Dataset -> List ( String, String )
+makeTooltipDataset ptr ds =
+    ds
+        |> List.map (\n -> ( n.title, toS <| listItemByIndex ptr n.values ))
 
 
 hideTooltip : State -> State
@@ -59,4 +67,4 @@ hideTooltip state =
         newBarChart =
             { barChart | selected = -1 }
     in
-        { state | tooltip = newTooltip, barChart = newBarChart }
+    { state | tooltip = newTooltip, barChart = newBarChart }

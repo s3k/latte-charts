@@ -5,9 +5,9 @@
 
 module Latte.Helper exposing (..)
 
-import Latte.Model exposing (Model, UserData)
 import Bitwise exposing (..)
 import Hex
+import Latte.Model exposing (Model, UserData)
 
 
 toPx : a -> String
@@ -38,6 +38,16 @@ maxDsValue model =
         |> justNumber
 
 
+listItemByIndex : Int -> List Float -> Float
+listItemByIndex i items =
+    items
+        |> List.indexedMap (,)
+        |> List.filter (\n -> Tuple.first n == i)
+        |> List.map (\n -> Tuple.second n)
+        |> List.head
+        |> justNumber
+
+
 justNumber item =
     case item of
         Just x ->
@@ -62,13 +72,12 @@ justString item =
 
 commonSvgFont : List ( String, String )
 commonSvgFont =
-    ([ ( "text-rendering", "optimizeLegibility" )
-     , ( "color", "rgb(108, 118, 128)" )
-     , ( "display", "inline" )
-     , ( "fill", "rgb(85, 91, 81)" )
-     ]
+    [ ( "text-rendering", "optimizeLegibility" )
+    , ( "color", "rgb(108, 118, 128)" )
+    , ( "display", "inline" )
+    , ( "fill", "rgb(85, 91, 81)" )
+    ]
         ++ commonFont
-    )
 
 
 commonFont : List ( String, String )
@@ -90,16 +99,16 @@ darken strColor =
             String.dropLeft 1 strColor
                 |> (++) "0x"
     in
-        case (String.toInt color) of
-            Ok intColor ->
-                intColor
-                    |> and 0x00FFFFFF
-                    |> shiftRightBy 1
-                    |> Hex.toString
-                    |> (++) "#"
+    case String.toInt color of
+        Ok intColor ->
+            intColor
+                |> and 0x00FFFFFF
+                |> shiftRightBy 1
+                |> Hex.toString
+                |> (++) "#"
 
-            Err msg ->
-                "#333333"
+        Err msg ->
+            "#333333"
 
 
 
@@ -115,7 +124,7 @@ scaleY n =
         n_ =
             n / 10 ^ base
     in
-        (roundNumberScale n_) * 10 ^ base
+    roundNumberScale n_ * 10 ^ base
 
 
 roundNumberScale : Float -> Float
