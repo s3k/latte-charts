@@ -51,7 +51,7 @@ tooltipStyle state =
                , ( "background-color", "black" )
                , ( "border-radius", "3px" )
                , opacityStyle
-               , ( "min-width", "110px" )
+                 -- , ( "min-width", "110px" )
                , ( "height", "82px" )
                ]
         )
@@ -81,6 +81,8 @@ liStyle =
         , ( "padding", "8px" )
         , ( "display", "inline" )
         , ( "float", "left" )
+        , ( "width", "70px" )
+        , ( "height", "50px" )
         ]
 
 
