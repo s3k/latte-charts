@@ -49,7 +49,7 @@ showTooltip ptr x y val label dsTitle model =
 makeTooltipDataset : Int -> List Dataset -> List ( String, String )
 makeTooltipDataset ptr ds =
     ds
-        |> List.map (\n -> ( n.title, toS <| listItemByIndex ptr n.values ))
+        |> List.map (\n -> ( n.title, toS <| floatByIndex ptr n.values ))
 
 
 hideTooltip : State -> State

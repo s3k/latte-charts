@@ -43,6 +43,7 @@ type alias State =
     , elemCount : Int
     , tooltip : Tooltip
     , barChart : BarChart
+    , colors : List String
     }
 
 

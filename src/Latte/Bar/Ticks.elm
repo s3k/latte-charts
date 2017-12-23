@@ -62,7 +62,7 @@ toBarTicks model ds =
 makeSubTicks : Model -> Int -> List (Svg Msg)
 makeSubTicks model ptr =
     model.userData.datasets
-        |> List.map (\dataset -> listItemByIndex ptr dataset.values)
+        |> List.map (\dataset -> floatByIndex ptr dataset.values)
         |> List.indexedMap (,)
         |> List.map (\( i, val ) -> subTick model.state i val)
 
@@ -71,14 +71,14 @@ subTick : State -> Int -> Float -> Svg Msg
 subTick state i val =
     let
         subWidth =
-            5.0
+            barWidth / 3
 
         right =
-            toFloat i * subWidth * 1.1
+            toFloat i * subWidth
     in
         rect
             [ width (toS subWidth)
-            , style [ ( "fill", "#555" ) ]
+            , style [ ( "fill", stringByIndex i state.colors ) ]
             , transform ("translate(" ++ toS right ++ ", 0)")
             ]
             [ barTickAnimate <| calcHeight state val ]
@@ -94,7 +94,7 @@ barTick ptr subTicks dsTitle val right height label state =
                     [ barTickStyle state ptr
                     , width (toS barWidth)
                     , onMouseOut HideTooltip
-                    , opacity "0.5"
+                    , opacity "0.0"
                     , onMouseOver (ShowTooltip ptr right height val label dsTitle)
                     ]
                     [ barTickAnimate height

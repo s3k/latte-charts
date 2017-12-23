@@ -38,14 +38,23 @@ maxDsValue model =
         |> justNumber
 
 
-listItemByIndex : Int -> List Float -> Float
+floatByIndex : Int -> List Float -> Float
+floatByIndex i items =
+    listItemByIndex i items |> justNumber
+
+
+stringByIndex : Int -> List String -> String
+stringByIndex i items =
+    listItemByIndex i items |> justString
+
+
+listItemByIndex : Int -> List a -> Maybe a
 listItemByIndex i items =
     items
         |> List.indexedMap (,)
         |> List.filter (\n -> Tuple.first n == i)
         |> List.map (\n -> Tuple.second n)
         |> List.head
-        |> justNumber
 
 
 justNumber item =
@@ -99,16 +108,16 @@ darken strColor =
             String.dropLeft 1 strColor
                 |> (++) "0x"
     in
-    case String.toInt color of
-        Ok intColor ->
-            intColor
-                |> and 0x00FFFFFF
-                |> shiftRightBy 1
-                |> Hex.toString
-                |> (++) "#"
+        case String.toInt color of
+            Ok intColor ->
+                intColor
+                    |> and 0x00FFFFFF
+                    |> shiftRightBy 1
+                    |> Hex.toString
+                    |> (++) "#"
 
-        Err msg ->
-            "#333333"
+            Err msg ->
+                "#333333"
 
 
 
@@ -124,7 +133,7 @@ scaleY n =
         n_ =
             n / 10 ^ base
     in
-    roundNumberScale n_ * 10 ^ base
+        roundNumberScale n_ * 10 ^ base
 
 
 roundNumberScale : Float -> Float
