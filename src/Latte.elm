@@ -38,7 +38,7 @@ latteMake width height data =
         , barChart =
             { selected = -1
             }
-        , colors = [ "#7986CB", "#303F9F", "#536DFE" ]
+        , colors = [ "#7cd6fd", "#5e64ff", "#743ee2", "#c79dd7", "#4d1b7b" ]
         }
     }
 
