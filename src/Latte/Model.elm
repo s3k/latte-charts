@@ -41,6 +41,7 @@ type alias State =
     , maxDsValue : Float
     , maxBarLines : Float
     , elemCount : Int
+    , dsCount : Int
     , tooltip : Tooltip
     , barChart : BarChart
     , colors : List String

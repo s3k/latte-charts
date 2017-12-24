@@ -22,33 +22,44 @@ makeLines model =
     let
         yStep =
             model.state.maxDsValue / model.state.maxBarLines
+
+        aspect =
+            model.state.height / (model.state.maxBarLines + 1)
     in
         List.range 0 (floor model.state.maxBarLines)
             |> List.map (\n -> BarArea (toFloat n) (toFloat (round (yStep * toFloat n))))
-            |> List.map (\n -> latteBarLine (model.state.height / (model.state.maxBarLines + 1) * n.i) (toString n.label) model.state)
+            |> List.indexedMap (,)
+            |> List.map (\( i, n ) -> latteBarLine i (aspect * n.i) (toString n.label) model.state)
 
 
-latteBarLine : Float -> String -> State -> Svg msg
-latteBarLine pos label state =
+latteBarLine : Int -> Float -> String -> State -> Svg msg
+latteBarLine i pos label state =
     g [ transform ("translate(10, " ++ toString (pos + 18) ++ ")") ]
-        [ barLine state, barText label ]
+        [ barLine i state, barText label ]
 
 
+paddingLeft : Float
 paddingLeft =
     55
 
 
-barLine : State -> Svg msg
-barLine state =
+barLine : Int -> State -> Svg msg
+barLine i state =
     let
+        strokeColor =
+            if i == 0 then
+                "#aaa"
+            else
+                "#dadada"
+
         attrs =
             [ x1 (toS paddingLeft)
             , x2 (toS (state.width - paddingLeft * 1.1))
             , y1 "0"
             , y2 "0"
             , style
-                [ ( "stroke", "#bbb" )
-                , ( "stroke-width", "0.5" )
+                [ ( "stroke", strokeColor )
+                , ( "stroke-width", "1" )
                 , ( "fill", "none" )
                 ]
             ]

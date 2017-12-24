@@ -21,8 +21,9 @@ view model =
 titleStyle : Attribute msg
 titleStyle =
     style
-        (commonFont
-            ++ [ ( "margin-bottom", "10px" )
-               , ( "margin-top", "5px" )
-               ]
-        )
+        [ ( "margin-bottom", "4px" )
+        , ( "margin-top", "16px" )
+        , ( "font-size", "12px" )
+        , ( "font-family", "\"proxima-nova\", sans-serif" )
+        , ( "color", "#6c7680" )
+        ]

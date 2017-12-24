@@ -71,7 +71,7 @@ subTick : State -> Int -> Float -> Svg Msg
 subTick state i val =
     let
         subWidth =
-            barWidth / 3
+            barWidth / toFloat state.dsCount
 
         right =
             toFloat i * subWidth

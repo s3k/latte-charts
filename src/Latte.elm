@@ -28,6 +28,7 @@ latteMake width height data =
         , maxDsValue = scaleY <| maxDsValue data
         , maxBarLines = maxBarLines height
         , elemCount = List.length data.labels
+        , dsCount = List.length data.datasets
         , tooltip =
             { label = "Label"
             , display = "none"
