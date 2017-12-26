@@ -33,8 +33,9 @@ showTooltip ptr x y val label dsTitle model =
 
         newTooltip =
             { tooltip
-                | x = x + 14 - 70.0 * (toFloat <| List.length model.userData.datasets) / 2
-                , y = (state.height - y) - 55
+              -- | x = x + 14 - 70.0 * (toFloat <| List.length model.userData.datasets) / 2
+                | x = x
+                , y = (state.height - y) - 62
                 , label = label
                 , display = "block"
                 , ds = makeTooltipDataset ptr model.userData.datasets
@@ -43,7 +44,7 @@ showTooltip ptr x y val label dsTitle model =
         newBarChart =
             { barChart | selected = ptr }
     in
-        { state | tooltip = newTooltip, barChart = newBarChart }
+    { state | tooltip = newTooltip, barChart = newBarChart }
 
 
 makeTooltipDataset : Int -> List Dataset -> List ( String, String )
@@ -67,4 +68,4 @@ hideTooltip state =
         newBarChart =
             { barChart | selected = -1 }
     in
-        { state | tooltip = newTooltip, barChart = newBarChart }
+    { state | tooltip = newTooltip, barChart = newBarChart }
