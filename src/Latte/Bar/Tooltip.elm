@@ -54,9 +54,8 @@ tooltipStyle state =
                , ( "background-color", "black" )
                , ( "border-radius", "3px" )
                , opacityStyle
-
-               -- , ( "min-width", "110px" )
-               -- , ( "height", "82px" )
+                 -- , ( "min-width", "110px" )
+                 -- , ( "height", "82px" )
                ]
         )
 
@@ -82,8 +81,7 @@ liStyle : Int -> State -> Attribute msg
 liStyle i state =
     style
         [ ( "border-top", "3px solid " ++ stringByIndex i state.colors )
-
-        -- , ( "padding", "0px 8px" )
+          -- , ( "padding", "0px 8px" )
         , ( "display", "inline" )
         , ( "float", "left" )
         , ( "width", "70px" )
@@ -114,6 +112,7 @@ arrowStyle =
     left: 50%;
     margin-left: -5px;
     border-width: 5px;
+    border-bottom-width: 0px;
     border-style: solid;
     border-color: black transparent transparent transparent;
 }
