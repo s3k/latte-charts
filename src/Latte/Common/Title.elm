@@ -1,4 +1,4 @@
-module Latte.Bar.Title exposing (view)
+module Latte.Common.Title exposing (view)
 
 import Html exposing (Attribute, Html, div, text)
 import Html.Attributes exposing (style)

@@ -1,4 +1,4 @@
-module Latte.Bar.Tooltip exposing (view)
+module Latte.Common.Tooltip exposing (view)
 
 import Html exposing (Attribute, Html, div, li, node, strong, text, ul)
 import Html.Attributes exposing (class, style)

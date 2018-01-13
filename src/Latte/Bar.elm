@@ -4,8 +4,8 @@ import Html exposing (Attribute, div, text)
 import Html.Attributes exposing (style)
 import Latte.Bar.Area exposing (view)
 import Latte.Bar.Ticks exposing (view)
-import Latte.Bar.Title
-import Latte.Bar.Tooltip
+import Latte.Common.Title as Title
+import Latte.Common.Tooltip as Tooltip
 import Latte.Helper exposing (..)
 import Latte.Model exposing (..)
 import Latte.Msg exposing (..)
@@ -16,8 +16,8 @@ import Svg.Attributes exposing (height, transform, viewBox, width)
 view : Model -> Svg Msg
 view model =
     div [ boxStyle model ]
-        [ Latte.Bar.Title.view model
-        , Latte.Bar.Tooltip.view model
+        [ Title.view model
+        , Tooltip.view model
         , svg (chartStyle model)
             [ g (viewportStyle model)
                 [ area model

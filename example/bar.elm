@@ -18,6 +18,7 @@ type alias Model =
     { hello : String
     , latte : LatteModel.Model
     , latte2 : LatteModel.Model
+    , lattePercentage : LatteModel.Model
     }
 
 
@@ -47,6 +48,16 @@ model =
                 ]
             , title = "Moons of Jupiter"
             }
+    , lattePercentage =
+        latteMake 640 200 <|
+            { chart = Percentage
+            , labels =
+                [ "Io", "Europa", "Ganymede", "Callisto" ]
+            , datasets =
+                [ Dataset "Mass" [ 8931900, 4800000, 14819000, 10759000 ]
+                ]
+            , title = "Moons of Jupiter"
+            }
     }
 
 
@@ -57,6 +68,7 @@ model =
 type Msg
     = Latte LatteMsg.Msg
     | LatteSecond LatteMsg.Msg
+    | LattePercentage LatteMsg.Msg
 
 
 update : Msg -> Model -> Model
@@ -68,6 +80,9 @@ update msg model =
         LatteSecond msg ->
             { model | latte2 = (latteUpdate msg model.latte2) }
 
+        LattePercentage msg ->
+            { model | lattePercentage = (latteUpdate msg model.lattePercentage) }
+
 
 
 -- VIEW
@@ -76,7 +91,8 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ Html.map Latte (latteDraw model.latte)
+        [ Html.map LattePercentage (latteDraw model.lattePercentage)
+        , Html.map Latte (latteDraw model.latte)
         , Html.map LatteSecond (latteDraw model.latte2)
         , ol []
             [ strong [] [ text "Todo:" ]
@@ -84,7 +100,10 @@ view model =
             , li [] [ s [] [ text "Humanize dataset labels" ] ]
             , li [] [ s [] [ text "Add onClick action to bar" ] ]
             , li [] [ s [] [ text "Implement triples" ] ]
-            , li [] [ text "Implement colors for datasets" ]
+            , li [] [ s [] [ text "Implement colors for datasets" ] ]
+            , li [] [ text "Implement css styles in single file" ]
+            , li [] [ text "Tooltip for Percentage" ]
+            , li [] [ text "Find same code pices" ]
             , li [] [ text "Tune fonts" ]
             , li [] [ text "Refactoring (clean up mess in code)" ]
             ]

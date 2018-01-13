@@ -7,12 +7,17 @@ module Latte.Helper exposing (..)
 
 import Bitwise exposing (..)
 import Hex
-import Latte.Model exposing (Model, UserData)
+import Latte.Model exposing (Model, UserData, Dataset)
 
 
 toPx : a -> String
 toPx val =
     toS val ++ "px"
+
+
+toPr : a -> String
+toPr val =
+    toS val ++ "%"
 
 
 toS : a -> String
@@ -36,6 +41,46 @@ maxDsValue model =
         |> List.concat
         |> List.maximum
         |> justNumber
+
+
+calcFirstDsPercents : Model -> List Float
+calcFirstDsPercents model =
+    let
+        dataset =
+            model.userData.datasets
+                |> List.head
+                |> Maybe.withDefault (Dataset "" [])
+
+        dsSum =
+            List.sum dataset.values
+    in
+        dataset.values
+            |> List.map (\n -> n * 100 / dsSum)
+
+
+percentageOffset : Int -> Model -> Float
+percentageOffset ptr model =
+    model
+        |> calcFirstDsPercents
+        |> List.indexedMap (,)
+        |> List.filter (\( i, n ) -> i <= ptr)
+        |> List.map (\( i, n ) -> n)
+        |> divLastElem
+        |> List.sum
+        |> (\n -> n * 640 / 100 - 24)
+
+
+divLastElem : List Float -> List Float
+divLastElem items =
+    items
+        |> List.indexedMap (,)
+        |> List.map
+            (\( i, n ) ->
+                if i == (List.length items) - 1 then
+                    n / 2
+                else
+                    n
+            )
 
 
 floatByIndex : Int -> List Float -> Float

@@ -28,13 +28,35 @@ showTooltip ptr x y val label dsTitle model =
         tooltip =
             state.tooltip
 
+        tooltipY =
+            case model.userData.chart of
+                Bar ->
+                    (state.height - y) - 62 - 1
+
+                Percentage ->
+                    -45
+
+                _ ->
+                    0
+
+        tooltipX =
+            case model.userData.chart of
+                Bar ->
+                    x + 26 - 70.0 * (toFloat <| List.length model.userData.datasets) / 2
+
+                Percentage ->
+                    percentageOffset ptr model
+
+                _ ->
+                    0
+
         barChart =
             state.barChart
 
         newTooltip =
             { tooltip
-                | x = x + 26 - 70.0 * (toFloat <| List.length model.userData.datasets) / 2
-                , y = (state.height - y) - 62 - 1
+                | x = tooltipX
+                , y = tooltipY
                 , label = label
                 , display = "block"
                 , ds = makeTooltipDataset ptr model.userData.datasets
