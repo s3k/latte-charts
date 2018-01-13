@@ -32,6 +32,7 @@ latteMake width height data =
         , dsCount = List.length data.datasets
         , tooltip =
             { label = "Label"
+            , title = "Title"
             , display = "none"
             , x = 0
             , y = 0

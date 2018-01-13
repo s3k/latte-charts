@@ -34,7 +34,7 @@ showTooltip ptr x y val label dsTitle model =
                     (state.height - y) - 62 - 1
 
                 Percentage ->
-                    -45
+                    8
 
                 _ ->
                     0
@@ -58,6 +58,7 @@ showTooltip ptr x y val label dsTitle model =
                 | x = tooltipX
                 , y = tooltipY
                 , label = label
+                , title = dsTitle
                 , display = "block"
                 , ds = makeTooltipDataset ptr model.userData.datasets
             }

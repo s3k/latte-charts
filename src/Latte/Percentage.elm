@@ -9,13 +9,14 @@ import Latte.Msg exposing (..)
 import Latte.Common.Title as Title
 import Latte.Common.Tooltip as Tooltip
 import Svg.Events exposing (onMouseOut, onMouseOver)
+import Round
 
 
 view : Model -> Html Msg
 view model =
     div [ boxStyle model ]
         [ Title.view model
-        , Tooltip.view model
+        , Tooltip.viewPr model
         , div
             [ class "latte-percentage"
             , style
@@ -37,12 +38,16 @@ makeBars model =
 
         percents =
             calcFirstDsPercents model
+
+        labels =
+            model.userData.labels
     in
-        (List.map3
-            (\ptr color percent -> barItem ptr color percent)
+        (List.map4
+            (\ptr color percent label -> barItem ptr color percent label)
             (List.range 0 (List.length colors - 1))
             colors
             percents
+            labels
         )
 
 
@@ -81,8 +86,8 @@ legendItem color title =
         ]
 
 
-barItem : Int -> String -> Float -> Html Msg
-barItem ptr color percent =
+barItem : Int -> String -> Float -> String -> Html Msg
+barItem ptr color percent label =
     let
         attrs =
             style
@@ -94,7 +99,7 @@ barItem ptr color percent =
     in
         div
             [ attrs
-            , onMouseOver (ShowTooltip ptr 50 0 0 "Label" "Title")
+            , onMouseOver (ShowTooltip ptr 50 0 0 label (Round.round 2 percent))
             , onMouseOut HideTooltip
             ]
             []

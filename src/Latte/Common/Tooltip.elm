@@ -1,10 +1,13 @@
-module Latte.Common.Tooltip exposing (view)
+module Latte.Common.Tooltip exposing (view, viewPr)
 
 import Html exposing (Attribute, Html, div, li, node, strong, text, ul)
 import Html.Attributes exposing (class, style)
 import Latte.Helper exposing (..)
 import Latte.Model exposing (..)
 import Latte.Msg exposing (..)
+
+
+-- Common View
 
 
 view : Model -> Html Msg
@@ -17,6 +20,26 @@ view model =
         , div []
             [ div [ labelStyle ] [ text model.state.tooltip.label ]
             , ul [ ulStyle ] (showDatasets model.state)
+            ]
+        ]
+
+
+
+-- Percentage View
+
+
+viewPr : Model -> Html Msg
+viewPr model =
+    div
+        [ tooltipStyle model.state
+        , class "tooltip-latte"
+        ]
+        [ node "style" [] [ arrowStyle ]
+        , div []
+            [ div [ labelStyle ]
+                [ text model.state.tooltip.label
+                , text <| " " ++ model.state.tooltip.title ++ "%"
+                ]
             ]
         ]
 

@@ -91,8 +91,8 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ Html.map LattePercentage (latteDraw model.lattePercentage)
-        , Html.map Latte (latteDraw model.latte)
+        [ Html.map Latte (latteDraw model.latte)
+        , Html.map LattePercentage (latteDraw model.lattePercentage)
         , Html.map LatteSecond (latteDraw model.latte2)
         , ol []
             [ strong [] [ text "Todo:" ]
