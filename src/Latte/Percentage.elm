@@ -2,7 +2,7 @@ module Latte.Percentage exposing (view)
 
 import Html exposing (Html, Attribute, div, span, i, text)
 import Html.Attributes exposing (style, class)
-import Latte.Helper exposing (..)
+import Latte.Common.Helper exposing (..)
 import Latte.Percentage.Helper exposing (..)
 import Latte.Model exposing (..)
 import Latte.Msg exposing (..)

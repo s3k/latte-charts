@@ -3,7 +3,7 @@
 -}
 
 
-module Latte.Helper exposing (..)
+module Latte.Common.Helper exposing (..)
 
 import Bitwise exposing (..)
 import Hex
@@ -27,6 +27,18 @@ toS val =
 
 
 -- Model Helpers
+
+
+maxDsPoints : Model -> List Float
+maxDsPoints model =
+    model.userData.datasets
+        |> List.map (\ds -> ds.values)
+        |> transpose
+        |> List.map
+            (\vals ->
+                List.maximum vals
+                    |> Maybe.withDefault 0.0
+            )
 
 
 maxBarLines : Float -> Float
@@ -203,3 +215,27 @@ roundNumberScale n =
         0.9
     else
         1.0
+
+
+
+-- Transpose matrix
+
+
+transpose : List (List a) -> List (List a)
+transpose ll =
+    case ll of
+        [] ->
+            []
+
+        [] :: xss ->
+            transpose xss
+
+        (x :: xs) :: xss ->
+            let
+                heads =
+                    List.filterMap List.head xss
+
+                tails =
+                    List.filterMap List.tail xss
+            in
+                (x :: heads) :: transpose (xs :: tails)

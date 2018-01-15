@@ -2,7 +2,7 @@ module Latte.Common.Tooltip exposing (view, viewPr)
 
 import Html exposing (Attribute, Html, div, li, node, strong, text, ul)
 import Html.Attributes exposing (class, style)
-import Latte.Helper exposing (..)
+import Latte.Common.Helper exposing (..)
 import Latte.Model exposing (..)
 import Latte.Msg exposing (..)
 

@@ -1,9 +1,10 @@
-module Latte.Bar exposing (view)
+module Latte.Scatter exposing (view)
 
 import Html exposing (Attribute, div, text)
 import Html.Attributes exposing (style)
-import Latte.Bar.Area exposing (view)
-import Latte.Bar.Ticks exposing (view)
+import Latte.Line.Area exposing (view)
+import Latte.Line.Ticks exposing (view)
+import Latte.Line.Lines exposing (view)
 import Latte.Common.Title as Title
 import Latte.Common.Tooltip as Tooltip
 import Latte.Common.Helper exposing (..)
@@ -33,12 +34,17 @@ view model =
 
 area : Model -> Svg Msg
 area model =
-    Latte.Bar.Area.view model
+    Latte.Line.Area.view model
 
 
 ticks : Model -> Svg Msg
 ticks model =
-    Latte.Bar.Ticks.view model
+    Latte.Line.Ticks.view model
+
+
+lines : Model -> Svg Msg
+lines model =
+    Latte.Line.Lines.view model
 
 
 

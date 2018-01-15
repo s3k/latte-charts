@@ -1,4 +1,4 @@
-module Latte.Bar.Area exposing (view)
+module Latte.Line.Area exposing (view)
 
 import Html exposing (Attribute)
 import Html.Attributes exposing (style)

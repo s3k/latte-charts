@@ -1,10 +1,4 @@
-{-
-   Render bars
-   Refactoring needed
--}
-
-
-module Latte.Bar.Ticks exposing (view)
+module Latte.Line.Ticks exposing (view)
 
 import Html
 import Html.Attributes exposing (style)
@@ -12,7 +6,7 @@ import Latte.Common.Helper exposing (..)
 import Latte.Bar.Helper exposing (..)
 import Latte.Model exposing (..)
 import Latte.Msg exposing (..)
-import Svg exposing (Svg, animate, g, line, rect, svg, text, text_)
+import Svg exposing (Svg, animate, g, line, rect, circle, svg, text, text_)
 import Svg.Events exposing (onMouseOut, onMouseOver)
 import Svg.Attributes
     exposing
@@ -37,22 +31,40 @@ import Svg.Attributes
 
 view : Model -> Svg Msg
 view model =
-    case List.head model.userData.datasets of
-        Just ds ->
-            g [ class "bars-latte" ] (toBarTicks model ds)
-
-        Nothing ->
-            g [ class "bars-latte" ] []
-
+    let
+        maxDs =
+            maxDsPoints model
+    in
+        g [ class "bars-latte" ] (toBarTicks model maxDs)
 
 
--- Bar ticks
-
-
-toBarTicks : Model -> Dataset -> List (Svg Msg)
+toBarTicks : Model -> List Float -> List (Svg Msg)
 toBarTicks model ds =
-    List.map3 (\i val label -> { ptr = i, position = leftAlign model.state i, val = val, label = label, subTicks = makeSubTicks model i }) (List.range 0 (List.length ds.values)) ds.values model.userData.labels
-        |> List.map (\n -> barTick n.ptr n.subTicks ds.title n.val n.position (calcHeight model.state n.val) n.label model.state)
+    List.map3
+        (\i val label ->
+            { ptr = i
+            , position = leftAlign model.state i
+            , val = val
+            , label = label
+            , subTicks = makeSubTicks model i
+            }
+        )
+        (List.range 0 (List.length ds))
+        ds
+        model.userData.labels
+        |> List.map
+            (\n ->
+                barTick
+                    n.ptr
+                    n.subTicks
+                    "Title"
+                    -- ds.title
+                    n.val
+                    n.position
+                    (calcHeight model.state n.val)
+                    n.label
+                    model.state
+            )
 
 
 
@@ -76,37 +88,47 @@ subTick state i val =
         right =
             toFloat i * subWidth
     in
-        rect
+        circle
             [ width (toS subWidth)
             , style [ ( "fill", stringByIndex i state.colors ) ]
-            , transform ("translate(" ++ toS right ++ ", 0)")
+            , Svg.Attributes.r "4"
+            , Svg.Attributes.cx "17"
+            , Svg.Attributes.cy <| toS <| calcHeight state val
             ]
-            [ barTickAnimate <| calcHeight state val ]
+            [ animate
+                [ attributeName "cy"
+                , from "0"
+                , to (toS <| calcHeight state val)
+                , dur "0.2s"
+                , fill "freeze"
+                ]
+                []
+            ]
 
 
 barTick : Int -> List (Svg Msg) -> String -> Float -> Float -> Float -> String -> State -> Svg Msg
 barTick ptr subTicks dsTitle val right height label state =
     g
-        [ transform ("translate(" ++ toString right ++ ", 18)")
+        [ transform ("translate(" ++ toString (right / 1.35 + 110) ++ ", 18)")
         ]
         (subTicks
-            ++ [ rect
-                    [ barTickStyle state ptr
-                    , width (toS barWidth)
-                    , onMouseOut HideTooltip
-                    , opacity "0.0"
-                    , onMouseOver (ShowTooltip ptr right height val label dsTitle)
-                    ]
-                    [ barTickAnimate height
-                    ]
-               , line
+            ++ [ line
                     [ x1 (toS barCenter)
                     , x2 (toS barCenter)
-                    , y1 "-1"
-                    , y2 "-5"
+                    , y1 "1"
+                    , y2 <| toS state.height
                     , style [ ( "stroke", "#999" ), ( "stroke-width", "0.7" ) ]
                     ]
                     []
+               , rect
+                    [ barTickStyle state ptr
+                    , width (toS barWidth)
+                    , onMouseOut HideTooltip
+                    , onMouseOver (ShowTooltip ptr right height val label dsTitle)
+                    , opacity "0.0"
+                    ]
+                    [ barTickAnimate height
+                    ]
                , text_
                     [ x "17.5"
                     , y "15"

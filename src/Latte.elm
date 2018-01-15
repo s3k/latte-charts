@@ -7,7 +7,9 @@ module Latte exposing (latteDraw, latteMake, latteUpdate)
 
 import Latte.Bar
 import Latte.Percentage
-import Latte.Helper exposing (..)
+import Latte.Line
+import Latte.Scatter
+import Latte.Common.Helper exposing (..)
 import Latte.Model exposing (..)
 import Latte.Msg exposing (..)
 import Latte.Update exposing (update)
@@ -53,10 +55,10 @@ latteDraw model =
             Latte.Bar.view model
 
         Line ->
-            svg [] []
+            Latte.Line.view model
 
         Scatter ->
-            svg [] []
+            Latte.Scatter.view model
 
         Pie ->
             svg [] []

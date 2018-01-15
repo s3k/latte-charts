@@ -1,6 +1,6 @@
 module Latte.Percentage.Helper exposing (..)
 
-import Latte.Helper exposing (toPr)
+import Latte.Common.Helper exposing (toPr)
 import Latte.Model exposing (Model, Dataset)
 
 

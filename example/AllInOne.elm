@@ -1,4 +1,4 @@
-module Bar exposing (..)
+module AllInOne exposing (..)
 
 import Html exposing (Html, div, text, ol, li, strong, s)
 import Latte exposing (..)
@@ -19,6 +19,8 @@ type alias Model =
     , latte : LatteModel.Model
     , latte2 : LatteModel.Model
     , lattePercentage : LatteModel.Model
+    , latteLine : LatteModel.Model
+    , latteScatter : LatteModel.Model
     }
 
 
@@ -58,6 +60,40 @@ model =
                 ]
             , title = "Moons of Jupiter"
             }
+    , latteLine =
+        latteMake 640 200 <|
+            { chart = Line
+            , labels =
+                [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ]
+            , datasets =
+                [ Dataset "Mars avg high"
+                    [ 7, 18, 23, 20, 4, 0, 2, 1, 1, 4, 1, 3 ]
+                , Dataset
+                    "Jupyter"
+                  <|
+                    List.map (\n -> n * 1.3) [ 8, 35, 14, 20, 4, 7, 2, 5, 7, 4, 1, 8 ]
+                , Dataset "Neptune"
+                    [ 33, 8, 15, 45, 4, 10, 2, 4, 3, 7, 3, 1 ]
+                ]
+            , title = "Moons of Jupiter"
+            }
+    , latteScatter =
+        latteMake 640 200 <|
+            { chart = Scatter
+            , labels =
+                [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ]
+            , datasets =
+                [ Dataset "Mars avg high"
+                    [ 7, 18, 23, 20, 4, 0, 2, 1, 1, 4, 1, 3 ]
+                , Dataset
+                    "Jupyter"
+                  <|
+                    List.map (\n -> n * 1.3) [ 8, 35, 14, 20, 4, 7, 2, 5, 7, 4, 1, 8 ]
+                , Dataset "Neptune"
+                    [ 33, 8, 15, 45, 4, 10, 2, 4, 3, 7, 3, 1 ]
+                ]
+            , title = "Moons of Jupiter"
+            }
     }
 
 
@@ -69,6 +105,8 @@ type Msg
     = Latte LatteMsg.Msg
     | LatteSecond LatteMsg.Msg
     | LattePercentage LatteMsg.Msg
+    | LatteLine LatteMsg.Msg
+    | LatteScatter LatteMsg.Msg
 
 
 update : Msg -> Model -> Model
@@ -83,6 +121,12 @@ update msg model =
         LattePercentage msg ->
             { model | lattePercentage = (latteUpdate msg model.lattePercentage) }
 
+        LatteLine msg ->
+            { model | latteLine = (latteUpdate msg model.latteLine) }
+
+        LatteScatter msg ->
+            { model | latteScatter = (latteUpdate msg model.latteScatter) }
+
 
 
 -- VIEW
@@ -91,7 +135,9 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ Html.map Latte (latteDraw model.latte)
+        [ Html.map LatteLine (latteDraw model.latteLine)
+        , Html.map LatteScatter (latteDraw model.latteScatter)
+        , Html.map Latte (latteDraw model.latte)
         , Html.map LattePercentage (latteDraw model.lattePercentage)
         , Html.map LatteSecond (latteDraw model.latte2)
         , ol []
@@ -101,10 +147,11 @@ view model =
             , li [] [ s [] [ text "Add onClick action to bar" ] ]
             , li [] [ s [] [ text "Implement triples" ] ]
             , li [] [ s [] [ text "Implement colors for datasets" ] ]
+            , li [] [ s [] [ text "Tooltip for Percentage" ] ]
+            , li [] [ text "RENDER DOTS!" ]
+            , li [] [ text "Implement Line Chart" ]
             , li [] [ text "Implement css styles in single file" ]
-            , li [] [ text "Tooltip for Percentage" ]
-            , li [] [ text "Find same code pices" ]
-            , li [] [ text "Tune fonts" ]
             , li [] [ text "Refactoring (clean up mess in code)" ]
+            , li [] [ text "Tune Design" ]
             ]
         ]

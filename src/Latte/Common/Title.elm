@@ -2,7 +2,7 @@ module Latte.Common.Title exposing (view)
 
 import Html exposing (Attribute, Html, div, text)
 import Html.Attributes exposing (style)
-import Latte.Helper exposing (..)
+import Latte.Common.Helper exposing (..)
 import Latte.Model exposing (..)
 import Latte.Msg exposing (..)
 
