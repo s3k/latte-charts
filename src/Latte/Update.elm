@@ -1,6 +1,8 @@
 module Latte.Update exposing (update)
 
 import Latte.Common.Helper exposing (..)
+import Latte.Bar.Helper exposing (calcMarginRight, leftAlign)
+import Latte.Common.Style exposing (barWidth, chartPaddingLeft)
 import Latte.Model exposing (..)
 import Latte.Msg exposing (..)
 
@@ -34,7 +36,10 @@ showTooltip ptr x y val label dsTitle model =
                     (state.height - y) - 62 - 1
 
                 Line ->
-                    (state.height - y) - 62 - 1
+                    (state.height - y) - 62 - 5
+
+                Scatter ->
+                    (state.height - y) - 62 - 5
 
                 Percentage ->
                     8
@@ -42,13 +47,24 @@ showTooltip ptr x y val label dsTitle model =
                 _ ->
                     0
 
+        commonTpX =
+            x
+                - 3.5
+                + chartPaddingLeft
+                / 2
+                - barWidth
+                * (toFloat <| List.length model.userData.datasets)
+
         tooltipX =
             case model.userData.chart of
                 Bar ->
-                    x + 26 - 70.0 * (toFloat <| List.length model.userData.datasets) / 2
+                    commonTpX
 
                 Line ->
-                    x + 26 - 70.0 * (toFloat <| List.length model.userData.datasets) / 2
+                    commonTpX
+
+                Scatter ->
+                    commonTpX
 
                 Percentage ->
                     percentageOffset ptr model

@@ -1,9 +1,10 @@
-module Latte.Bar.Area exposing (view)
+module Latte.Common.Area exposing (view)
 
 import Html exposing (Attribute)
 import Html.Attributes exposing (style)
-import Latte.Model exposing (..)
 import Latte.Common.Helper exposing (..)
+import Latte.Common.Style exposing (chartPaddingLeft, svgFontStyle)
+import Latte.Model exposing (..)
 import Svg exposing (Svg, g, line, text, text_)
 import Svg.Attributes exposing (class, textAnchor, transform, x, x1, x2, y, y1, y2)
 
@@ -26,21 +27,16 @@ makeLines model =
         aspect =
             model.state.height / (model.state.maxBarLines + 1)
     in
-        List.range 0 (floor model.state.maxBarLines)
-            |> List.map (\n -> BarArea (toFloat n) (toFloat (round (yStep * toFloat n))))
-            |> List.indexedMap (,)
-            |> List.map (\( i, n ) -> latteBarLine i (aspect * n.i) (toString n.label) model.state)
+    List.range 0 (floor model.state.maxBarLines)
+        |> List.map (\n -> BarArea (toFloat n) (toFloat (round (yStep * toFloat n))))
+        |> List.indexedMap (,)
+        |> List.map (\( i, n ) -> latteBarLine i (aspect * n.i) (toString n.label) model.state)
 
 
 latteBarLine : Int -> Float -> String -> State -> Svg msg
 latteBarLine i pos label state =
     g [ transform ("translate(10, " ++ toString (pos + 18) ++ ")") ]
         [ barLine i state, barText label ]
-
-
-paddingLeft : Float
-paddingLeft =
-    55
 
 
 barLine : Int -> State -> Svg msg
@@ -53,8 +49,8 @@ barLine i state =
                 "#dadada"
 
         attrs =
-            [ x1 (toS paddingLeft)
-            , x2 (toS (state.width - paddingLeft * 1.1))
+            [ x1 (toS chartPaddingLeft)
+            , x2 (toS (state.width - chartPaddingLeft * 1.1))
             , y1 "0"
             , y2 "0"
             , style
@@ -64,7 +60,7 @@ barLine i state =
                 ]
             ]
     in
-        line attrs []
+    line attrs []
 
 
 barText : String -> Svg msg
@@ -78,9 +74,9 @@ barText label =
             , textAnchor "end"
             ]
     in
-        text_ attrs [ text label ]
+    text_ attrs [ text label ]
 
 
 barTextStyle : Attribute msg
 barTextStyle =
-    style commonSvgFont
+    style svgFontStyle

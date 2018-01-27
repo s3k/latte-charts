@@ -1,20 +1,21 @@
-module Latte.Line.Lines exposing (view)
+module Latte.Common.Lines exposing (view)
 
 import Html.Attributes exposing (style)
-import Svg exposing (Svg, svg, animate, g, path)
-import Svg.Events exposing (onMouseOut, onMouseOver)
-import Svg.Attributes
-    exposing
-        ( d
-        , attributeName
-        , from
-        , to
-        , dur
-        , fill
-        )
+import Latte.Bar.Helper exposing (calcHeight, leftAlign)
+import Latte.Common.Style exposing (barWidth)
 import Latte.Model exposing (..)
 import Latte.Msg exposing (..)
-import Latte.Bar.Helper exposing (leftAlign, calcHeight, barWidth)
+import Svg exposing (Svg, animate, g, path, svg)
+import Svg.Attributes
+    exposing
+        ( attributeName
+        , d
+        , dur
+        , fill
+        , from
+        , to
+        )
+import Svg.Events exposing (onMouseOut, onMouseOver)
 
 
 view : Model -> Svg Msg
@@ -28,12 +29,12 @@ drawPathes model =
         datasets =
             model.userData.datasets
     in
-        datasets
-            |> List.map2
-                (\color dataset ->
-                    makePath model.state color dataset.values
-                )
-                model.state.colors
+    datasets
+        |> List.map2
+            (\color dataset ->
+                makePath model.state color dataset.values
+            )
+            model.state.colors
 
 
 makePath : State -> String -> List Float -> Svg Msg
@@ -74,8 +75,8 @@ pair state i val =
             else
                 "L"
     in
-        (++) coordType <|
-            String.join "," <|
-                [ toString <| (leftAlign state i) / 1.35 + 127
-                , toString <| (calcHeight state val) + 18
-                ]
+    (++) coordType <|
+        String.join "," <|
+            [ toString <| leftAlign state i + barWidth / 2
+            , toString <| calcHeight state val + 18
+            ]

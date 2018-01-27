@@ -3,13 +3,19 @@ module Latte.Percentage exposing (view)
 import Html exposing (Html, Attribute, div, span, i, text)
 import Html.Attributes exposing (style, class)
 import Latte.Common.Helper exposing (..)
-import Latte.Percentage.Helper exposing (..)
 import Latte.Model exposing (..)
 import Latte.Msg exposing (..)
 import Latte.Common.Title as Title
 import Latte.Common.Tooltip as Tooltip
 import Svg.Events exposing (onMouseOut, onMouseOver)
 import Round
+import Latte.Common.Style
+    exposing
+        ( fontStyle
+        , boxStyle
+        , legendStyle
+        , percentageAreaStyle
+        )
 
 
 view : Model -> Html Msg
@@ -19,15 +25,15 @@ view model =
         , Tooltip.viewPr model
         , div
             [ class "latte-percentage"
-            , style
-                [ ( "height", "20px" )
-                , ( "border-radius", "4px" )
-                , ( "overflow", "hidden" )
-                ]
+            , percentageAreaStyle
             ]
             (makeBars model)
         , legend model
         ]
+
+
+
+-- Bars
 
 
 makeBars : Model -> List (Html Msg)
@@ -49,6 +55,29 @@ makeBars model =
             percents
             labels
         )
+
+
+barItem : Int -> String -> Float -> String -> Html Msg
+barItem ptr color percent label =
+    let
+        attrs =
+            style
+                [ ( "background", color ++ " none repeat scroll 0% 0%" )
+                , ( "width", toPr percent )
+                , ( "height", "20px" )
+                , ( "float", "left" )
+                ]
+    in
+        div
+            [ attrs
+            , onMouseOver (ShowTooltip ptr 50 0 0 label (Round.round 2 percent))
+            , onMouseOut HideTooltip
+            ]
+            []
+
+
+
+-- Legend
 
 
 legend : Model -> Html Msg
@@ -82,48 +111,5 @@ legendItem color title =
                 ]
             ]
             [ text "●" ]
-        , span [ style commonFont ] [ text title ]
-        ]
-
-
-barItem : Int -> String -> Float -> String -> Html Msg
-barItem ptr color percent label =
-    let
-        attrs =
-            style
-                [ ( "background", color ++ " none repeat scroll 0% 0%" )
-                , ( "width", toPr percent )
-                , ( "height", "20px" )
-                , ( "float", "left" )
-                ]
-    in
-        div
-            [ attrs
-            , onMouseOver (ShowTooltip ptr 50 0 0 label (Round.round 2 percent))
-            , onMouseOut HideTooltip
-            ]
-            []
-
-
-
--- Styles
-
-
-legendStyle : Attribute msg
-legendStyle =
-    style
-        [ ( "margin-top", "20px" )
-        , ( "text-align", "center" )
-        ]
-
-
-boxStyle : Model -> Attribute msg
-boxStyle model =
-    style
-        [ ( "padding", "10px" )
-        , ( "margin", "10px" )
-        , ( "position", "relative" )
-        , ( "border", "1px solid #ccc" )
-        , ( "max-width", toPx model.state.width )
-        , ( "border-radius", "3px" )
+        , span [ style fontStyle ] [ text title ]
         ]

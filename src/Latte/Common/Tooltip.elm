@@ -3,6 +3,7 @@ module Latte.Common.Tooltip exposing (view, viewPr)
 import Html exposing (Attribute, Html, div, li, node, strong, text, ul)
 import Html.Attributes exposing (class, style)
 import Latte.Common.Helper exposing (..)
+import Latte.Common.Style exposing (fontStyle)
 import Latte.Model exposing (..)
 import Latte.Msg exposing (..)
 
@@ -13,7 +14,7 @@ import Latte.Msg exposing (..)
 view : Model -> Html Msg
 view model =
     div
-        [ tooltipStyle model.state
+        [ tooltipStyle model.state (toPx <| liWidth * model.state.dsCount)
         , class "tooltip-latte"
         ]
         [ node "style" [] [ arrowStyle ]
@@ -31,7 +32,7 @@ view model =
 viewPr : Model -> Html Msg
 viewPr model =
     div
-        [ tooltipStyle model.state
+        [ tooltipStyle model.state ""
         , class "tooltip-latte"
         ]
         [ node "style" [] [ arrowStyle ]
@@ -65,10 +66,15 @@ showDataset i state val title =
 -- Style
 
 
-tooltipStyle : State -> Attribute msg
-tooltipStyle state =
+liWidth : Int
+liWidth =
+    70
+
+
+tooltipStyle : State -> String -> Attribute msg
+tooltipStyle state width =
     style
-        (commonFont
+        (fontStyle
             ++ [ ( "position", "absolute" )
                , ( "left", toPx state.tooltip.x )
                , ( "top", toPx state.tooltip.y )
@@ -76,9 +82,9 @@ tooltipStyle state =
                , ( "color", "white" )
                , ( "background-color", "black" )
                , ( "border-radius", "3px" )
+               , ( "width", width )
+               , ( "text-align", "center" )
                , opacityStyle
-                 -- , ( "min-width", "110px" )
-                 -- , ( "height", "82px" )
                ]
         )
 
@@ -107,7 +113,7 @@ liStyle i state =
           -- , ( "padding", "0px 8px" )
         , ( "display", "inline" )
         , ( "float", "left" )
-        , ( "width", "70px" )
+        , ( "width", toPx liWidth )
         , ( "height", "50px" )
         ]
 

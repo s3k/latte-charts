@@ -1,11 +1,7 @@
 module Latte.Bar.Helper exposing (..)
 
+import Latte.Common.Style exposing (barWidth, chartPaddingLeft)
 import Latte.Model exposing (..)
-
-
-barWidth : Float
-barWidth =
-    34
 
 
 barCenter : Float
@@ -22,22 +18,37 @@ leftAlign state step_ =
         step =
             toFloat step_
 
-        paddingLeft =
-            70
-
         areaWidth =
-            state.width - paddingLeft
+            state.width - chartPaddingLeft * 2
 
         barMarginRight =
-            30
-
-        barWidthAndMargin =
-            barWidth + barMarginRight
+            areaWidth / barsCount
 
         centerShift =
-            areaWidth / 2 - (barsCount * 70 + barWidth) / 2
+            areaWidth
+                - (barsCount * barMarginRight)
+                + (barMarginRight - barWidth / 2)
+                / 2
     in
-        paddingLeft + (step * barWidthAndMargin) + centerShift
+        chartPaddingLeft
+            + (step * barMarginRight)
+            + centerShift
+
+
+calcMarginRight : Model -> Float
+calcMarginRight model =
+    let
+        barsCount =
+            toFloat model.state.elemCount
+
+        areaWidth =
+            model.state.width - chartPaddingLeft * 2
+    in
+        areaWidth / barsCount
+
+
+
+-- paddingLeft + (step * barWidthAndMargin) + centerShift
 
 
 calcHeight : State -> Float -> Float

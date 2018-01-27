@@ -60,8 +60,8 @@ latteDraw model =
         Scatter ->
             Latte.Scatter.view model
 
-        Pie ->
-            svg [] []
-
         Percentage ->
             Latte.Percentage.view model
+
+        Pie ->
+            svg [] []

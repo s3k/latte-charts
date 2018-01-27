@@ -133,28 +133,6 @@ justString item =
 
 
 
--- Style Helpers
-
-
-commonSvgFont : List ( String, String )
-commonSvgFont =
-    [ ( "text-rendering", "optimizeLegibility" )
-    , ( "color", "rgb(108, 118, 128)" )
-    , ( "display", "inline" )
-    , ( "fill", "rgb(85, 91, 81)" )
-    ]
-        ++ commonFont
-
-
-commonFont : List ( String, String )
-commonFont =
-    [ ( "font-family", "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif" )
-    , ( "font-size", "11px" )
-    , ( "font-weight", "300" )
-    ]
-
-
-
 -- Darken color
 
 
