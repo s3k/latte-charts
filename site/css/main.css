@@ -1,0 +1,42 @@
+
+body {
+  color: #5A6378;
+  margin: 0px;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 600;
+}
+
+header {
+  background-color: #E6ECF0;
+  min-height: 50vh;
+
+  display: flex;
+  align-items: center;
+
+  text-align: center;
+}
+
+.center {
+  margin: 10px auto;
+}
+
+.logo {
+  display: block;
+
+  width: 274px;
+  height: 143px;
+
+  margin: 20px auto;
+
+  background: url(../images/logo.svg) no-repeat top left;
+  background-size: contain;
+
+}
+
+.subtitle {
+  font-size: 24px;
+  animation-delay: 600ms;
+}
