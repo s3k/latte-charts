@@ -1,6 +1,6 @@
 module Landing exposing (..)
 
-import Html exposing (Html, div, li, ol, s, strong, text, h4)
+import Html exposing (Html, div, li, ol, s, strong, text, h4, p)
 import Html.Attributes exposing (class, style)
 import Latte exposing (..)
 import Latte.Model as LatteModel exposing (Chart(..), Dataset)
@@ -34,7 +34,7 @@ init =
             { hello =
                 "Hello, this is a Latte Chart example"
             , latte =
-                latteMake 640 200 <|
+                latteMake 400 200 <|
                     { chart = Bar
                     , labels =
                         [ "Io", "Europa", "Ganymede", "Callisto" ]
@@ -83,10 +83,36 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div
-        [ class "content animated fadeIn"
+        [ class "container content animated fadeIn"
         ]
-        [ div [ class "content-item" ]
-            [ h4 [ class "center" ] [ text "Multiple Bar Charts" ]
-            , Html.map Latte (latteDraw model.latte)
+        [ div [ class "row" ]
+            [ div [ class "six columns" ]
+                [ strong []
+                    [ text "Moons of Jupiter" ]
+                , p
+                    []
+                    [ text aboutJupiter ]
+                ]
+            , div [ class "six columns content-item" ]
+                [ -- h4 [ class "center" ] [ text "Multiple Bar Charts" ]
+                  Html.map Latte (latteDraw model.latte)
+                ]
+            ]
+        , div [ class "row" ]
+            [ div [ class "six columns" ]
+                [ strong []
+                    [ text "Moons of Jupiter" ]
+                , p
+                    []
+                    [ text aboutJupiter ]
+                ]
+            , div [ class "six columns content-item" ]
+                [ -- h4 [ class "center" ] [ text "Multiple Bar Charts" ]
+                  Html.map Latte (latteDraw model.latte)
+                ]
             ]
         ]
+
+
+aboutJupiter =
+    "There are 69 known moons of Jupiter. This gives Jupiter the largest number of moons with reasonably stable orbits of any planet in the Solar System"

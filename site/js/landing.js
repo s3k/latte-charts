@@ -11613,6 +11613,7 @@ var _user$project$Latte$latteUpdate = F2(
 		return A2(_user$project$Latte_Update$update, msg, model);
 	});
 
+var _user$project$Landing$aboutJupiter = 'There are 69 known moons of Jupiter. This gives Jupiter the largest number of moons with reasonably stable orbits of any planet in the Solar System';
 var _user$project$Landing$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
@@ -11639,7 +11640,7 @@ var _user$project$Landing$init = function () {
 		hello: 'Hello, this is a Latte Chart example',
 		latte: A3(
 			_user$project$Latte$latteMake,
-			640,
+			400,
 			200,
 			{
 				chart: _user$project$Latte_Model$Bar,
@@ -11771,7 +11772,7 @@ var _user$project$Landing$view = function (model) {
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('content animated fadeIn'),
+			_0: _elm_lang$html$Html_Attributes$class('container content animated fadeIn'),
 			_1: {ctor: '[]'}
 		},
 		{
@@ -11780,33 +11781,124 @@ var _user$project$Landing$view = function (model) {
 				_elm_lang$html$Html$div,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('content-item'),
+					_0: _elm_lang$html$Html_Attributes$class('row'),
 					_1: {ctor: '[]'}
 				},
 				{
 					ctor: '::',
 					_0: A2(
-						_elm_lang$html$Html$h4,
+						_elm_lang$html$Html$div,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('center'),
+							_0: _elm_lang$html$Html_Attributes$class('six columns'),
 							_1: {ctor: '[]'}
 						},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text('Multiple Bar Charts'),
-							_1: {ctor: '[]'}
+							_0: A2(
+								_elm_lang$html$Html$strong,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('Moons of Jupiter'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$p,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(_user$project$Landing$aboutJupiter),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
 						}),
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_elm_lang$html$Html$map,
-							_user$project$Landing$Latte,
-							_user$project$Latte$latteDraw(model.latte)),
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('six columns content-item'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$map,
+									_user$project$Landing$Latte,
+									_user$project$Latte$latteDraw(model.latte)),
+								_1: {ctor: '[]'}
+							}),
 						_1: {ctor: '[]'}
 					}
 				}),
-			_1: {ctor: '[]'}
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('row'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('six columns'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$strong,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Moons of Jupiter'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$p,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(_user$project$Landing$aboutJupiter),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('six columns content-item'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$map,
+										_user$project$Landing$Latte,
+										_user$project$Latte$latteDraw(model.latte)),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
 		});
 };
 var _user$project$Landing$main = _elm_lang$html$Html$program(
