@@ -1,7 +1,7 @@
 module Landing exposing (..)
 
-import Html exposing (Html, div, li, ol, s, strong, text)
-import Html.Attributes exposing (class)
+import Html exposing (Html, div, li, ol, s, strong, text, h4)
+import Html.Attributes exposing (class, style)
 import Latte exposing (..)
 import Latte.Model as LatteModel exposing (Chart(..), Dataset)
 import Latte.Msg as LatteMsg
@@ -34,7 +34,7 @@ init =
             { hello =
                 "Hello, this is a Latte Chart example"
             , latte =
-                latteMake 840 200 <|
+                latteMake 640 200 <|
                     { chart = Bar
                     , labels =
                         [ "Io", "Europa", "Ganymede", "Callisto" ]
@@ -82,6 +82,11 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div [ class "center" ]
-        [ Html.map Latte (latteDraw model.latte)
+    div
+        [ class "content animated fadeIn"
+        ]
+        [ div [ class "content-item" ]
+            [ h4 [ class "center" ] [ text "Multiple Bar Charts" ]
+            , Html.map Latte (latteDraw model.latte)
+            ]
         ]

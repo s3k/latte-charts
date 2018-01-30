@@ -9968,7 +9968,7 @@ var _user$project$Latte_Common_Style$boxStyle = function (model) {
 			_0: {ctor: '_Tuple2', _0: 'padding', _1: '10px'},
 			_1: {
 				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'margin', _1: '10px'},
+				_0: {ctor: '_Tuple2', _0: 'margin', _1: '10px auto'},
 				_1: {
 					ctor: '::',
 					_0: {ctor: '_Tuple2', _0: 'position', _1: 'relative'},
@@ -11639,7 +11639,7 @@ var _user$project$Landing$init = function () {
 		hello: 'Hello, this is a Latte Chart example',
 		latte: A3(
 			_user$project$Latte$latteMake,
-			840,
+			640,
 			200,
 			{
 				chart: _user$project$Latte_Model$Bar,
@@ -11771,15 +11771,41 @@ var _user$project$Landing$view = function (model) {
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('center'),
+			_0: _elm_lang$html$Html_Attributes$class('content animated fadeIn'),
 			_1: {ctor: '[]'}
 		},
 		{
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$map,
-				_user$project$Landing$Latte,
-				_user$project$Latte$latteDraw(model.latte)),
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('content-item'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$h4,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('center'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Multiple Bar Charts'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$map,
+							_user$project$Landing$Latte,
+							_user$project$Latte$latteDraw(model.latte)),
+						_1: {ctor: '[]'}
+					}
+				}),
 			_1: {ctor: '[]'}
 		});
 };

@@ -46,7 +46,7 @@ boxStyle : Model -> Attribute msg
 boxStyle model =
     style
         [ ( "padding", "10px" )
-        , ( "margin", "10px" )
+        , ( "margin", "10px auto" )
         , ( "position", "relative" )
         , ( "border", "1px solid #ccc" )
         , ( "max-width", toPx model.state.width )
