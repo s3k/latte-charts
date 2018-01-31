@@ -53,5 +53,36 @@ header {
   animation-delay: 600ms;
 }
 
-.content-item {
+/*
+ * Button Group
+ */
+
+.btn-group a {
+    border: 1px solid #ccc;
+    padding: 5px 24px;
+    cursor: pointer;
+    font-size: 12px;
+    color: #777;
+}
+
+.btn-group a:not(:last-child) {
+    border-right: none; /* Prevent double borders */
+}
+
+.btn-group:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.btn-group a:hover, .btn.active {
+    background-color: #eee;
+}
+
+.btn-group a:first-child{
+  border-radius: 5px 0px 0px 5px;
+}
+
+.btn-group a:last-child{
+  border-radius: 0px 5px 5px 0px;
 }

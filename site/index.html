@@ -28,31 +28,10 @@
   <link rel="icon" type="image/png" href="images/favicon.png">
 
 </head>
+
 <body>
-
-  <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <header>
-    <div class="container" >
-      <div class="row">
-        <div class="column" >
-          <div class="logo animated bounceInDown"></div>
-          <p class="subtitle animated fadeIn">Library for creating charts in Elm language</p>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <section id="app">
-  </section>
-
-  <script src="js/landing.js"></script>
-  <script>
-    var node = document.getElementById('app');
-    var app = Elm.Landing.embed(node);
-  </script>
-
-<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>
+
+<script src="js/landing.js"></script>
+<script>Elm.Landing.embed(document.body);</script>
 </html>
