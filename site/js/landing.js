@@ -8769,6 +8769,121 @@ var _elm_lang$html$Html_Attributes$classList = function (list) {
 };
 var _elm_lang$html$Html_Attributes$style = _elm_lang$virtual_dom$VirtualDom$style;
 
+var _elm_lang$html$Html_Events$keyCode = A2(_elm_lang$core$Json_Decode$field, 'keyCode', _elm_lang$core$Json_Decode$int);
+var _elm_lang$html$Html_Events$targetChecked = A2(
+	_elm_lang$core$Json_Decode$at,
+	{
+		ctor: '::',
+		_0: 'target',
+		_1: {
+			ctor: '::',
+			_0: 'checked',
+			_1: {ctor: '[]'}
+		}
+	},
+	_elm_lang$core$Json_Decode$bool);
+var _elm_lang$html$Html_Events$targetValue = A2(
+	_elm_lang$core$Json_Decode$at,
+	{
+		ctor: '::',
+		_0: 'target',
+		_1: {
+			ctor: '::',
+			_0: 'value',
+			_1: {ctor: '[]'}
+		}
+	},
+	_elm_lang$core$Json_Decode$string);
+var _elm_lang$html$Html_Events$defaultOptions = _elm_lang$virtual_dom$VirtualDom$defaultOptions;
+var _elm_lang$html$Html_Events$onWithOptions = _elm_lang$virtual_dom$VirtualDom$onWithOptions;
+var _elm_lang$html$Html_Events$on = _elm_lang$virtual_dom$VirtualDom$on;
+var _elm_lang$html$Html_Events$onFocus = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'focus',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onBlur = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'blur',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onSubmitOptions = _elm_lang$core$Native_Utils.update(
+	_elm_lang$html$Html_Events$defaultOptions,
+	{preventDefault: true});
+var _elm_lang$html$Html_Events$onSubmit = function (msg) {
+	return A3(
+		_elm_lang$html$Html_Events$onWithOptions,
+		'submit',
+		_elm_lang$html$Html_Events$onSubmitOptions,
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onCheck = function (tagger) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'change',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetChecked));
+};
+var _elm_lang$html$Html_Events$onInput = function (tagger) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'input',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetValue));
+};
+var _elm_lang$html$Html_Events$onMouseOut = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseout',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseOver = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseover',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseLeave = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseleave',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseEnter = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseenter',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseUp = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseup',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseDown = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mousedown',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onDoubleClick = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'dblclick',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onClick = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'click',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$Options = F2(
+	function (a, b) {
+		return {stopPropagation: a, preventDefault: b};
+	});
+
 var _elm_lang$svg$Svg$map = _elm_lang$virtual_dom$VirtualDom$map;
 var _elm_lang$svg$Svg$text = _elm_lang$virtual_dom$VirtualDom$text;
 var _elm_lang$svg$Svg$svgNamespace = A2(
@@ -11770,36 +11885,66 @@ var _user$project$Landing$installView = function (model) {
 					_0: _elm_lang$html$Html_Attributes$class('content'),
 					_1: {ctor: '[]'}
 				},
-				'\n\n## Installation\n\nAdd package Latte Chart package\n\n```\n$ elm package install s3k/latte\n```\n\n'),
+				'\n\n##### Installation\n\nAdd package Latte Chart package\n\n```\n$ elm package install s3k/latte\n```\n\n##### Imports\n\n```\nimport Latte exposing (..)\nimport Latte.Model as LatteModel exposing (Chart(..), Dataset)\nimport Latte.Msg as LatteMsg\n```\n\n##### Prepare model\n\nUse helper **latteMake** to create Latte Chart model.\n\n1. Declare resolution height x width and fill structure\n1. Choose chart type: **Bar | Line | Scatter | Percentage**\n1. Fill labels and datasets. Labels are Strings and datasets are Floats\n\n```\ntype alias Model =\n    { latte : LatteModel.Model\n    }\n\n\ninit : ( Model, Cmd Msg )\ninit =\n    let\n        model =\n            { latte =\n                latteMake 950 200 <|\n                    { chart = Bar\n                    , labels =\n                        [ \"Io\", \"Europa\", \"Ganymede\", \"Callisto\", \"Fake\" ]\n                    , datasets =\n                        [ Dataset \"Mass\" [ 8931900, 4800000, 14819000, 10759000, 10759000 ]\n                        , Dataset \"Diameter\" <| List.map (\n -> n * 1000) [ 3660.0, 3121.6, 5262.4, 4820.6, 4000 ]\n                        , Dataset \"Semi-Major\" [ 421700, 671034, 1070412, 1882709, 1882709 ]\n                        ]\n                    , title = \"Biggest Moons of Jupiter\"\n                    }\n            }\n    in\n        model ! []\n```\n\n##### Setting up Update\n\n```\ntype Msg\n    = Latte LatteMsg.Msg\n\n\nupdate : Msg -> Model -> ( Model, Cmd Msg )\nupdate msg model =\n    case msg of\n        Latte msg ->\n            ( { model | latte = latteUpdate msg model.latte }, Cmd.none )\n\n\n```\n\n##### Emerge View\n\nUse **latteDraw** function to render chart. Notice! Use **Html.map** to map all events.\n\n```\nview : Model -> Html Msg\nview model =\n    div []\n        [ Html.map Latte (latteDraw model.latte)]\n\n```\n\n'),
 			_1: {ctor: '[]'}
 		});
 };
 var _user$project$Landing$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
-		if (_p0.ctor === 'Latte') {
-			return {
-				ctor: '_Tuple2',
-				_0: _elm_lang$core$Native_Utils.update(
-					model,
-					{
-						latte: A2(_user$project$Latte$latteUpdate, _p0._0, model.latte)
-					}),
-				_1: _elm_lang$core$Platform_Cmd$none
-			};
-		} else {
-			return {
-				ctor: '_Tuple2',
-				_0: A2(_elm_lang$core$Debug$log, '123', model),
-				_1: _elm_lang$core$Platform_Cmd$none
-			};
+		switch (_p0.ctor) {
+			case 'Latte':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							latte: A2(_user$project$Latte$latteUpdate, _p0._0, model.latte)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'ChangeChart':
+				var _p4 = _p0._0;
+				var chartBtns = A2(
+					_elm_lang$core$List$map,
+					function (_p1) {
+						var _p2 = _p1;
+						var _p3 = _p2._0;
+						return {
+							ctor: '_Tuple2',
+							_0: _p3,
+							_1: _elm_lang$core$Native_Utils.eq(_p4, _p3) ? 'active' : ''
+						};
+					},
+					model.chartBtns);
+				var lt = model.latte;
+				var ltUserData = lt.userData;
+				var ltUserData_ = _elm_lang$core$Native_Utils.update(
+					ltUserData,
+					{chart: _p4});
+				var lt_ = _elm_lang$core$Native_Utils.update(
+					lt,
+					{userData: ltUserData_});
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{latte: lt_, chartBtns: chartBtns}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: A2(_elm_lang$core$Debug$log, '123', model),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
 		}
 	});
 var _user$project$Landing$init = function () {
 	var model = {
 		latte: A3(
 			_user$project$Latte$latteMake,
-			950,
+			800,
 			200,
 			{
 				chart: _user$project$Latte_Model$Bar,
@@ -11912,16 +12057,34 @@ var _user$project$Landing$init = function () {
 					}
 				},
 				title: 'Biggest Moons of Jupiter'
-			})
+			}),
+		chartBtns: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: _user$project$Latte_Model$Bar, _1: 'active'},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: _user$project$Latte_Model$Line, _1: ''},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: _user$project$Latte_Model$Scatter, _1: ''},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: _user$project$Latte_Model$Percentage, _1: ''},
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}
 	};
 	return A2(
 		_elm_lang$core$Platform_Cmd_ops['!'],
 		model,
 		{ctor: '[]'});
 }();
-var _user$project$Landing$Model = function (a) {
-	return {latte: a};
-};
+var _user$project$Landing$Model = F2(
+	function (a, b) {
+		return {latte: a, chartBtns: b};
+	});
 var _user$project$Landing$Resize = F2(
 	function (a, b) {
 		return {ctor: 'Resize', _0: a, _1: b};
@@ -11931,12 +12094,57 @@ var _user$project$Landing$subscriptions = function (model) {
 		{
 			ctor: '::',
 			_0: _elm_lang$window$Window$resizes(
-				function (_p1) {
-					var _p2 = _p1;
-					return A2(_user$project$Landing$Resize, _p2.height, _p2.width);
+				function (_p5) {
+					var _p6 = _p5;
+					return A2(_user$project$Landing$Resize, _p6.height, _p6.width);
 				}),
 			_1: {ctor: '[]'}
 		});
+};
+var _user$project$Landing$ChangeChart = function (a) {
+	return {ctor: 'ChangeChart', _0: a};
+};
+var _user$project$Landing$makeChartBtns = function (model) {
+	return A2(
+		_elm_lang$core$List$map,
+		function (_p7) {
+			var _p8 = _p7;
+			var _p9 = _p8._0;
+			return A2(
+				_elm_lang$html$Html$a,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class(
+						A2(
+							_elm_lang$core$String$join,
+							' ',
+							{
+								ctor: '::',
+								_0: 'btn',
+								_1: {
+									ctor: '::',
+									_0: _p8._1,
+									_1: {ctor: '[]'}
+								}
+							})),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(
+							_user$project$Landing$ChangeChart(_p9)),
+						_1: {ctor: '[]'}
+					}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							_elm_lang$core$Basics$toString(_p9),
+							' Chart')),
+					_1: {ctor: '[]'}
+				});
+		},
+		model.chartBtns);
 };
 var _user$project$Landing$Latte = function (a) {
 	return {ctor: 'Latte', _0: a};
@@ -11987,82 +12195,7 @@ var _user$project$Landing$mainChart = function (model) {
 									_0: _elm_lang$html$Html_Attributes$class('center btn-group'),
 									_1: {ctor: '[]'}
 								},
-								{
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$a,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('btn active'),
-											_1: {ctor: '[]'}
-										},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('Multiple Bar'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$a,
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('btn'),
-												_1: {ctor: '[]'}
-											},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text('Line'),
-												_1: {ctor: '[]'}
-											}),
-										_1: {
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$a,
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$class('btn'),
-													_1: {ctor: '[]'}
-												},
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html$text('Percentage'),
-													_1: {ctor: '[]'}
-												}),
-											_1: {
-												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html$a,
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$class('btn'),
-														_1: {ctor: '[]'}
-													},
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html$text('Scatter'),
-														_1: {ctor: '[]'}
-													}),
-												_1: {
-													ctor: '::',
-													_0: A2(
-														_elm_lang$html$Html$a,
-														{
-															ctor: '::',
-															_0: _elm_lang$html$Html_Attributes$class('btn'),
-															_1: {ctor: '[]'}
-														},
-														{
-															ctor: '::',
-															_0: _elm_lang$html$Html$text('Simple Bar'),
-															_1: {ctor: '[]'}
-														}),
-													_1: {ctor: '[]'}
-												}
-											}
-										}
-									}
-								}),
+								_user$project$Landing$makeChartBtns(model)),
 							_1: {ctor: '[]'}
 						}
 					}),
