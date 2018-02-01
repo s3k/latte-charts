@@ -206,9 +206,7 @@ installView model =
 ##### Hello
 
 
-This is experimental chart library for Elm.
-Here i figure out how to use Elm language in production.
-For now this is an deep alpha version so issues and pull requests are welcome ;)
+It is an experimental Elm charting library. Here I’m attempting to figure out how to use Elm language in practice. At this moment my project goes through pre-alpha version, so your feedback, suggestions and pull requests are welcome;)
 
 ##### Installation
 
