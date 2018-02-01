@@ -203,6 +203,13 @@ installView model =
     div [ class "row" ]
         [ Markdown.toHtml [ class "content" ] """
 
+##### Hello
+
+
+This is experimental chart library for Elm.
+Here i figure out how to use Elm language in production.
+For now this is an deep alpha version so issues and pull requests are welcome ;)
+
 ##### Installation
 
 Add package Latte Chart package
