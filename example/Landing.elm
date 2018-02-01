@@ -208,7 +208,7 @@ installView model =
 
 It is an experimental Elm charting library. Here I’m attempting to figure out how to use Elm language in practice. At this moment my project goes through pre-alpha version, so your feedback, suggestions and pull requests are welcome;)
 
-##### Installation
+##### How to install?
 
 Add package Latte Chart package
 
@@ -216,7 +216,7 @@ Add package Latte Chart package
 $ elm package install s3k/latte
 ```
 
-##### Imports
+##### Let's write something!
 
 ```
 import Latte exposing (..)
@@ -224,7 +224,7 @@ import Latte.Model as LatteModel exposing (Chart(..), Dataset)
 import Latte.Msg as LatteMsg
 ```
 
-##### Prepare model
+##### Data preparation
 
 Use helper **latteMake** to create Latte Chart model.
 
@@ -260,7 +260,7 @@ init =
         model ! []
 ```
 
-##### Setting up Update
+##### Connect latte chart to your program
 
 ```
 type Msg
@@ -276,7 +276,7 @@ update msg model =
 
 ```
 
-##### Emerge View
+##### Behold!
 
 Use **latteDraw** function to render chart. Notice! Use **Html.map** to map all events.
 
