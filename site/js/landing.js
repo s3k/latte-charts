@@ -11868,27 +11868,15 @@ var _user$project$Latte$latteUpdate = F2(
 		return A2(_user$project$Latte_Update$update, msg, model);
 	});
 
-var _user$project$Landing$installView = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('row'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_evancz$elm_markdown$Markdown$toHtml,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('content'),
-					_1: {ctor: '[]'}
-				},
-				'\n\n##### Hello\n\n\nIt is an experimental Elm charting library. Here I’m attempting to figure out how to use Elm language in practice. At this moment my project goes through pre-alpha version, so your feedback, suggestions and pull requests are welcome;)\n\n##### How to install?\n\nAdd package Latte Chart package\n\n```\n$ elm package install s3k/latte\n```\n\n##### Let\'s write something!\n\n```\nimport Latte exposing (..)\nimport Latte.Model as LatteModel exposing (Chart(..), Dataset)\nimport Latte.Msg as LatteMsg\n```\n\n##### Data preparation\n\nUse helper **latteMake** to create Latte Chart model.\n\n1. Declare resolution height x width and fill structure\n1. Choose chart type: **Bar | Line | Scatter | Percentage**\n1. Fill labels and datasets. Labels are Strings and datasets are Floats\n\n```\ntype alias Model =\n    { latte : LatteModel.Model\n    }\n\n\ninit : ( Model, Cmd Msg )\ninit =\n    let\n        model =\n            { latte =\n                latteMake 950 200 <|\n                    { chart = Bar\n                    , labels =\n                        [ \"Io\", \"Europa\", \"Ganymede\", \"Callisto\", \"Fake\" ]\n                    , datasets =\n                        [ Dataset \"Mass\" [ 8931900, 4800000, 14819000, 10759000, 10759000 ]\n                        , Dataset \"Diameter\" <| List.map (\n -> n * 1000) [ 3660.0, 3121.6, 5262.4, 4820.6, 4000 ]\n                        , Dataset \"Semi-Major\" [ 421700, 671034, 1070412, 1882709, 1882709 ]\n                        ]\n                    , title = \"Biggest Moons of Jupiter\"\n                    }\n            }\n    in\n        model ! []\n```\n\n##### Connect latte chart to your program\n\n```\ntype Msg\n    = Latte LatteMsg.Msg\n\n\nupdate : Msg -> Model -> ( Model, Cmd Msg )\nupdate msg model =\n    case msg of\n        Latte msg ->\n            ( { model | latte = latteUpdate msg model.latte }, Cmd.none )\n\n\n```\n\n##### Behold!\n\nUse **latteDraw** function to render chart. Notice! Use **Html.map** to map all events.\n\n```\nview : Model -> Html Msg\nview model =\n    div []\n        [ Html.map Latte (latteDraw model.latte)]\n\n```\n\n'),
-			_1: {ctor: '[]'}
-		});
-};
+var _user$project$LandingDesc$view = A2(
+	_evancz$elm_markdown$Markdown$toHtml,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('content'),
+		_1: {ctor: '[]'}
+	},
+	'\n\n##### Hello\n\n\nIt is an experimental Elm charting library. Here I’m attempting to figure out how to use Elm language in practice. At this moment my project goes through pre-alpha version, so your feedback, suggestions and pull requests are welcome;)\n\n##### How to install?\n\nAdd package Latte Chart package\n\n```\n$ elm package install s3k/latte\n```\n\n##### Let\'s write something!\n\n```\nimport Latte exposing (..)\nimport Latte.Model as LatteModel exposing (Chart(..), Dataset)\nimport Latte.Msg as LatteMsg\n```\n\n##### Data preparation\n\nUse helper **latteMake** to create Latte Chart model.\n\n1. Declare resolution height x width and fill structure\n1. Choose chart type: **Bar | Line | Scatter | Percentage**\n1. Fill labels and datasets. Labels are Strings and datasets are Floats\n\n```\ntype alias Model =\n    { latte : LatteModel.Model\n    }\n\n\ninit : ( Model, Cmd Msg )\ninit =\n    let\n        model =\n            { latte =\n                latteMake 950 200 <|\n                    { chart = Bar\n                    , labels =\n                        [ \"Io\", \"Europa\", \"Ganymede\", \"Callisto\", \"Fake\" ]\n                    , datasets =\n                        [ Dataset \"Mass\" [ 8931900, 4800000, 14819000, 10759000, 10759000 ]\n                        , Dataset \"Diameter\" <| List.map (\n -> n * 1000) [ 3660.0, 3121.6, 5262.4, 4820.6, 4000 ]\n                        , Dataset \"Semi-Major\" [ 421700, 671034, 1070412, 1882709, 1882709 ]\n                        ]\n                    , title = \"Biggest Moons of Jupiter\"\n                    }\n            }\n    in\n        model ! []\n```\n\n##### Connect latte chart to your program\n\n```\ntype Msg\n    = Latte LatteMsg.Msg\n\n\nupdate : Msg -> Model -> ( Model, Cmd Msg )\nupdate msg model =\n    case msg of\n        Latte msg ->\n            ( { model | latte = latteUpdate msg model.latte }, Cmd.none )\n\n\n```\n\n##### Behold!\n\nUse **latteDraw** function to render chart. Notice! Use **Html.map** to map all events.\n\n```\nview : Model -> Html Msg\nview model =\n    div []\n        [ Html.map Latte (latteDraw model.latte)]\n\n```\n\n');
+
 var _user$project$Landing$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
@@ -12295,7 +12283,18 @@ var _user$project$Landing$view = function (model) {
 								_0: _user$project$Landing$mainChart(model),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Landing$installView(model),
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('row'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _user$project$LandingDesc$view,
+											_1: {ctor: '[]'}
+										}),
 									_1: {ctor: '[]'}
 								}
 							}),
