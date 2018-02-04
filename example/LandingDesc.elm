@@ -109,8 +109,7 @@ view model =
 
 #### Outro
 
-Как я и сказал в самом начале — это глубокая альфа версия, которой еще далеко до продакшена.
-В ближайших планах это исправление багов с положением тултипа и реализация
-autoscaling по ширине, если у кого-то есть мысли на этот счет, то поделитесь ;)
+As I told before - it’s a pre-alpha, which is very far from production. The next steps are fixing bugs with tooltip position and realization of based on width auto-scaling. If someone have ideas of how to do that, let me know, please! ;)
+
 
 """
