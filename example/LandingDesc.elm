@@ -12,17 +12,25 @@ view =
 ##### Hello
 
 
-It is an experimental Elm charting library. Here I’m attempting to figure out how to use Elm language in practice. At this moment my project goes through pre-alpha version, so your feedback, suggestions and pull requests are welcome;)
+It is an experimental Elm charting library. Here I’m attempting to figure out how to use Elm language in practice. At this moment my project goes through pre-alpha version, so your feedback, suggestions and pull requests are welcome ;)
+
+##### TL;DR
+
+1. Add Latte Chart package to your project with `$ elm package install s3k/latte`
+1. Import functions and types from Latte package
+1. Describe new latte state in your Html.program (The Elm Architecture pattern). Use **latteMake** helper.
+1. Connect all chart events in **update** section
+1. To render Latte Chart component in your view use **latteDraw** function through **Html.map**
 
 ##### How to install?
 
-Add package Latte Chart package
+Just add new package with command
 
 ```
 $ elm package install s3k/latte
 ```
 
-##### Let's write something!
+And import main functions and types
 
 ```
 import Latte exposing (..)
@@ -30,7 +38,7 @@ import Latte.Model as LatteModel exposing (Chart(..), Dataset)
 import Latte.Msg as LatteMsg
 ```
 
-##### Data preparation
+##### Model. Data preparation.
 
 Use helper **latteMake** to create Latte Chart model.
 
@@ -66,7 +74,10 @@ init =
         model ! []
 ```
 
-##### Connect latte chart to your program
+
+##### Update. Connect latte chart to update event loop.
+
+Create new message type and add handler in update section
 
 ```
 type Msg
@@ -82,9 +93,9 @@ update msg model =
 
 ```
 
-##### Behold!
+##### View. Render a component.
 
-Use **latteDraw** function to render chart. Notice! Use **Html.map** to map all events.
+Use **latteDraw** function to render a chart through **Html.map** function to route all events in a component.
 
 ```
 view : Model -> Html Msg
