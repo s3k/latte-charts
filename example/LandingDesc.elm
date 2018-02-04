@@ -9,12 +9,12 @@ view : Html msg
 view =
     Markdown.toHtml [ class "content" ] """
 
-##### Hello
+#### Hello
 
 
 It is an experimental Elm charting library. Here I’m attempting to figure out how to use Elm language in practice. At this moment my project goes through pre-alpha version, so your feedback, suggestions and pull requests are welcome ;)
 
-##### TL;DR
+#### TL;DR
 
 1. Add Latte Chart package to your project with `$ elm package install s3k/latte`
 1. Import functions and types from Latte package
@@ -22,15 +22,17 @@ It is an experimental Elm charting library. Here I’m attempting to figure out 
 1. Connect all chart events in **update** section
 1. To render Latte Chart component in your view use **latteDraw** function through **Html.map**
 
-##### How to install?
+Download full [example here](https://github.com/s3k/latte/blob/master/example/BarChart.elm).
 
-Just add new package with command
+#### How to install?
+
+Just add new package with command below.
 
 ```
 $ elm package install s3k/latte
 ```
 
-And import main functions and types
+And import main functions and types.
 
 ```
 import Latte exposing (..)
@@ -38,7 +40,7 @@ import Latte.Model as LatteModel exposing (Chart(..), Dataset)
 import Latte.Msg as LatteMsg
 ```
 
-##### Model. Data preparation.
+#### Model. Data preparation.
 
 Use helper **latteMake** to create Latte Chart model.
 
@@ -75,7 +77,7 @@ init =
 ```
 
 
-##### Update. Connect latte chart to update event loop.
+#### Update. Connect latte chart to update event loop.
 
 Create new message type and add handler in update section
 
@@ -93,7 +95,7 @@ update msg model =
 
 ```
 
-##### View. Render a component.
+#### View. Render a component.
 
 Use **latteDraw** function to render a chart through **Html.map** function to route all events in a component.
 
@@ -104,5 +106,11 @@ view model =
         [ Html.map Latte (latteDraw model.latte)]
 
 ```
+
+#### Outro
+
+Как я и сказал в самом начале — это глубокая альфа версия, которой еще далеко до продакшена.
+В ближайших планах это исправление багов с положением тултипа и реализация
+autoscaling по ширине, если у кого-то есть мысли на этот счет, то поделитесь ;)
 
 """

@@ -11875,7 +11875,7 @@ var _user$project$LandingDesc$view = A2(
 		_0: _elm_lang$html$Html_Attributes$class('content'),
 		_1: {ctor: '[]'}
 	},
-	'\n\n##### Hello\n\n\nIt is an experimental Elm charting library. Here I’m attempting to figure out how to use Elm language in practice. At this moment my project goes through pre-alpha version, so your feedback, suggestions and pull requests are welcome ;)\n\n##### TL;DR\n\n1. Add Latte Chart package to your project with `$ elm package install s3k/latte`\n1. Import functions and types from Latte package\n1. Describe new latte state in your Html.program (The Elm Architecture pattern). Use **latteMake** helper.\n1. Connect all chart events in **update** section\n1. To render Latte Chart component in your view use **latteDraw** function through **Html.map**\n\n##### How to install?\n\nJust add new package with command\n\n```\n$ elm package install s3k/latte\n```\n\nAnd import main functions and types\n\n```\nimport Latte exposing (..)\nimport Latte.Model as LatteModel exposing (Chart(..), Dataset)\nimport Latte.Msg as LatteMsg\n```\n\n##### Model. Data preparation.\n\nUse helper **latteMake** to create Latte Chart model.\n\n1. Declare resolution height x width and fill structure\n1. Choose chart type: **Bar | Line | Scatter | Percentage**\n1. Fill labels and datasets. Labels are Strings and datasets are Floats\n\n```\ntype alias Model =\n    { latte : LatteModel.Model\n    }\n\n\ninit : ( Model, Cmd Msg )\ninit =\n    let\n        model =\n            { latte =\n                latteMake 950 200 <|\n                    { chart = Bar\n                    , labels =\n                        [ \"Io\", \"Europa\", \"Ganymede\", \"Callisto\", \"Fake\" ]\n                    , datasets =\n                        [ Dataset \"Mass\" [ 8931900, 4800000, 14819000, 10759000, 10759000 ]\n                        , Dataset \"Diameter\" <| List.map (\n -> n * 1000) [ 3660.0, 3121.6, 5262.4, 4820.6, 4000 ]\n                        , Dataset \"Semi-Major\" [ 421700, 671034, 1070412, 1882709, 1882709 ]\n                        ]\n                    , title = \"Biggest Moons of Jupiter\"\n                    }\n            }\n    in\n        model ! []\n```\n\n\n##### Update. Connect latte chart to update event loop.\n\nCreate new message type and add handler in update section\n\n```\ntype Msg\n    = Latte LatteMsg.Msg\n\n\nupdate : Msg -> Model -> ( Model, Cmd Msg )\nupdate msg model =\n    case msg of\n        Latte msg ->\n            ( { model | latte = latteUpdate msg model.latte }, Cmd.none )\n\n\n```\n\n##### View. Render a component.\n\nUse **latteDraw** function to render a chart through **Html.map** function to route all events in a component.\n\n```\nview : Model -> Html Msg\nview model =\n    div []\n        [ Html.map Latte (latteDraw model.latte)]\n\n```\n\n');
+	'\n\n#### Hello\n\n\nIt is an experimental Elm charting library. Here I’m attempting to figure out how to use Elm language in practice. At this moment my project goes through pre-alpha version, so your feedback, suggestions and pull requests are welcome ;)\n\n#### TL;DR\n\n1. Add Latte Chart package to your project with `$ elm package install s3k/latte`\n1. Import functions and types from Latte package\n1. Describe new latte state in your Html.program (The Elm Architecture pattern). Use **latteMake** helper.\n1. Connect all chart events in **update** section\n1. To render Latte Chart component in your view use **latteDraw** function through **Html.map**\n\nDownload full [example here](https://github.com/s3k/latte/blob/master/example/BarChart.elm).\n\n#### How to install?\n\nJust add new package with command below.\n\n```\n$ elm package install s3k/latte\n```\n\nAnd import main functions and types.\n\n```\nimport Latte exposing (..)\nimport Latte.Model as LatteModel exposing (Chart(..), Dataset)\nimport Latte.Msg as LatteMsg\n```\n\n#### Model. Data preparation.\n\nUse helper **latteMake** to create Latte Chart model.\n\n1. Declare resolution height x width and fill structure\n1. Choose chart type: **Bar | Line | Scatter | Percentage**\n1. Fill labels and datasets. Labels are Strings and datasets are Floats\n\n```\ntype alias Model =\n    { latte : LatteModel.Model\n    }\n\n\ninit : ( Model, Cmd Msg )\ninit =\n    let\n        model =\n            { latte =\n                latteMake 950 200 <|\n                    { chart = Bar\n                    , labels =\n                        [ \"Io\", \"Europa\", \"Ganymede\", \"Callisto\", \"Fake\" ]\n                    , datasets =\n                        [ Dataset \"Mass\" [ 8931900, 4800000, 14819000, 10759000, 10759000 ]\n                        , Dataset \"Diameter\" <| List.map (\n -> n * 1000) [ 3660.0, 3121.6, 5262.4, 4820.6, 4000 ]\n                        , Dataset \"Semi-Major\" [ 421700, 671034, 1070412, 1882709, 1882709 ]\n                        ]\n                    , title = \"Biggest Moons of Jupiter\"\n                    }\n            }\n    in\n        model ! []\n```\n\n\n#### Update. Connect latte chart to update event loop.\n\nCreate new message type and add handler in update section\n\n```\ntype Msg\n    = Latte LatteMsg.Msg\n\n\nupdate : Msg -> Model -> ( Model, Cmd Msg )\nupdate msg model =\n    case msg of\n        Latte msg ->\n            ( { model | latte = latteUpdate msg model.latte }, Cmd.none )\n\n\n```\n\n#### View. Render a component.\n\nUse **latteDraw** function to render a chart through **Html.map** function to route all events in a component.\n\n```\nview : Model -> Html Msg\nview model =\n    div []\n        [ Html.map Latte (latteDraw model.latte)]\n\n```\n\n#### Outro\n\nКак я и сказал в самом начале — это глубокая альфа версия, которой еще далеко до продакшена.\nВ ближайших планах это исправление багов с положением тултипа и реализация\nautoscaling по ширине, если у кого-то есть мысли на этот счет, то поделитесь ;)\n\n');
 
 var _user$project$Landing$update = F2(
 	function (msg, model) {
@@ -12300,7 +12300,96 @@ var _user$project$Landing$view = function (model) {
 							}),
 						_1: {ctor: '[]'}
 					}),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$footer,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('row footer'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('center columns'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$a,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$href('http://github.com/s3k/latte'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$target('_blank'),
+														_1: {ctor: '[]'}
+													}
+												},
+												{
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$img,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$height(70),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$src('./images/GitHub_Logo.png'),
+																_1: {ctor: '[]'}
+															}
+														},
+														{ctor: '[]'}),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$a,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$href('http://elm-lang.org'),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$target('_blank'),
+															_1: {ctor: '[]'}
+														}
+													},
+													{
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$img,
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$height(70),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$src('./images/elm.svg'),
+																	_1: {ctor: '[]'}
+																}
+															},
+															{ctor: '[]'}),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
 			}
 		});
 };

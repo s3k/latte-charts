@@ -1,7 +1,7 @@
 module Landing exposing (..)
 
-import Html exposing (Html, div, li, ol, s, strong, text, h1, h2, h3, h4, p, a, header)
-import Html.Attributes exposing (class, style)
+import Html exposing (Html, div, li, ol, s, strong, text, h1, h2, h3, h4, p, a, header, img, footer)
+import Html.Attributes exposing (class, style, src, height, href, target)
 import Html.Events exposing (onClick)
 import Latte exposing (..)
 import Latte.Model as LatteModel exposing (Chart(..), Dataset)
@@ -137,6 +137,32 @@ view model =
                 [ mainChart model
                 , div [ class "row" ] [ LandingDesc.view ]
                   -- , jupiterView model
+                ]
+            ]
+        , footer []
+            [ div [ class "row footer" ]
+                [ div [ class "center columns" ]
+                    [ a
+                        [ href "http://github.com/s3k/latte"
+                        , target "_blank"
+                        ]
+                        [ img
+                            [ height 70
+                            , src "./images/GitHub_Logo.png"
+                            ]
+                            []
+                        ]
+                    , a
+                        [ href "http://elm-lang.org"
+                        , target "_blank"
+                        ]
+                        [ img
+                            [ height 70
+                            , src "./images/elm.svg"
+                            ]
+                            []
+                        ]
+                    ]
                 ]
             ]
         ]
