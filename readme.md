@@ -1,9 +1,9 @@
-#### Hello
+## Elm Latte Charts
 
 
 It is an experimental Elm charting library. Here I’m attempting to figure out how to use Elm language in practice. At this moment my project goes through pre-alpha version, so your feedback, suggestions and pull requests are welcome ;)
 
-#### TL; DR
+### TL; DR
 
 1. Add Latte Chart package to your project with `$ elm package install s3k/latte`
 1. Import functions and types from Latte package
@@ -13,7 +13,7 @@ It is an experimental Elm charting library. Here I’m attempting to figure out 
 
 Download full [example here](https://github.com/s3k/latte/blob/master/example/BarChart.elm).
 
-#### How to install?
+### How to install?
 
 Just add a new package by running the following command:
 
@@ -29,7 +29,7 @@ import Latte.Model as LatteModel exposing (Chart(..), Dataset)
 import Latte.Msg as LatteMsg
 ```
 
-#### Model. Data preparation
+### Model. Data preparation
 
 Use helper **latteMake** to create Latte Chart model:
 
@@ -66,7 +66,7 @@ init =
 ```
 
 
-#### Update. Connect latte chart to update event loop
+### Update. Connect latte chart to update event loop
 
 Create new message type and add handler in update section
 
@@ -84,7 +84,7 @@ update msg model =
 
 ```
 
-#### View. Render a component
+### View. Render a component
 
 Use **latteDraw** function to render a chart through **Html.map** function to route all events in a component.
 
@@ -96,9 +96,9 @@ view model =
 
 ```
 
-#### Outro
+### Outro
 
-As I told before - it’s a pre-alpha, which is very far from production.
+As I told before — it’s a pre-alpha, which is very far from production.
 The next steps are adding negative values, fixing bugs with tooltip position and realization of based on width auto-scaling.
-If someone have ideas of how to do that, let me know, please! ;)
+If someone have ideas of how to do that, let me know! Also PR's are welcome)
 
