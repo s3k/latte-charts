@@ -1,3 +1,5 @@
+![](https://s3k.github.io/latte/www/images/chart.png "Elm Latte Bar Chart")
+
 ## Elm Latte Charts
 
 
@@ -11,7 +13,8 @@ It is an experimental Elm charting library. Here I’m attempting to figure out 
 1. Connect all chart events in **update** section
 1. To render Latte Chart component in your view use **latteDraw** function through **Html.map**
 
-Download full [example here](https://github.com/s3k/latte/blob/master/example/BarChart.elm).
+Download full [Example here](https://github.com/s3k/latte/blob/master/example/BarChart.elm)  
+Check interactive [Demo](https://s3k.github.io/latte/)
 
 ### How to install?
 
