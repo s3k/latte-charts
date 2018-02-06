@@ -11211,11 +11211,7 @@ var _user$project$Landing$init = function () {
 							_1: {
 								ctor: '::',
 								_0: 'Callisto',
-								_1: {
-									ctor: '::',
-									_0: 'Fake',
-									_1: {ctor: '[]'}
-								}
+								_1: {ctor: '[]'}
 							}
 						}
 					}
@@ -11237,11 +11233,7 @@ var _user$project$Landing$init = function () {
 									_1: {
 										ctor: '::',
 										_0: 10759000,
-										_1: {
-											ctor: '::',
-											_0: 10759000,
-											_1: {ctor: '[]'}
-										}
+										_1: {ctor: '[]'}
 									}
 								}
 							}
@@ -11268,11 +11260,7 @@ var _user$project$Landing$init = function () {
 											_1: {
 												ctor: '::',
 												_0: 4820.6,
-												_1: {
-													ctor: '::',
-													_0: 4000,
-													_1: {ctor: '[]'}
-												}
+												_1: {ctor: '[]'}
 											}
 										}
 									}
@@ -11294,11 +11282,7 @@ var _user$project$Landing$init = function () {
 											_1: {
 												ctor: '::',
 												_0: 1882709,
-												_1: {
-													ctor: '::',
-													_0: 1882709,
-													_1: {ctor: '[]'}
-												}
+												_1: {ctor: '[]'}
 											}
 										}
 									}

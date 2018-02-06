@@ -109,9 +109,8 @@ view model =
 
 #### Outro
 
-As I told before - it’s a pre-alpha, which is very far from production.
+As I told before — it’s a pre-alpha, which is very far from production.
 The next steps are adding negative values, fixing bugs with tooltip position and realization of based on width auto-scaling.
-If someone have ideas of how to do that, let me know, please! ;)
-
+If someone have ideas of how to do that, let me know! Also PR's are welcome)
 
 """

@@ -37,12 +37,12 @@ init =
                 latteMake 800 200 <|
                     { chart = Bar
                     , labels =
-                        [ "Io", "Europa", "Ganymede", "Callisto", "Fake" ]
+                        [ "Io", "Europa", "Ganymede", "Callisto" ]
                     , datasets =
-                        [ Dataset "Mass" [ 8931900, 4800000, 14819000, 10759000, 10759000 ]
+                        [ Dataset "Mass" [ 8931900, 4800000, 14819000, 10759000 ]
                         , Dataset "Diameter" <|
-                            List.map (\n -> n * 1000) [ 3660.0, 3121.6, 5262.4, 4820.6, 4000 ]
-                        , Dataset "Semi-Major" [ 421700, 671034, 1070412, 1882709, 1882709 ]
+                            List.map (\n -> n * 1000) [ 3660.0, 3121.6, 5262.4, 4820.6 ]
+                        , Dataset "Semi-Major" [ 421700, 671034, 1070412, 1882709 ]
                         ]
                     , title = "Biggest Moons of Jupiter"
                     }
