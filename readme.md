@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="460" height="300" src="https://s3k.github.io/latte/www/images/logo.svg">
+  <img width="274" src="https://s3k.github.io/latte/www/images/logo.svg">
 </p>
 
 ### Hello
