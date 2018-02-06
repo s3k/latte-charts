@@ -9926,7 +9926,7 @@ var _user$project$LandingDesc$view = A2(
 		_0: _elm_lang$html$Html_Attributes$class('content'),
 		_1: {ctor: '[]'}
 	},
-	'\n\n#### Hello\n\n\nIt is an experimental Elm charting library. Here I’m attempting to figure out how to use Elm language in practice. At this moment my project goes through pre-alpha version, so your feedback, suggestions and pull requests are welcome ;)\n\n#### TL;DR\n\n1. Add Latte Chart package to your project with `$ elm package install s3k/latte`\n1. Import functions and types from Latte package\n1. Describe new latte state in your Html.program (The Elm Architecture pattern). Use **latteMake** helper.\n1. Connect all chart events in **update** section\n1. To render Latte Chart component in your view use **latteDraw** function through **Html.map**\n\nDownload full [example here](https://github.com/s3k/latte/blob/master/example/BarChart.elm).\n\n#### How to install?\n\nJust add new package with command below.\n\n```\n$ elm package install s3k/latte\n```\n\nAnd import main functions and types.\n\n```\nimport Latte exposing (..)\nimport Latte.Model as LatteModel exposing (Chart(..), Dataset)\nimport Latte.Msg as LatteMsg\n```\n\n#### Model. Data preparation.\n\nUse helper **latteMake** to create Latte Chart model.\n\n1. Declare resolution height x width and fill structure\n1. Choose chart type: **Bar | Line | Scatter | Percentage**\n1. Fill labels and datasets. Labels are Strings and datasets are Floats\n\n```\ntype alias Model =\n    { latte : LatteModel.Model\n    }\n\n\ninit : ( Model, Cmd Msg )\ninit =\n    let\n        model =\n            { latte =\n                latteMake 950 200 <|\n                    { chart = Bar\n                    , labels =\n                        [ \"Io\", \"Europa\", \"Ganymede\", \"Callisto\", \"Fake\" ]\n                    , datasets =\n                        [ Dataset \"Mass\" [ 8931900, 4800000, 14819000, 10759000, 10759000 ]\n                        , Dataset \"Diameter\" <|\n                            List.map ( -> n * 1000) [ 3660.0, 3121.6, 5262.4, 4820.6, 4000 ]\n                        , Dataset \"Semi-Major\" [ 421700, 671034, 1070412, 1882709, 1882709 ]\n                        ]\n                    , title = \"Biggest Moons of Jupiter\"\n                    }\n            }\n    in\n        model ! []\n```\n\n\n#### Update. Connect latte chart to update event loop.\n\nCreate new message type and add handler in update section\n\n```\ntype Msg\n    = Latte LatteMsg.Msg\n\n\nupdate : Msg -> Model -> ( Model, Cmd Msg )\nupdate msg model =\n    case msg of\n        Latte msg ->\n            ( { model | latte = latteUpdate msg model.latte }, Cmd.none )\n\n\n```\n\n#### View. Render a component.\n\nUse **latteDraw** function to render a chart through **Html.map** function to route all events in a component.\n\n```\nview : Model -> Html Msg\nview model =\n    div []\n        [ Html.map Latte (latteDraw model.latte)]\n\n```\n\n#### Outro\n\nAs I told before - it’s a pre-alpha, which is very far from production.\nThe next steps are adding negative values, fixing bugs with tooltip position and realization of based on width auto-scaling.\nIf someone have ideas of how to do that, let me know, please! ;)\n\n\n');
+	'\n\n#### Hello\n\n\nIt is an experimental Elm charting library. Here I’m attempting to figure out how to use Elm language in practice. At this moment my project goes through pre-alpha version, so your feedback, suggestions and pull requests are welcome ;)\n\n#### TL; DR\n\n1. Add Latte Chart package to your project with `$ elm package install s3k/latte`\n1. Import functions and types from Latte package\n1. Describe new latte state in your Html.program (The Elm Architecture pattern). Use **latteMake** helper\n1. Connect all chart events in **update** section\n1. To render Latte Chart component in your view use **latteDraw** function through **Html.map**\n\nDownload full [example here](https://github.com/s3k/latte/blob/master/example/BarChart.elm).\n\n#### How to install?\n\nJust add a new package by running the following command:\n\n```\n$ elm package install s3k/latte\n```\n\nAnd import main functions and types.\n\n```\nimport Latte exposing (..)\nimport Latte.Model as LatteModel exposing (Chart(..), Dataset)\nimport Latte.Msg as LatteMsg\n```\n\n#### Model. Data preparation\n\nUse helper **latteMake** to create Latte Chart model:\n\n1. Set rendering options: hight x width\n1. Choose the chart type: **Bar | Line | Scatter | Percentage**\n1. Fill labels and datasets. Labels are Strings and datasets are Floats\n\n```\ntype alias Model =\n    { latte : LatteModel.Model\n    }\n\n\ninit : ( Model, Cmd Msg )\ninit =\n    let\n        model =\n            { latte =\n                latteMake 950 200 <|\n                    { chart = Bar\n                    , labels =\n                        [ \"Io\", \"Europa\", \"Ganymede\", \"Callisto\", \"Fake\" ]\n                    , datasets =\n                        [ Dataset \"Mass\" [ 8931900, 4800000, 14819000, 10759000, 10759000 ]\n                        , Dataset \"Diameter\" <|\n                            List.map ( -> n * 1000) [ 3660.0, 3121.6, 5262.4, 4820.6, 4000 ]\n                        , Dataset \"Semi-Major\" [ 421700, 671034, 1070412, 1882709, 1882709 ]\n                        ]\n                    , title = \"Biggest Moons of Jupiter\"\n                    }\n            }\n    in\n        model ! []\n```\n\n\n#### Update. Connect latte chart to update event loop\n\nCreate new message type and add handler in update section\n\n```\ntype Msg\n    = Latte LatteMsg.Msg\n\n\nupdate : Msg -> Model -> ( Model, Cmd Msg )\nupdate msg model =\n    case msg of\n        Latte msg ->\n            ( { model | latte = latteUpdate msg model.latte }, Cmd.none )\n\n\n```\n\n#### View. Render a component\n\nUse **latteDraw** function to render a chart through **Html.map** function to route all events in a component.\n\n```\nview : Model -> Html Msg\nview model =\n    div []\n        [ Html.map Latte (latteDraw model.latte)]\n\n```\n\n#### Outro\n\nAs I told before - it’s a pre-alpha, which is very far from production.\nThe next steps are adding negative values, fixing bugs with tooltip position and realization of based on width auto-scaling.\nIf someone have ideas of how to do that, let me know, please! ;)\n\n\n');
 
 var _user$project$Latte_Model$Dataset = F2(
 	function (a, b) {
@@ -11923,11 +11923,15 @@ var _user$project$Landing$update = F2(
 			default:
 				return {
 					ctor: '_Tuple2',
-					_0: A2(_elm_lang$core$Debug$log, '123', model),
+					_0: A2(_elm_lang$core$Debug$log, 'Window Size', model),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 		}
 	});
+var _user$project$Landing$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$batch(
+		{ctor: '[]'});
+};
 var _user$project$Landing$init = function () {
 	var model = {
 		latte: A3(
@@ -12073,31 +12077,19 @@ var _user$project$Landing$Model = F2(
 	function (a, b) {
 		return {latte: a, chartBtns: b};
 	});
-var _user$project$Landing$Resize = F2(
+var _user$project$Landing$WindowSize = F2(
 	function (a, b) {
-		return {ctor: 'Resize', _0: a, _1: b};
+		return {ctor: 'WindowSize', _0: a, _1: b};
 	});
-var _user$project$Landing$subscriptions = function (model) {
-	return _elm_lang$core$Platform_Sub$batch(
-		{
-			ctor: '::',
-			_0: _elm_lang$window$Window$resizes(
-				function (_p5) {
-					var _p6 = _p5;
-					return A2(_user$project$Landing$Resize, _p6.height, _p6.width);
-				}),
-			_1: {ctor: '[]'}
-		});
-};
 var _user$project$Landing$ChangeChart = function (a) {
 	return {ctor: 'ChangeChart', _0: a};
 };
 var _user$project$Landing$makeChartBtns = function (model) {
 	return A2(
 		_elm_lang$core$List$map,
-		function (_p7) {
-			var _p8 = _p7;
-			var _p9 = _p8._0;
+		function (_p5) {
+			var _p6 = _p5;
+			var _p7 = _p6._0;
 			return A2(
 				_elm_lang$html$Html$a,
 				{
@@ -12111,14 +12103,14 @@ var _user$project$Landing$makeChartBtns = function (model) {
 								_0: 'btn',
 								_1: {
 									ctor: '::',
-									_0: _p8._1,
+									_0: _p6._1,
 									_1: {ctor: '[]'}
 								}
 							})),
 					_1: {
 						ctor: '::',
 						_0: _elm_lang$html$Html_Events$onClick(
-							_user$project$Landing$ChangeChart(_p9)),
+							_user$project$Landing$ChangeChart(_p7)),
 						_1: {ctor: '[]'}
 					}
 				},
@@ -12127,7 +12119,7 @@ var _user$project$Landing$makeChartBtns = function (model) {
 					_0: _elm_lang$html$Html$text(
 						A2(
 							_elm_lang$core$Basics_ops['++'],
-							_elm_lang$core$Basics$toString(_p9),
+							_elm_lang$core$Basics$toString(_p7),
 							' Chart')),
 					_1: {ctor: '[]'}
 				});

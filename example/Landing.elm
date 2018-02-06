@@ -60,7 +60,7 @@ init =
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.batch
-        [ Window.resizes (\{ height, width } -> Resize height width)
+        [-- Window.size (\{ height, width } -> WindowSize height width)
         ]
 
 
@@ -71,7 +71,7 @@ subscriptions model =
 type Msg
     = Latte LatteMsg.Msg
     | ChangeChart Chart
-    | Resize Int Int
+    | WindowSize Int Int
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -108,8 +108,8 @@ update msg model =
             in
             ( { model | latte = lt_, chartBtns = chartBtns }, Cmd.none )
 
-        Resize w h ->
-            ( Debug.log "123" model, Cmd.none )
+        WindowSize w h ->
+            ( Debug.log "Window Size" model, Cmd.none )
 
 
 
