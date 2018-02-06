@@ -1,13 +1,13 @@
 module Landing exposing (..)
 
-import Html exposing (Html, div, li, ol, s, strong, text, h1, h2, h3, h4, p, a, header, img, footer)
-import Html.Attributes exposing (class, style, src, height, href, target)
+import Html exposing (Html, a, div, footer, h1, h2, h3, h4, header, img, li, ol, p, s, strong, text)
+import Html.Attributes exposing (class, height, href, src, style, target)
 import Html.Events exposing (onClick)
+import LandingDesc
 import Latte exposing (..)
 import Latte.Model as LatteModel exposing (Chart(..), Dataset)
 import Latte.Msg as LatteMsg
 import Window
-import LandingDesc
 
 
 main =
@@ -40,7 +40,8 @@ init =
                         [ "Io", "Europa", "Ganymede", "Callisto", "Fake" ]
                     , datasets =
                         [ Dataset "Mass" [ 8931900, 4800000, 14819000, 10759000, 10759000 ]
-                        , Dataset "Diameter" <| List.map (\n -> n * 1000) [ 3660.0, 3121.6, 5262.4, 4820.6, 4000 ]
+                        , Dataset "Diameter" <|
+                            List.map (\n -> n * 1000) [ 3660.0, 3121.6, 5262.4, 4820.6, 4000 ]
                         , Dataset "Semi-Major" [ 421700, 671034, 1070412, 1882709, 1882709 ]
                         ]
                     , title = "Biggest Moons of Jupiter"
@@ -53,7 +54,7 @@ init =
                 ]
             }
     in
-        model ! []
+    model ! []
 
 
 subscriptions : Model -> Sub Msg
@@ -105,7 +106,7 @@ update msg model =
                                 )
                             )
             in
-                ( { model | latte = lt_, chartBtns = chartBtns }, Cmd.none )
+            ( { model | latte = lt_, chartBtns = chartBtns }, Cmd.none )
 
         Resize w h ->
             ( Debug.log "123" model, Cmd.none )
@@ -136,7 +137,8 @@ view model =
                 ]
                 [ mainChart model
                 , div [ class "row" ] [ LandingDesc.view ]
-                  -- , jupiterView model
+
+                -- , jupiterView model
                 ]
             ]
         , footer []
@@ -148,7 +150,7 @@ view model =
                         ]
                         [ img
                             [ height 70
-                            , src "./images/GitHub_Logo.png"
+                            , src "./www/images/GitHub_Logo.png"
                             ]
                             []
                         ]
@@ -158,7 +160,7 @@ view model =
                         ]
                         [ img
                             [ height 70
-                            , src "./images/elm.svg"
+                            , src "./www/images/elm.svg"
                             ]
                             []
                         ]
@@ -194,7 +196,7 @@ makeChartBtns model =
                     [ class <| String.join " " [ "btn", status ]
                     , onClick (ChangeChart chart)
                     ]
-                    [ text <| (toString chart) ++ " Chart" ]
+                    [ text <| toString chart ++ " Chart" ]
             )
 
 
