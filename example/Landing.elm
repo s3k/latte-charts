@@ -7,12 +7,14 @@ import LandingDesc
 import Latte exposing (..)
 import Latte.Model as LatteModel exposing (Chart(..), Dataset)
 import Latte.Msg as LatteMsg
+import Task
 import Window
 
 
+main : Program Never Model Msg
 main =
     Html.program
-        { init = init
+        { init = ( init, initialSizeCmd )
         , view = view
         , update = update
         , subscriptions = subscriptions
@@ -64,6 +66,11 @@ subscriptions model =
         ]
 
 
+initialSizeCmd : Cmd Msg
+initialSizeCmd =
+    Window.size |> Task.perform WindowSize
+
+
 
 -- UPDATE
 
@@ -71,7 +78,7 @@ subscriptions model =
 type Msg
     = Latte LatteMsg.Msg
     | ChangeChart Chart
-    | WindowSize Int Int
+    | WindowSize Window.Size
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -108,7 +115,7 @@ update msg model =
             in
             ( { model | latte = lt_, chartBtns = chartBtns }, Cmd.none )
 
-        WindowSize w h ->
+        WindowSize msg ->
             ( Debug.log "Window Size" model, Cmd.none )
 
 
