@@ -6,7 +6,7 @@
 
 It is an experimental Elm charting library. Here I’m attempting to figure out how to use Elm language in practice. At this moment my project goes through pre-alpha version, so your feedback, suggestions and pull requests are welcome ;)
 
-![](https://s3k.github.io/latte/www/images/logo.svg "Elm Latte Bar Chart")
+![](https://s3k.github.io/latte/www/images/chart.png "Elm Latte Bar Chart")
 
 ### TL; DR
 
