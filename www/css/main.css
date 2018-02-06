@@ -57,6 +57,10 @@ footer {
   animation-delay: 600ms;
 }
 
+.content pre code {
+  overflow: scroll;
+}
+
 
 /*
  * Button Group
@@ -69,6 +73,7 @@ footer {
     font-size: 12px;
     color: #777;
 }
+
 
 .btn-group a:not(:last-child) {
     border-right: none; /* Prevent double borders */
@@ -90,4 +95,24 @@ footer {
 
 .btn-group a:last-child{
   border-radius: 0px 5px 5px 0px;
+}
+
+@media (max-width: 570px) {
+  .btn-group a {
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
+
+  .btn-group a:not(:last-child) {
+      border-right: 1px solid #ccc;
+  }
+
+  .btn-group a:first-child{
+    border-radius: 5px;
+  }
+
+  .btn-group a:last-child{
+    border-radius: 5px;
+  }
 }

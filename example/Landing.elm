@@ -7,14 +7,12 @@ import LandingDesc
 import Latte exposing (..)
 import Latte.Model as LatteModel exposing (Chart(..), Dataset)
 import Latte.Msg as LatteMsg
-import Task
-import Window
 
 
 main : Program Never Model Msg
 main =
     Html.program
-        { init = ( init, initialSizeCmd )
+        { init = init
         , view = view
         , update = update
         , subscriptions = subscriptions
@@ -56,19 +54,12 @@ init =
                 ]
             }
     in
-    model ! []
+        model ! []
 
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.batch
-        [-- Window.size (\{ height, width } -> WindowSize height width)
-        ]
-
-
-initialSizeCmd : Cmd Msg
-initialSizeCmd =
-    Window.size |> Task.perform WindowSize
+    Sub.batch []
 
 
 
@@ -78,7 +69,6 @@ initialSizeCmd =
 type Msg
     = Latte LatteMsg.Msg
     | ChangeChart Chart
-    | WindowSize Window.Size
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -113,10 +103,7 @@ update msg model =
                                 )
                             )
             in
-            ( { model | latte = lt_, chartBtns = chartBtns }, Cmd.none )
-
-        WindowSize msg ->
-            ( Debug.log "Window Size" model, Cmd.none )
+                ( { model | latte = lt_, chartBtns = chartBtns }, Cmd.none )
 
 
 
@@ -144,8 +131,6 @@ view model =
                 ]
                 [ mainChart model
                 , div [ class "row" ] [ LandingDesc.view ]
-
-                -- , jupiterView model
                 ]
             ]
         , footer []
@@ -205,25 +190,3 @@ makeChartBtns model =
                     ]
                     [ text <| toString chart ++ " Chart" ]
             )
-
-
-jupiterView : Model -> Html Msg
-jupiterView model =
-    div [ class "row" ]
-        [ div [ class "six columns" ]
-            [ h1 []
-                [ text "Moons of Jupiter" ]
-            , p
-                []
-                [ text
-                    """
-                      There are 69 known moons of Jupiter.
-                      This gives Jupiter the largest number of moons with reasonably stable orbits of any planet in the Solar System.
-                    """
-                ]
-            , p [] [ text "Compare the biggest on latte bar chart!" ]
-            ]
-        , div [ class "six columns content-item" ]
-            [ Html.map Latte (latteDraw model.latte)
-            ]
-        ]

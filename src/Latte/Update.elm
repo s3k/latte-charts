@@ -32,20 +32,11 @@ showTooltip ptr x y val label dsTitle model =
 
         tooltipY =
             case model.userData.chart of
-                Bar ->
-                    (state.height - y) - 62 - 1
-
-                Line ->
-                    (state.height - y) - 62 - 5
-
-                Scatter ->
-                    (state.height - y) - 62 - 5
-
                 Percentage ->
-                    8
+                    6
 
                 _ ->
-                    0
+                    (state.height - y) - 62 - 10
 
         commonTpX =
             x
@@ -57,20 +48,11 @@ showTooltip ptr x y val label dsTitle model =
 
         tooltipX =
             case model.userData.chart of
-                Bar ->
-                    commonTpX
-
-                Line ->
-                    commonTpX
-
-                Scatter ->
-                    commonTpX
-
                 Percentage ->
                     percentageOffset ptr model
 
                 _ ->
-                    0
+                    commonTpX
 
         barChart =
             state.barChart
