@@ -39,14 +39,15 @@ init =
                         [ "Io", "Europa", "Ganymede", "Callisto" ]
                     , datasets =
                         [ Dataset "Mass" [ 8931900, 4800000, 14819000, 10759000 ]
-                        , Dataset "Diameter" <| List.map (\n -> n * 1000) [ 3660.0, 3121.6, 5262.4, 4820.6 ]
+                        , Dataset "Diameter" <|
+                            List.map (\n -> n * 1000) [ 3660.0, 3121.6, 5262.4, 4820.6 ]
                         , Dataset "Semi-Major" [ 421700, 671034, 1070412, 1882709 ]
                         ]
                     , title = "Moons of Jupiter"
                     }
             }
     in
-        model ! []
+    model ! []
 
 
 subscriptions : Model -> Sub Msg
