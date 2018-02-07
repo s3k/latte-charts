@@ -4,9 +4,13 @@
 
 ### Hello
 
-It is an experimental Elm charting library. Here I’m attempting to figure out how to use Elm language in practice. At this moment my project goes through pre-alpha version, so your feedback, suggestions and pull requests are welcome ;)
+It is an experimental Elm charting library. Here I’m attempting to figure out how to use Elm language in practice.
 
-![](https://s3k.github.io/latte/www/images/chart.png "Elm Latte Bar Chart")
+At this moment my project goes through **alpha** version, so your feedback, suggestions and pull requests are welcome!
+
+<p align="center">
+  <img width="100%" src="https://s3k.github.io/latte/www/images/chart.png">
+</p>
 
 ### TL; DR
 
@@ -16,7 +20,7 @@ It is an experimental Elm charting library. Here I’m attempting to figure out 
 1. Connect all chart events in **update** section
 1. To render Latte Chart component in your view use **latteDraw** function through **Html.map**
 
-Download full [Example here](https://github.com/s3k/latte/blob/master/example/BarChart.elm)  
+Source code [Examples](https://github.com/s3k/latte/tree/master/example)  
 Check interactive [Demo](https://s3k.github.io/latte/)
 
 ### How to install?
@@ -37,7 +41,7 @@ import Latte.Msg as LatteMsg
 
 ### Model. Data preparation
 
-Use helper **latteMake** to create Latte Chart model:
+Use helper **latteInit** to create Latte Chart model:
 
 1. Set rendering options: hight x width
 1. Choose the chart type: **Bar | Line | Scatter | Percentage**
@@ -54,7 +58,7 @@ init =
     let
         model =
             { latte =
-                latteMake 950 200 <|
+                latteInit 640 200 <|
                     { chart = Bar
                     , labels =
                         [ "Io", "Europa", "Ganymede", "Callisto", "Fake" ]
@@ -92,19 +96,23 @@ update msg model =
 
 ### View. Render a component
 
-Use **latteDraw** function to render a chart through **Html.map** function to route all events in a component.
+Use **latteView** function to render a chart through **Html.map** function to route all events in a component.
 
 ```
 view : Model -> Html Msg
 view model =
     div []
-        [ Html.map Latte (latteDraw model.latte)]
+        [ Html.map Latte (latteView model.latte)]
 
 ```
 
 ### Outro
 
-As I told before — it’s a pre-alpha, which is very far from production.
-The next steps are adding negative values, fixing bugs with tooltip position and realization of based on width auto-scaling.
-If someone have ideas of how to do that, let me know! Also PR's are welcome)
+As I told before -- it’s an alpha version, which is very far from production.  
+The next steps are:
 
+- adding negative values
+- fixing bugs with tooltip position
+- auto-scaling by width
+
+If someone have ideas of how to do that, let me know.
