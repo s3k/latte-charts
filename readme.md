@@ -8,8 +8,29 @@ It is an experimental Elm charting library. Here I’m attempting to figure out 
 
 At this moment my project goes through **alpha** version, so your feedback, suggestions and pull requests are welcome!
 
+**Multiple Bar Chart**
 <p align="center">
   <img width="100%" src="https://s3k.github.io/latte/www/images/chart.png">
+</p>
+
+**Line Chart**
+<p align="center">
+  <img width="100%" src="https://s3k.github.io/latte/www/images/line-chart.png">
+</p>
+
+**Scatter Chart**
+<p align="center">
+  <img width="100%" src="https://s3k.github.io/latte/www/images/scatter-chart.png">
+</p>
+
+**Percentage Chart**
+<p align="center">
+  <img width="100%" src="https://s3k.github.io/latte/www/images/percentage-chart.png">
+</p>
+
+**Simple Bar Chart**
+<p align="center">
+  <img width="100%" src="https://s3k.github.io/latte/www/images/bar-chart.png">
 </p>
 
 ### TL; DR
