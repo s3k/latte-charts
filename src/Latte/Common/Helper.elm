@@ -5,8 +5,6 @@
 
 module Latte.Common.Helper exposing (..)
 
-import Bitwise exposing (..)
-import Hex
 import Latte.Model exposing (Model, UserData, Dataset)
 
 
@@ -130,29 +128,6 @@ justString item =
 
         Nothing ->
             ""
-
-
-
--- Darken color
-
-
-darken : String -> String
-darken strColor =
-    let
-        color =
-            String.dropLeft 1 strColor
-                |> (++) "0x"
-    in
-        case String.toInt color of
-            Ok intColor ->
-                intColor
-                    |> and 0x00FFFFFF
-                    |> shiftRightBy 1
-                    |> Hex.toString
-                    |> (++) "#"
-
-            Err msg ->
-                "#333333"
 
 
 

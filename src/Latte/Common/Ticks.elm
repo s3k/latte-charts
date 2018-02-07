@@ -36,7 +36,7 @@ view model =
         maxDs =
             maxDsPoints model
     in
-    g [ class "bars-latte" ] (toBarTicks model maxDs)
+        g [ class "bars-latte" ] (toBarTicks model maxDs)
 
 
 toBarTicks : Model -> List Float -> List (Svg Msg)
@@ -90,18 +90,18 @@ barTick ptr subTicks dsTitle val right height label model =
             else
                 toS state.height
     in
-    g
-        [ transform ("translate(" ++ toString right ++ ", 18)")
-        ]
-        (List.concat
-            [ [ lineTickItem lineY1 lineY2
-              , textTickItem label
-              ]
-            , subTicks
-            , [ rectTickItem model ptr right height val label dsTitle
-              ]
+        g
+            [ transform ("translate(" ++ toString right ++ ", 18)")
             ]
-        )
+            (List.concat
+                [ [ lineTickItem lineY1 lineY2
+                  , textTickItem label
+                  ]
+                , subTicks
+                , [ rectTickItem model ptr right height val label dsTitle
+                  ]
+                ]
+            )
 
 
 textTickItem : String -> Svg Msg
@@ -119,7 +119,7 @@ textTickItem label =
 rectTickItem : Model -> Int -> Float -> Float -> Float -> String -> String -> Svg Msg
 rectTickItem model ptr right height val label dsTitle =
     rect
-        [ barTickStyle model.state ptr
+        [ barTickStyle
         , width (toS barWidth)
         , onMouseOut HideTooltip
         , opacity "0.0"
@@ -158,12 +158,12 @@ subTick model i val =
         right =
             toFloat i * subWidth
     in
-    case model.userData.chart of
-        Bar ->
-            subTickRect i val right subWidth model
+        case model.userData.chart of
+            Bar ->
+                subTickRect i val right subWidth model
 
-        _ ->
-            subTickCircle i val subWidth model
+            _ ->
+                subTickCircle i val subWidth model
 
 
 subTickRect : Int -> Float -> Float -> Float -> Model -> Svg Msg
@@ -200,20 +200,11 @@ subTickCircle i val subWidth model =
 -- Styles
 
 
-barTickStyle : State -> Int -> Html.Attribute msg
-barTickStyle state ptr =
-    let
-        baseColor =
-            "#C0D6E4"
-    in
-    if state.barChart.selected == ptr then
-        style
-            [ ( "fill", darken baseColor )
-            ]
-    else
-        style
-            [ ( "fill", baseColor )
-            ]
+barTickStyle : Html.Attribute msg
+barTickStyle =
+    style
+        [ ( "fill", "#C0D6E4" )
+        ]
 
 
 barTickAnimate : Float -> Svg msg
