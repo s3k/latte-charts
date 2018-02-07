@@ -7,8 +7,8 @@
 It is an experimental Elm charting library. Here I’m attempting to figure out how to use Elm language in practice.  
 At this moment my project goes through **alpha** version, so your feedback, suggestions and pull requests are welcome!
 
-Check [Interactive Demo](https://s3k.github.io/latte/)  
-Explore [Code Examples](https://github.com/s3k/latte/tree/master/example)
+Check [Interactive Demo](https://s3k.github.io/latte/).  
+Or clone this repo to your local machine and explore [examples](https://github.com/s3k/latte/tree/master/example) through `elm-reactor`.
 
 **Multiple Bar Chart**
 <p align="left">
