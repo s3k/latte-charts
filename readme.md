@@ -4,9 +4,11 @@
 
 ### Hello
 
-It is an experimental Elm charting library. Here I’m attempting to figure out how to use Elm language in practice.
-
+It is an experimental Elm charting library. Here I’m attempting to figure out how to use Elm language in practice.  
 At this moment my project goes through **alpha** version, so your feedback, suggestions and pull requests are welcome!
+
+Check [Interactive Demo](https://s3k.github.io/latte/)  
+Explore [Code Examples](https://github.com/s3k/latte/tree/master/example)
 
 **Multiple Bar Chart**
 <p align="left">
@@ -41,8 +43,6 @@ At this moment my project goes through **alpha** version, so your feedback, sugg
 1. Connect all chart events in **update** section
 1. To render Latte Chart component in your view use **latteDraw** function through **Html.map**
 
-Source code [Examples](https://github.com/s3k/latte/tree/master/example)  
-Check interactive [Demo](https://s3k.github.io/latte/)
 
 ### How to install?
 
