@@ -8,9 +8,7 @@ import Latte.Msg as LatteMsg
 
 main =
     Html.program
-        { init =
-            init
-            -- , model = model
+        { init = init
         , view = view
         , update = update
         , subscriptions = subscriptions
@@ -22,8 +20,7 @@ main =
 
 
 type alias Model =
-    { hello : String
-    , latte : LatteModel.Model
+    { latte : LatteModel.Model
     , latte2 : LatteModel.Model
     , lattePercentage : LatteModel.Model
     , latteLine : LatteModel.Model
@@ -38,10 +35,8 @@ subscriptions model =
 
 init : ( Model, Cmd Msg )
 init =
-    ( { hello =
-            "Hello, this is a Latte Chart example"
-      , latte =
-            latteMake 640 200 <|
+    ( { latte =
+            latteInit 640 200 <|
                 { chart = Bar
                 , labels =
                     [ "Io", "Europa", "Ganymede", "Callisto" ]
@@ -53,7 +48,7 @@ init =
                 , title = "Moons of Jupiter"
                 }
       , latte2 =
-            latteMake 640 200 <|
+            latteInit 640 200 <|
                 { chart = Bar
                 , labels =
                     [ "Io", "Europa", "Ganymede", "Callisto" ]
@@ -63,7 +58,7 @@ init =
                 , title = "Moons of Jupiter"
                 }
       , lattePercentage =
-            latteMake 640 200 <|
+            latteInit 640 200 <|
                 { chart = Percentage
                 , labels =
                     [ "Io", "Europa", "Ganymede", "Callisto" ]
@@ -73,7 +68,7 @@ init =
                 , title = "Moons of Jupiter"
                 }
       , latteLine =
-            latteMake 640 200 <|
+            latteInit 640 200 <|
                 { chart = Line
                 , labels =
                     [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ]
@@ -90,7 +85,7 @@ init =
                 , title = "Temperature on planets"
                 }
       , latteScatter =
-            latteMake 640 200 <|
+            latteInit 640 200 <|
                 { chart = Scatter
                 , labels =
                     [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ]
@@ -104,7 +99,7 @@ init =
                     , Dataset "Neptune"
                         [ 33, 8, 15, 45, 4, 10, 2, 4, 3, 7, 3, 1 ]
                     ]
-                , title = "Moons of Jupiter"
+                , title = "Temperature on planets"
                 }
       }
     , Cmd.none
@@ -149,9 +144,9 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ Html.map LatteLine (latteDraw model.latteLine)
-        , Html.map LatteScatter (latteDraw model.latteScatter)
-        , Html.map Latte (latteDraw model.latte)
-        , Html.map LattePercentage (latteDraw model.lattePercentage)
-        , Html.map LatteSecond (latteDraw model.latte2)
+        [ Html.map LatteLine (latteView model.latteLine)
+        , Html.map LatteScatter (latteView model.latteScatter)
+        , Html.map Latte (latteView model.latte)
+        , Html.map LattePercentage (latteView model.lattePercentage)
+        , Html.map LatteSecond (latteView model.latte2)
         ]

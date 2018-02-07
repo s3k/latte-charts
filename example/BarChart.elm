@@ -4,7 +4,6 @@ import Html exposing (Html, div, li, ol, s, strong, text)
 import Latte exposing (..)
 import Latte.Model as LatteModel exposing (Chart(..), Dataset)
 import Latte.Msg as LatteMsg
-import Window
 
 
 main =
@@ -21,8 +20,7 @@ main =
 
 
 type alias Model =
-    { hello : String
-    , latte : LatteModel.Model
+    { latte : LatteModel.Model
     }
 
 
@@ -30,9 +28,7 @@ init : ( Model, Cmd Msg )
 init =
     let
         model =
-            { hello =
-                "Hello, this is a Latte Chart example"
-            , latte =
+            { latte =
                 latteInit 640 200 <|
                     { chart = Bar
                     , labels =
@@ -52,8 +48,7 @@ init =
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.batch
-        [ Window.resizes (\{ height, width } -> Resize height width)
-        ]
+        []
 
 
 
@@ -62,7 +57,6 @@ subscriptions model =
 
 type Msg
     = Latte LatteMsg.Msg
-    | Resize Int Int
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -70,9 +64,6 @@ update msg model =
     case msg of
         Latte msg ->
             ( { model | latte = latteUpdate msg model.latte }, Cmd.none )
-
-        Resize w h ->
-            ( Debug.log "123" model, Cmd.none )
 
 
 
