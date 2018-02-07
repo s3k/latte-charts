@@ -76,7 +76,7 @@ init =
                     [ Dataset "Mars avg high"
                         [ 7, 18, 23, 20, 4, 0, 2, 1, 1, 4, 1, 3 ]
                     , Dataset
-                        "Jupyter"
+                        "Jupiter"
                       <|
                         List.map (\n -> n * 1.3) [ 8, 35, 14, 20, 4, 7, 2, 5, 7, 4, 1, 8 ]
                     , Dataset "Neptune"
@@ -93,7 +93,7 @@ init =
                     [ Dataset "Mars avg high"
                         [ 7, 18, 23, 20, 4, 0, 2, 1, 1, 4, 1, 3 ]
                     , Dataset
-                        "Jupyter"
+                        "Jupiter"
                       <|
                         List.map (\n -> n * 1.3) [ 8, 35, 14, 20, 4, 7, 2, 5, 7, 4, 1, 8 ]
                     , Dataset "Neptune"
