@@ -33,7 +33,7 @@ init =
             { hello =
                 "Hello, this is a Latte Chart example"
             , latte =
-                latteMake 640 200 <|
+                latteInit 640 200 <|
                     { chart = Bar
                     , labels =
                         [ "Io", "Europa", "Ganymede", "Callisto" ]
@@ -82,5 +82,5 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ Html.map Latte (latteDraw model.latte)
+        [ Html.map Latte (latteView model.latte)
         ]
