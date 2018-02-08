@@ -1,0 +1,132 @@
+[
+  {
+    "name": "Latte",
+    "comment": " With this module you can create, update and draw chart in your `Html.program`.\n\nFor more details watch [Live Demo](https://s3k.github.io/latte-charts/)\n\n@docs latteInit, latteUpdate, latteView\n\n",
+    "aliases": [],
+    "types": [],
+    "values": [
+      {
+        "name": "latteInit",
+        "comment": " Use helper **latteInit** to create Latte Chart state:\n\n1.  Set rendering options: hight x width\n2.  Choose the chart type: **Bar | Line | Scatter | Percentage**\n3.  Fill labels and datasets. Labels are Strings and datasets are Floats\n\n```\ninit : ( Model, Cmd Msg )\ninit =\n    let\n        model =\n            { latte =\n                latteInit 640 200 <|\n                    { chart = Bar\n                    , labels =\n                        [ \"Io\", \"Europa\", \"Ganymede\", \"Callisto\" ]\n                    , datasets =\n                        [ Dataset \"Mass\" [ 8931900, 4800000, 14819000, 10759000 ]\n                        , Dataset \"Diameter\" <| List.map (\\n -> n * 1000) [ 3660.0, 3121.6, 5262.4, 4820.6 ]\n                        , Dataset \"Semi-Major\" [ 421700, 671034, 1070412, 1882709 ]\n                        ]\n                    , title = \"Moons of Jupiter\"\n                    }\n            }\n    in\n    model ! []\n```\n\n",
+        "type": "Float -> Float -> Latte.Model.UserData -> Latte.Model.Model"
+      },
+      {
+        "name": "latteUpdate",
+        "comment": " Create new message type and add handler in an update section:\n\n    type Msg\n        = Latte LatteMsg.Msg\n\n    update : Msg -> Model -> ( Model, Cmd Msg )\n    update msg model =\n        case msg of\n            Latte msg ->\n                ( { model | latte = latteUpdate msg model.latte }, Cmd.none )\n\n",
+        "type": "Latte.Msg.Msg -> Latte.Model.Model -> Latte.Model.Model"
+      },
+      {
+        "name": "latteView",
+        "comment": " Use this function to render a chart through **Html.map** function to route all events in a component:\n\n    view : Model -> Html Msg\n    view model =\n        div []\n            [ Html.map Latte (latteDraw model.latte) ]\n\n",
+        "type": "Latte.Model.Model -> Svg.Svg Latte.Msg.Msg"
+      }
+    ],
+    "generated-with-elm-version": "0.18.0"
+  },
+  {
+    "name": "Latte.Msg",
+    "comment": " Latte Chart Events.\n\n@docs Msg\n\n",
+    "aliases": [],
+    "types": [
+      {
+        "name": "Msg",
+        "comment": " Show and Hide Tooltip.\n",
+        "args": [],
+        "cases": [
+          [
+            "ShowTooltip",
+            [
+              "Int",
+              "Float",
+              "Float",
+              "Float",
+              "String",
+              "String"
+            ]
+          ],
+          [
+            "HideTooltip",
+            []
+          ]
+        ]
+      }
+    ],
+    "values": [],
+    "generated-with-elm-version": "0.18.0"
+  },
+  {
+    "name": "Latte.Model",
+    "comment": " Latte Chart Types.\n\n@docs Chart, Dataset, BarArea, BarArea, State, UserData, Model, BarChart, Tooltip\n\n",
+    "aliases": [
+      {
+        "name": "BarArea",
+        "comment": " Legenda\n",
+        "args": [],
+        "type": "{ i : Float, label : Float }"
+      },
+      {
+        "name": "BarChart",
+        "comment": " On mouse over state.\n",
+        "args": [],
+        "type": "{ selected : Int }"
+      },
+      {
+        "name": "Dataset",
+        "comment": " String title and List of Float's.\n",
+        "args": [],
+        "type": "{ title : String, values : List Float }"
+      },
+      {
+        "name": "Model",
+        "comment": " Chart model. Composing user data and chart state.\n",
+        "args": [],
+        "type": "{ userData : Latte.Model.UserData, state : Latte.Model.State }"
+      },
+      {
+        "name": "State",
+        "comment": " Chart state.\n",
+        "args": [],
+        "type": "{ width : Float , height : Float , maxDsValue : Float , maxBarLines : Float , elemCount : Int , dsCount : Int , tooltip : Latte.Model.Tooltip , barChart : Latte.Model.BarChart , colors : List String }"
+      },
+      {
+        "name": "Tooltip",
+        "comment": " Tooltip datastructire.\nPosition and dataset values under cursor.\n",
+        "args": [],
+        "type": "{ label : String , title : String , display : String , x : Float , y : Float , ds : List ( String, String ) }"
+      },
+      {
+        "name": "UserData",
+        "comment": " User data.\n",
+        "args": [],
+        "type": "{ chart : Latte.Model.Chart , labels : List String , datasets : List Latte.Model.Dataset , title : String }"
+      }
+    ],
+    "types": [
+      {
+        "name": "Chart",
+        "comment": " Latte chart types.\nPick one.\n",
+        "args": [],
+        "cases": [
+          [
+            "Bar",
+            []
+          ],
+          [
+            "Line",
+            []
+          ],
+          [
+            "Scatter",
+            []
+          ],
+          [
+            "Percentage",
+            []
+          ]
+        ]
+      }
+    ],
+    "values": [],
+    "generated-with-elm-version": "0.18.0"
+  }
+]

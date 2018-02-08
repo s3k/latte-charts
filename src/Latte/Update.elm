@@ -1,7 +1,7 @@
 module Latte.Update exposing (update)
 
-import Latte.Common.Helper exposing (..)
 import Latte.Bar.Helper exposing (calcMarginRight, leftAlign)
+import Latte.Common.Helper exposing (..)
 import Latte.Common.Style exposing (barWidth, chartPaddingLeft)
 import Latte.Model exposing (..)
 import Latte.Msg exposing (..)
@@ -44,9 +44,6 @@ showTooltip ptr x y val label dsTitle model =
                 Percentage ->
                     8
 
-                _ ->
-                    0
-
         commonTpX =
             x
                 - 3.5
@@ -69,9 +66,6 @@ showTooltip ptr x y val label dsTitle model =
                 Percentage ->
                     percentageOffset ptr model
 
-                _ ->
-                    0
-
         barChart =
             state.barChart
 
@@ -88,7 +82,7 @@ showTooltip ptr x y val label dsTitle model =
         newBarChart =
             { barChart | selected = ptr }
     in
-        { state | tooltip = newTooltip, barChart = newBarChart }
+    { state | tooltip = newTooltip, barChart = newBarChart }
 
 
 makeTooltipDataset : Int -> List Dataset -> List ( String, String )
@@ -112,4 +106,4 @@ hideTooltip state =
         newBarChart =
             { barChart | selected = -1 }
     in
-        { state | tooltip = newTooltip, barChart = newBarChart }
+    { state | tooltip = newTooltip, barChart = newBarChart }

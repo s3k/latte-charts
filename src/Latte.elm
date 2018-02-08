@@ -129,6 +129,3 @@ latteView model =
 
         Percentage ->
             Latte.Percentage.view model
-
-        Pie ->
-            svg [] []
