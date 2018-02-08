@@ -37,7 +37,7 @@ Or clone this repo to your local machine and explore [examples](https://github.c
 
 ### TL; DR
 
-1. Add Latte Chart package to your project with `$ elm package install s3k/latte`
+1. Add Latte Chart package to your project with `$ elm package install s3k/latte-charts`
 1. Import functions and types from Latte package
 1. Describe new latte state in your Html.program (The Elm Architecture pattern). Use **latteMake** helper
 1. Connect all chart events in **update** section
