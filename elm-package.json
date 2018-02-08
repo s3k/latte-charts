@@ -1,7 +1,7 @@
 {
     "version": "1.0.0",
     "summary": "Simple charts for your Html.program",
-    "repository": "https://github.com/s3k/latte-charts",
+    "repository": "https://github.com/s3k/latte-charts.git",
     "license": "BSD3",
     "source-directories": [
         "src",
