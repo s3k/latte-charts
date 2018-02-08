@@ -5757,28 +5757,6 @@ var _elm_lang$core$Platform$Task = {ctor: 'Task'};
 var _elm_lang$core$Platform$ProcessId = {ctor: 'ProcessId'};
 var _elm_lang$core$Platform$Router = {ctor: 'Router'};
 
-var _elm_lang$core$Native_Bitwise = function() {
-
-return {
-	and: F2(function and(a, b) { return a & b; }),
-	or: F2(function or(a, b) { return a | b; }),
-	xor: F2(function xor(a, b) { return a ^ b; }),
-	complement: function complement(a) { return ~a; },
-	shiftLeftBy: F2(function(offset, a) { return a << offset; }),
-	shiftRightBy: F2(function(offset, a) { return a >> offset; }),
-	shiftRightZfBy: F2(function(offset, a) { return a >>> offset; })
-};
-
-}();
-
-var _elm_lang$core$Bitwise$shiftRightZfBy = _elm_lang$core$Native_Bitwise.shiftRightZfBy;
-var _elm_lang$core$Bitwise$shiftRightBy = _elm_lang$core$Native_Bitwise.shiftRightBy;
-var _elm_lang$core$Bitwise$shiftLeftBy = _elm_lang$core$Native_Bitwise.shiftLeftBy;
-var _elm_lang$core$Bitwise$complement = _elm_lang$core$Native_Bitwise.complement;
-var _elm_lang$core$Bitwise$xor = _elm_lang$core$Native_Bitwise.xor;
-var _elm_lang$core$Bitwise$or = _elm_lang$core$Native_Bitwise.or;
-var _elm_lang$core$Bitwise$and = _elm_lang$core$Native_Bitwise.and;
-
 var _elm_lang$virtual_dom$VirtualDom_Debug$wrap;
 var _elm_lang$virtual_dom$VirtualDom_Debug$wrapWithFlags;
 
@@ -9000,244 +8978,39 @@ var _myrho$elm_round$Round$roundCom = _myrho$elm_round$Round$roundFun(
 	});
 var _myrho$elm_round$Round$roundNumCom = _myrho$elm_round$Round$funNum(_myrho$elm_round$Round$roundCom);
 
-var _rtfeldman$hex$Hex$toString = function (num) {
-	return _elm_lang$core$String$fromList(
-		(_elm_lang$core$Native_Utils.cmp(num, 0) < 0) ? {
-			ctor: '::',
-			_0: _elm_lang$core$Native_Utils.chr('-'),
-			_1: A2(
-				_rtfeldman$hex$Hex$unsafePositiveToDigits,
-				{ctor: '[]'},
-				_elm_lang$core$Basics$negate(num))
-		} : A2(
-			_rtfeldman$hex$Hex$unsafePositiveToDigits,
-			{ctor: '[]'},
-			num));
-};
-var _rtfeldman$hex$Hex$unsafePositiveToDigits = F2(
-	function (digits, num) {
-		unsafePositiveToDigits:
-		while (true) {
-			if (_elm_lang$core$Native_Utils.cmp(num, 16) < 0) {
-				return {
-					ctor: '::',
-					_0: _rtfeldman$hex$Hex$unsafeToDigit(num),
-					_1: digits
-				};
-			} else {
-				var _v0 = {
-					ctor: '::',
-					_0: _rtfeldman$hex$Hex$unsafeToDigit(
-						A2(_elm_lang$core$Basics_ops['%'], num, 16)),
-					_1: digits
-				},
-					_v1 = (num / 16) | 0;
-				digits = _v0;
-				num = _v1;
-				continue unsafePositiveToDigits;
-			}
-		}
-	});
-var _rtfeldman$hex$Hex$unsafeToDigit = function (num) {
-	var _p0 = num;
-	switch (_p0) {
-		case 0:
-			return _elm_lang$core$Native_Utils.chr('0');
-		case 1:
-			return _elm_lang$core$Native_Utils.chr('1');
-		case 2:
-			return _elm_lang$core$Native_Utils.chr('2');
-		case 3:
-			return _elm_lang$core$Native_Utils.chr('3');
-		case 4:
-			return _elm_lang$core$Native_Utils.chr('4');
-		case 5:
-			return _elm_lang$core$Native_Utils.chr('5');
-		case 6:
-			return _elm_lang$core$Native_Utils.chr('6');
-		case 7:
-			return _elm_lang$core$Native_Utils.chr('7');
-		case 8:
-			return _elm_lang$core$Native_Utils.chr('8');
-		case 9:
-			return _elm_lang$core$Native_Utils.chr('9');
-		case 10:
-			return _elm_lang$core$Native_Utils.chr('a');
-		case 11:
-			return _elm_lang$core$Native_Utils.chr('b');
-		case 12:
-			return _elm_lang$core$Native_Utils.chr('c');
-		case 13:
-			return _elm_lang$core$Native_Utils.chr('d');
-		case 14:
-			return _elm_lang$core$Native_Utils.chr('e');
-		case 15:
-			return _elm_lang$core$Native_Utils.chr('f');
-		default:
-			return _elm_lang$core$Native_Utils.crashCase(
-				'Hex',
-				{
-					start: {line: 138, column: 5},
-					end: {line: 188, column: 84}
-				},
-				_p0)(
-				A2(
-					_elm_lang$core$Basics_ops['++'],
-					'Tried to convert ',
-					A2(
-						_elm_lang$core$Basics_ops['++'],
-						_rtfeldman$hex$Hex$toString(num),
-						' to hexadecimal.')));
-	}
-};
-var _rtfeldman$hex$Hex$fromStringHelp = F3(
-	function (position, chars, accumulated) {
-		var _p2 = chars;
-		if (_p2.ctor === '[]') {
-			return _elm_lang$core$Result$Ok(accumulated);
-		} else {
-			var recurse = function (additional) {
-				return A3(
-					_rtfeldman$hex$Hex$fromStringHelp,
-					position - 1,
-					_p2._1,
-					accumulated + (additional * Math.pow(16, position)));
-			};
-			var _p3 = _p2._0;
-			switch (_p3.valueOf()) {
-				case '0':
-					return recurse(0);
-				case '1':
-					return recurse(1);
-				case '2':
-					return recurse(2);
-				case '3':
-					return recurse(3);
-				case '4':
-					return recurse(4);
-				case '5':
-					return recurse(5);
-				case '6':
-					return recurse(6);
-				case '7':
-					return recurse(7);
-				case '8':
-					return recurse(8);
-				case '9':
-					return recurse(9);
-				case 'a':
-					return recurse(10);
-				case 'b':
-					return recurse(11);
-				case 'c':
-					return recurse(12);
-				case 'd':
-					return recurse(13);
-				case 'e':
-					return recurse(14);
-				case 'f':
-					return recurse(15);
-				default:
-					return _elm_lang$core$Result$Err(
-						A2(
-							_elm_lang$core$Basics_ops['++'],
-							_elm_lang$core$Basics$toString(_p3),
-							' is not a valid hexadecimal character.'));
-			}
-		}
-	});
-var _rtfeldman$hex$Hex$fromString = function (str) {
-	if (_elm_lang$core$String$isEmpty(str)) {
-		return _elm_lang$core$Result$Err('Empty strings are not valid hexadecimal strings.');
-	} else {
-		var formatError = function (err) {
-			return A2(
-				_elm_lang$core$String$join,
-				' ',
-				{
-					ctor: '::',
-					_0: _elm_lang$core$Basics$toString(str),
-					_1: {
-						ctor: '::',
-						_0: 'is not a valid hexadecimal string because',
-						_1: {
-							ctor: '::',
-							_0: err,
-							_1: {ctor: '[]'}
-						}
-					}
-				});
-		};
-		var result = function () {
-			if (A2(_elm_lang$core$String$startsWith, '-', str)) {
-				var list = A2(
-					_elm_lang$core$Maybe$withDefault,
-					{ctor: '[]'},
-					_elm_lang$core$List$tail(
-						_elm_lang$core$String$toList(str)));
-				return A2(
-					_elm_lang$core$Result$map,
-					_elm_lang$core$Basics$negate,
-					A3(
-						_rtfeldman$hex$Hex$fromStringHelp,
-						_elm_lang$core$List$length(list) - 1,
-						list,
-						0));
-			} else {
-				return A3(
-					_rtfeldman$hex$Hex$fromStringHelp,
-					_elm_lang$core$String$length(str) - 1,
-					_elm_lang$core$String$toList(str),
-					0);
-			}
-		}();
-		return A2(_elm_lang$core$Result$mapError, formatError, result);
-	}
-};
-
-var _user$project$LandingDesc$view = A2(
-	_evancz$elm_markdown$Markdown$toHtml,
-	{
-		ctor: '::',
-		_0: _elm_lang$html$Html_Attributes$class('content'),
-		_1: {ctor: '[]'}
-	},
-	'\n\n#### Hello\n\n\nIt is an experimental Elm charting library. Here I’m attempting to figure out how to use Elm language in practice. At this moment my project goes through pre-alpha version, so your feedback, suggestions and pull requests are welcome ;)\n\n#### TL; DR\n\n1. Add Latte Chart package to your project with `$ elm package install s3k/latte-charts`\n1. Import functions and types from Latte package\n1. Describe new latte state in your Html.program (The Elm Architecture pattern). Use **latteInit** helper\n1. Connect all chart events in **update** section\n1. To render Latte Chart component in your view use **latteView** function through **Html.map**\n\nDownload full [example here](https://github.com/s3k/latte-charts/tree/master/example).\n\n#### How to install?\n\nJust add a new package by running the following command:\n\n```\n$ elm package install s3k/latte-charts\n```\n\nAnd import main functions and types.\n\n```\nimport Latte exposing (..)\nimport Latte.Model as LatteModel exposing (Chart(..), Dataset)\nimport Latte.Msg as LatteMsg\n```\n\n#### Model. Data preparation\n\nUse helper **latteInit** to create Latte Chart model:\n\n1. Set rendering options: hight x width\n1. Choose the chart type: **Bar | Line | Scatter | Percentage**\n1. Fill labels and datasets. Labels are Strings and datasets are Floats\n\n```\ntype alias Model =\n    { latte : LatteModel.Model\n    }\n\n\ninit : ( Model, Cmd Msg )\ninit =\n    let\n        model =\n            { latte =\n                latteInit 950 200 <|\n                    { chart = Bar\n                    , labels =\n                        [ \"Io\", \"Europa\", \"Ganymede\", \"Callisto\", \"Fake\" ]\n                    , datasets =\n                        [ Dataset \"Mass\" [ 8931900, 4800000, 14819000, 10759000, 10759000 ]\n                        , Dataset \"Diameter\" <|\n                            List.map ( -> n * 1000) [ 3660.0, 3121.6, 5262.4, 4820.6, 4000 ]\n                        , Dataset \"Semi-Major\" [ 421700, 671034, 1070412, 1882709, 1882709 ]\n                        ]\n                    , title = \"Biggest Moons of Jupiter\"\n                    }\n            }\n    in\n        model ! []\n```\n\n\n#### Update. Connect latte chart to update event loop\n\nCreate new message type and add handler in update section\n\n```\ntype Msg\n    = Latte LatteMsg.Msg\n\n\nupdate : Msg -> Model -> ( Model, Cmd Msg )\nupdate msg model =\n    case msg of\n        Latte msg ->\n            ( { model | latte = latteUpdate msg model.latte }, Cmd.none )\n\n\n```\n\n#### View. Render a component\n\nUse **latteView** function to render a chart through **Html.map** function to route all events in a component.\n\n```\nview : Model -> Html Msg\nview model =\n    div []\n        [ Html.map Latte (latteView model.latte)]\n\n```\n\n#### Outro\n\nAs I told before — it’s a pre-alpha, which is very far from production.\nThe next steps are adding negative values, fixing bugs with tooltip position and realization of based on width auto-scaling.\nIf someone have ideas of how to do that, let me know! Also PR\'s are welcome)\n\n');
-
-var _user$project$Latte_Model$Dataset = F2(
+var _s3k$latte_charts$Latte_Model$Dataset = F2(
 	function (a, b) {
 		return {title: a, values: b};
 	});
-var _user$project$Latte_Model$BarArea = F2(
+var _s3k$latte_charts$Latte_Model$BarArea = F2(
 	function (a, b) {
 		return {i: a, label: b};
 	});
-var _user$project$Latte_Model$Tooltip = F6(
+var _s3k$latte_charts$Latte_Model$Tooltip = F6(
 	function (a, b, c, d, e, f) {
 		return {label: a, title: b, display: c, x: d, y: e, ds: f};
 	});
-var _user$project$Latte_Model$BarChart = function (a) {
+var _s3k$latte_charts$Latte_Model$BarChart = function (a) {
 	return {selected: a};
 };
-var _user$project$Latte_Model$State = F9(
+var _s3k$latte_charts$Latte_Model$State = F9(
 	function (a, b, c, d, e, f, g, h, i) {
 		return {width: a, height: b, maxDsValue: c, maxBarLines: d, elemCount: e, dsCount: f, tooltip: g, barChart: h, colors: i};
 	});
-var _user$project$Latte_Model$UserData = F4(
+var _s3k$latte_charts$Latte_Model$UserData = F4(
 	function (a, b, c, d) {
 		return {chart: a, labels: b, datasets: c, title: d};
 	});
-var _user$project$Latte_Model$Model = F2(
+var _s3k$latte_charts$Latte_Model$Model = F2(
 	function (a, b) {
 		return {userData: a, state: b};
 	});
-var _user$project$Latte_Model$Percentage = {ctor: 'Percentage'};
-var _user$project$Latte_Model$Pie = {ctor: 'Pie'};
-var _user$project$Latte_Model$Scatter = {ctor: 'Scatter'};
-var _user$project$Latte_Model$Line = {ctor: 'Line'};
-var _user$project$Latte_Model$Bar = {ctor: 'Bar'};
+var _s3k$latte_charts$Latte_Model$Percentage = {ctor: 'Percentage'};
+var _s3k$latte_charts$Latte_Model$Scatter = {ctor: 'Scatter'};
+var _s3k$latte_charts$Latte_Model$Line = {ctor: 'Line'};
+var _s3k$latte_charts$Latte_Model$Bar = {ctor: 'Bar'};
 
-var _user$project$Latte_Common_Helper$transpose = function (ll) {
+var _s3k$latte_charts$Latte_Common_Helper$transpose = function (ll) {
 	transpose:
 	while (true) {
 		var _p0 = ll;
@@ -9255,61 +9028,40 @@ var _user$project$Latte_Common_Helper$transpose = function (ll) {
 				return {
 					ctor: '::',
 					_0: {ctor: '::', _0: _p0._0._0, _1: heads},
-					_1: _user$project$Latte_Common_Helper$transpose(
+					_1: _s3k$latte_charts$Latte_Common_Helper$transpose(
 						{ctor: '::', _0: _p0._0._1, _1: tails})
 				};
 			}
 		}
 	}
 };
-var _user$project$Latte_Common_Helper$roundNumberScale = function (n) {
+var _s3k$latte_charts$Latte_Common_Helper$roundNumberScale = function (n) {
 	return (_elm_lang$core$Native_Utils.cmp(n, 0.1) < 1) ? 0.1 : (((_elm_lang$core$Native_Utils.cmp(n, 0.2) < 1) && (_elm_lang$core$Native_Utils.cmp(n, 0.1) > 0)) ? 0.2 : (((_elm_lang$core$Native_Utils.cmp(n, 0.3) < 1) && (_elm_lang$core$Native_Utils.cmp(n, 0.2) > 0)) ? 0.3 : (((_elm_lang$core$Native_Utils.cmp(n, 0.4) < 1) && (_elm_lang$core$Native_Utils.cmp(n, 0.3) > 0)) ? 0.4 : (((_elm_lang$core$Native_Utils.cmp(n, 0.5) < 1) && (_elm_lang$core$Native_Utils.cmp(n, 0.4) > 0)) ? 0.5 : (((_elm_lang$core$Native_Utils.cmp(n, 0.6) < 1) && (_elm_lang$core$Native_Utils.cmp(n, 0.5) > 0)) ? 0.6 : (((_elm_lang$core$Native_Utils.cmp(n, 0.7) < 1) && (_elm_lang$core$Native_Utils.cmp(n, 0.6) > 0)) ? 0.7 : (((_elm_lang$core$Native_Utils.cmp(n, 0.8) < 1) && (_elm_lang$core$Native_Utils.cmp(n, 0.7) > 0)) ? 0.8 : (((_elm_lang$core$Native_Utils.cmp(n, 0.9) < 1) && (_elm_lang$core$Native_Utils.cmp(n, 0.8) > 0)) ? 0.9 : 1.0))))))));
 };
-var _user$project$Latte_Common_Helper$scaleY = function (n) {
+var _s3k$latte_charts$Latte_Common_Helper$scaleY = function (n) {
 	var base = _elm_lang$core$Basics$toFloat(
 		_elm_lang$core$Basics$ceiling(
 			A2(_elm_lang$core$Basics$logBase, 10, n)));
 	var n_ = n / Math.pow(10, base);
-	return _user$project$Latte_Common_Helper$roundNumberScale(n_) * Math.pow(10, base);
+	return _s3k$latte_charts$Latte_Common_Helper$roundNumberScale(n_) * Math.pow(10, base);
 };
-var _user$project$Latte_Common_Helper$darken = function (strColor) {
-	var color = A2(
-		F2(
-			function (x, y) {
-				return A2(_elm_lang$core$Basics_ops['++'], x, y);
-			}),
-		'0x',
-		A2(_elm_lang$core$String$dropLeft, 1, strColor));
-	var _p2 = _elm_lang$core$String$toInt(color);
-	if (_p2.ctor === 'Ok') {
-		return A2(
-			F2(
-				function (x, y) {
-					return A2(_elm_lang$core$Basics_ops['++'], x, y);
-				}),
-			'#',
-			_rtfeldman$hex$Hex$toString((16777215 & _p2._0) >> 1));
-	} else {
-		return '#333333';
-	}
-};
-var _user$project$Latte_Common_Helper$justString = function (item) {
-	var _p3 = item;
-	if (_p3.ctor === 'Just') {
-		return _p3._0;
+var _s3k$latte_charts$Latte_Common_Helper$justString = function (item) {
+	var _p2 = item;
+	if (_p2.ctor === 'Just') {
+		return _p2._0;
 	} else {
 		return '';
 	}
 };
-var _user$project$Latte_Common_Helper$justNumber = function (item) {
-	var _p4 = item;
-	if (_p4.ctor === 'Just') {
-		return _p4._0;
+var _s3k$latte_charts$Latte_Common_Helper$justNumber = function (item) {
+	var _p3 = item;
+	if (_p3.ctor === 'Just') {
+		return _p3._0;
 	} else {
 		return 0;
 	}
 };
-var _user$project$Latte_Common_Helper$listItemByIndex = F2(
+var _s3k$latte_charts$Latte_Common_Helper$listItemByIndex = F2(
 	function (i, items) {
 		return _elm_lang$core$List$head(
 			A2(
@@ -9332,25 +9084,25 @@ var _user$project$Latte_Common_Helper$listItemByIndex = F2(
 							}),
 						items))));
 	});
-var _user$project$Latte_Common_Helper$stringByIndex = F2(
+var _s3k$latte_charts$Latte_Common_Helper$stringByIndex = F2(
 	function (i, items) {
-		return _user$project$Latte_Common_Helper$justString(
-			A2(_user$project$Latte_Common_Helper$listItemByIndex, i, items));
+		return _s3k$latte_charts$Latte_Common_Helper$justString(
+			A2(_s3k$latte_charts$Latte_Common_Helper$listItemByIndex, i, items));
 	});
-var _user$project$Latte_Common_Helper$floatByIndex = F2(
+var _s3k$latte_charts$Latte_Common_Helper$floatByIndex = F2(
 	function (i, items) {
-		return _user$project$Latte_Common_Helper$justNumber(
-			A2(_user$project$Latte_Common_Helper$listItemByIndex, i, items));
+		return _s3k$latte_charts$Latte_Common_Helper$justNumber(
+			A2(_s3k$latte_charts$Latte_Common_Helper$listItemByIndex, i, items));
 	});
-var _user$project$Latte_Common_Helper$divLastElem = function (items) {
+var _s3k$latte_charts$Latte_Common_Helper$divLastElem = function (items) {
 	return A2(
 		_elm_lang$core$List$map,
-		function (_p5) {
-			var _p6 = _p5;
-			var _p7 = _p6._1;
+		function (_p4) {
+			var _p5 = _p4;
+			var _p6 = _p5._1;
 			return _elm_lang$core$Native_Utils.eq(
-				_p6._0,
-				_elm_lang$core$List$length(items) - 1) ? (_p7 / 2) : _p7;
+				_p5._0,
+				_elm_lang$core$List$length(items) - 1) ? (_p6 / 2) : _p6;
 		},
 		A2(
 			_elm_lang$core$List$indexedMap,
@@ -9360,11 +9112,11 @@ var _user$project$Latte_Common_Helper$divLastElem = function (items) {
 				}),
 			items));
 };
-var _user$project$Latte_Common_Helper$calcFirstDsPercents = function (model) {
+var _s3k$latte_charts$Latte_Common_Helper$calcFirstDsPercents = function (model) {
 	var dataset = A2(
 		_elm_lang$core$Maybe$withDefault,
 		A2(
-			_user$project$Latte_Model$Dataset,
+			_s3k$latte_charts$Latte_Model$Dataset,
 			'',
 			{ctor: '[]'}),
 		_elm_lang$core$List$head(model.userData.datasets));
@@ -9376,24 +9128,24 @@ var _user$project$Latte_Common_Helper$calcFirstDsPercents = function (model) {
 		},
 		dataset.values);
 };
-var _user$project$Latte_Common_Helper$percentageOffset = F2(
+var _s3k$latte_charts$Latte_Common_Helper$percentageOffset = F2(
 	function (ptr, model) {
 		return function (n) {
 			return ((n * 640) / 100) - 24;
 		}(
 			_elm_lang$core$List$sum(
-				_user$project$Latte_Common_Helper$divLastElem(
+				_s3k$latte_charts$Latte_Common_Helper$divLastElem(
 					A2(
 						_elm_lang$core$List$map,
-						function (_p8) {
-							var _p9 = _p8;
-							return _p9._1;
+						function (_p7) {
+							var _p8 = _p7;
+							return _p8._1;
 						},
 						A2(
 							_elm_lang$core$List$filter,
-							function (_p10) {
-								var _p11 = _p10;
-								return _elm_lang$core$Native_Utils.cmp(_p11._0, ptr) < 1;
+							function (_p9) {
+								var _p10 = _p9;
+								return _elm_lang$core$Native_Utils.cmp(_p10._0, ptr) < 1;
 							},
 							A2(
 								_elm_lang$core$List$indexedMap,
@@ -9401,10 +9153,10 @@ var _user$project$Latte_Common_Helper$percentageOffset = F2(
 									function (v0, v1) {
 										return {ctor: '_Tuple2', _0: v0, _1: v1};
 									}),
-								_user$project$Latte_Common_Helper$calcFirstDsPercents(model)))))));
+								_s3k$latte_charts$Latte_Common_Helper$calcFirstDsPercents(model)))))));
 	});
-var _user$project$Latte_Common_Helper$maxDsValue = function (model) {
-	return _user$project$Latte_Common_Helper$justNumber(
+var _s3k$latte_charts$Latte_Common_Helper$maxDsValue = function (model) {
+	return _s3k$latte_charts$Latte_Common_Helper$justNumber(
 		_elm_lang$core$List$maximum(
 			_elm_lang$core$List$concat(
 				A2(
@@ -9414,10 +9166,10 @@ var _user$project$Latte_Common_Helper$maxDsValue = function (model) {
 					},
 					model.datasets))));
 };
-var _user$project$Latte_Common_Helper$maxBarLines = function (height) {
+var _s3k$latte_charts$Latte_Common_Helper$maxBarLines = function (height) {
 	return height / 35.0;
 };
-var _user$project$Latte_Common_Helper$maxDsPoints = function (model) {
+var _s3k$latte_charts$Latte_Common_Helper$maxDsPoints = function (model) {
 	return A2(
 		_elm_lang$core$List$map,
 		function (vals) {
@@ -9426,7 +9178,7 @@ var _user$project$Latte_Common_Helper$maxDsPoints = function (model) {
 				0.0,
 				_elm_lang$core$List$maximum(vals));
 		},
-		_user$project$Latte_Common_Helper$transpose(
+		_s3k$latte_charts$Latte_Common_Helper$transpose(
 			A2(
 				_elm_lang$core$List$map,
 				function (ds) {
@@ -9434,23 +9186,23 @@ var _user$project$Latte_Common_Helper$maxDsPoints = function (model) {
 				},
 				model.userData.datasets)));
 };
-var _user$project$Latte_Common_Helper$toS = function (val) {
+var _s3k$latte_charts$Latte_Common_Helper$toS = function (val) {
 	return _elm_lang$core$Basics$toString(val);
 };
-var _user$project$Latte_Common_Helper$toPr = function (val) {
+var _s3k$latte_charts$Latte_Common_Helper$toPr = function (val) {
 	return A2(
 		_elm_lang$core$Basics_ops['++'],
-		_user$project$Latte_Common_Helper$toS(val),
+		_s3k$latte_charts$Latte_Common_Helper$toS(val),
 		'%');
 };
-var _user$project$Latte_Common_Helper$toPx = function (val) {
+var _s3k$latte_charts$Latte_Common_Helper$toPx = function (val) {
 	return A2(
 		_elm_lang$core$Basics_ops['++'],
-		_user$project$Latte_Common_Helper$toS(val),
+		_s3k$latte_charts$Latte_Common_Helper$toS(val),
 		'px');
 };
 
-var _user$project$Latte_Common_Style$percentageAreaStyle = _elm_lang$html$Html_Attributes$style(
+var _s3k$latte_charts$Latte_Common_Style$percentageAreaStyle = _elm_lang$html$Html_Attributes$style(
 	{
 		ctor: '::',
 		_0: {ctor: '_Tuple2', _0: 'height', _1: '20px'},
@@ -9464,7 +9216,7 @@ var _user$project$Latte_Common_Style$percentageAreaStyle = _elm_lang$html$Html_A
 			}
 		}
 	});
-var _user$project$Latte_Common_Style$legendStyle = _elm_lang$html$Html_Attributes$style(
+var _s3k$latte_charts$Latte_Common_Style$legendStyle = _elm_lang$html$Html_Attributes$style(
 	{
 		ctor: '::',
 		_0: {ctor: '_Tuple2', _0: 'margin-top', _1: '20px'},
@@ -9474,20 +9226,20 @@ var _user$project$Latte_Common_Style$legendStyle = _elm_lang$html$Html_Attribute
 			_1: {ctor: '[]'}
 		}
 	});
-var _user$project$Latte_Common_Style$chartStyle = function (model) {
+var _s3k$latte_charts$Latte_Common_Style$chartStyle = function (model) {
 	return {
 		ctor: '::',
 		_0: _elm_lang$svg$Svg_Attributes$width(
-			_user$project$Latte_Common_Helper$toS(model.state.width)),
+			_s3k$latte_charts$Latte_Common_Helper$toS(model.state.width)),
 		_1: {
 			ctor: '::',
 			_0: _elm_lang$svg$Svg_Attributes$height(
-				_user$project$Latte_Common_Helper$toS(model.state.height)),
+				_s3k$latte_charts$Latte_Common_Helper$toS(model.state.height)),
 			_1: {ctor: '[]'}
 		}
 	};
 };
-var _user$project$Latte_Common_Style$viewportStyle = function (model) {
+var _s3k$latte_charts$Latte_Common_Style$viewportStyle = function (model) {
 	return {
 		ctor: '::',
 		_0: _elm_lang$svg$Svg_Attributes$transform(
@@ -9496,19 +9248,19 @@ var _user$project$Latte_Common_Style$viewportStyle = function (model) {
 				'scale(1,-1) translate(0,-',
 				A2(
 					_elm_lang$core$Basics_ops['++'],
-					_user$project$Latte_Common_Helper$toS(model.state.height),
+					_s3k$latte_charts$Latte_Common_Helper$toS(model.state.height),
 					')'))),
 		_1: {ctor: '[]'}
 	};
 };
-var _user$project$Latte_Common_Style$boxStyle = function (model) {
+var _s3k$latte_charts$Latte_Common_Style$boxStyle = function (model) {
 	return _elm_lang$html$Html_Attributes$style(
 		{
 			ctor: '::',
 			_0: {ctor: '_Tuple2', _0: 'padding', _1: '10px'},
 			_1: {
 				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'margin', _1: '10px auto'},
+				_0: {ctor: '_Tuple2', _0: 'margin', _1: '10px'},
 				_1: {
 					ctor: '::',
 					_0: {ctor: '_Tuple2', _0: 'position', _1: 'relative'},
@@ -9520,16 +9272,12 @@ var _user$project$Latte_Common_Style$boxStyle = function (model) {
 							_0: {
 								ctor: '_Tuple2',
 								_0: 'max-width',
-								_1: _user$project$Latte_Common_Helper$toPx(model.state.width)
+								_1: _s3k$latte_charts$Latte_Common_Helper$toPx(model.state.width)
 							},
 							_1: {
 								ctor: '::',
 								_0: {ctor: '_Tuple2', _0: 'border-radius', _1: '3px'},
-								_1: {
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'overflow', _1: 'scroll'},
-									_1: {ctor: '[]'}
-								}
+								_1: {ctor: '[]'}
 							}
 						}
 					}
@@ -9537,9 +9285,9 @@ var _user$project$Latte_Common_Style$boxStyle = function (model) {
 			}
 		});
 };
-var _user$project$Latte_Common_Style$barWidth = 34;
-var _user$project$Latte_Common_Style$chartPaddingLeft = 55;
-var _user$project$Latte_Common_Style$fontStyle = {
+var _s3k$latte_charts$Latte_Common_Style$barWidth = 34;
+var _s3k$latte_charts$Latte_Common_Style$chartPaddingLeft = 55;
+var _s3k$latte_charts$Latte_Common_Style$fontStyle = {
 	ctor: '::',
 	_0: {ctor: '_Tuple2', _0: 'font-family', _1: '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif'},
 	_1: {
@@ -9552,7 +9300,7 @@ var _user$project$Latte_Common_Style$fontStyle = {
 		}
 	}
 };
-var _user$project$Latte_Common_Style$svgFontStyle = A2(
+var _s3k$latte_charts$Latte_Common_Style$svgFontStyle = A2(
 	_elm_lang$core$Basics_ops['++'],
 	{
 		ctor: '::',
@@ -9571,10 +9319,10 @@ var _user$project$Latte_Common_Style$svgFontStyle = A2(
 			}
 		}
 	},
-	_user$project$Latte_Common_Style$fontStyle);
+	_s3k$latte_charts$Latte_Common_Style$fontStyle);
 
-var _user$project$Latte_Common_Area$barTextStyle = _elm_lang$html$Html_Attributes$style(_user$project$Latte_Common_Style$svgFontStyle);
-var _user$project$Latte_Common_Area$barText = function (label) {
+var _s3k$latte_charts$Latte_Common_Area$barTextStyle = _elm_lang$html$Html_Attributes$style(_s3k$latte_charts$Latte_Common_Style$svgFontStyle);
+var _s3k$latte_charts$Latte_Common_Area$barText = function (label) {
 	var attrs = {
 		ctor: '::',
 		_0: _elm_lang$svg$Svg_Attributes$transform('scale(1,-1)'),
@@ -9586,7 +9334,7 @@ var _user$project$Latte_Common_Area$barText = function (label) {
 				_0: _elm_lang$svg$Svg_Attributes$y('3'),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Latte_Common_Area$barTextStyle,
+					_0: _s3k$latte_charts$Latte_Common_Area$barTextStyle,
 					_1: {
 						ctor: '::',
 						_0: _elm_lang$svg$Svg_Attributes$textAnchor('end'),
@@ -9605,17 +9353,17 @@ var _user$project$Latte_Common_Area$barText = function (label) {
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Latte_Common_Area$barLine = F2(
+var _s3k$latte_charts$Latte_Common_Area$barLine = F2(
 	function (i, state) {
 		var strokeColor = _elm_lang$core$Native_Utils.eq(i, 0) ? '#aaa' : '#dadada';
 		var attrs = {
 			ctor: '::',
 			_0: _elm_lang$svg$Svg_Attributes$x1(
-				_user$project$Latte_Common_Helper$toS(_user$project$Latte_Common_Style$chartPaddingLeft)),
+				_s3k$latte_charts$Latte_Common_Helper$toS(_s3k$latte_charts$Latte_Common_Style$chartPaddingLeft)),
 			_1: {
 				ctor: '::',
 				_0: _elm_lang$svg$Svg_Attributes$x2(
-					_user$project$Latte_Common_Helper$toS(state.width - (_user$project$Latte_Common_Style$chartPaddingLeft * 1.1))),
+					_s3k$latte_charts$Latte_Common_Helper$toS(state.width - (_s3k$latte_charts$Latte_Common_Style$chartPaddingLeft * 1.1))),
 				_1: {
 					ctor: '::',
 					_0: _elm_lang$svg$Svg_Attributes$y1('0'),
@@ -9649,7 +9397,7 @@ var _user$project$Latte_Common_Area$barLine = F2(
 			attrs,
 			{ctor: '[]'});
 	});
-var _user$project$Latte_Common_Area$latteBarLine = F4(
+var _s3k$latte_charts$Latte_Common_Area$latteBarLine = F4(
 	function (i, pos, label, state) {
 		return A2(
 			_elm_lang$svg$Svg$g,
@@ -9667,15 +9415,15 @@ var _user$project$Latte_Common_Area$latteBarLine = F4(
 			},
 			{
 				ctor: '::',
-				_0: A2(_user$project$Latte_Common_Area$barLine, i, state),
+				_0: A2(_s3k$latte_charts$Latte_Common_Area$barLine, i, state),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Latte_Common_Area$barText(label),
+					_0: _s3k$latte_charts$Latte_Common_Area$barText(label),
 					_1: {ctor: '[]'}
 				}
 			});
 	});
-var _user$project$Latte_Common_Area$makeLines = function (model) {
+var _s3k$latte_charts$Latte_Common_Area$makeLines = function (model) {
 	var aspect = model.state.height / (model.state.maxBarLines + 1);
 	var yStep = model.state.maxDsValue / model.state.maxBarLines;
 	return A2(
@@ -9684,7 +9432,7 @@ var _user$project$Latte_Common_Area$makeLines = function (model) {
 			var _p1 = _p0;
 			var _p2 = _p1._1;
 			return A4(
-				_user$project$Latte_Common_Area$latteBarLine,
+				_s3k$latte_charts$Latte_Common_Area$latteBarLine,
 				_p1._0,
 				aspect * _p2.i,
 				_elm_lang$core$Basics$toString(_p2.label),
@@ -9700,7 +9448,7 @@ var _user$project$Latte_Common_Area$makeLines = function (model) {
 				_elm_lang$core$List$map,
 				function (n) {
 					return A2(
-						_user$project$Latte_Model$BarArea,
+						_s3k$latte_charts$Latte_Model$BarArea,
 						_elm_lang$core$Basics$toFloat(n),
 						_elm_lang$core$Basics$toFloat(
 							_elm_lang$core$Basics$round(
@@ -9711,7 +9459,7 @@ var _user$project$Latte_Common_Area$makeLines = function (model) {
 					0,
 					_elm_lang$core$Basics$floor(model.state.maxBarLines)))));
 };
-var _user$project$Latte_Common_Area$view = function (model) {
+var _s3k$latte_charts$Latte_Common_Area$view = function (model) {
 	return A2(
 		_elm_lang$svg$Svg$g,
 		{
@@ -9719,39 +9467,39 @@ var _user$project$Latte_Common_Area$view = function (model) {
 			_0: _elm_lang$svg$Svg_Attributes$class('lines-latte'),
 			_1: {ctor: '[]'}
 		},
-		_user$project$Latte_Common_Area$makeLines(model));
+		_s3k$latte_charts$Latte_Common_Area$makeLines(model));
 };
 
-var _user$project$Latte_Bar_Helper$calcHeight = F2(
+var _s3k$latte_charts$Latte_Bar_Helper$calcHeight = F2(
 	function (state, val) {
 		var mbl = state.maxBarLines;
 		var yMaxPx = (mbl * state.height) / (mbl + 1);
 		var coeff = state.maxDsValue / yMaxPx;
 		return val / coeff;
 	});
-var _user$project$Latte_Bar_Helper$calcMarginRight = function (model) {
-	var areaWidth = model.state.width - (_user$project$Latte_Common_Style$chartPaddingLeft * 2);
+var _s3k$latte_charts$Latte_Bar_Helper$calcMarginRight = function (model) {
+	var areaWidth = model.state.width - (_s3k$latte_charts$Latte_Common_Style$chartPaddingLeft * 2);
 	var barsCount = _elm_lang$core$Basics$toFloat(model.state.elemCount);
 	return areaWidth / barsCount;
 };
-var _user$project$Latte_Bar_Helper$leftAlign = F2(
+var _s3k$latte_charts$Latte_Bar_Helper$leftAlign = F2(
 	function (state, step_) {
-		var areaWidth = state.width - (_user$project$Latte_Common_Style$chartPaddingLeft * 2);
+		var areaWidth = state.width - (_s3k$latte_charts$Latte_Common_Style$chartPaddingLeft * 2);
 		var step = _elm_lang$core$Basics$toFloat(step_);
 		var barsCount = _elm_lang$core$Basics$toFloat(state.elemCount);
 		var barMarginRight = areaWidth / barsCount;
-		var centerShift = (areaWidth - (barsCount * barMarginRight)) + ((barMarginRight - (_user$project$Latte_Common_Style$barWidth / 2)) / 2);
-		return (_user$project$Latte_Common_Style$chartPaddingLeft + (step * barMarginRight)) + centerShift;
+		var centerShift = (areaWidth - (barsCount * barMarginRight)) + ((barMarginRight - (_s3k$latte_charts$Latte_Common_Style$barWidth / 2)) / 2);
+		return (_s3k$latte_charts$Latte_Common_Style$chartPaddingLeft + (step * barMarginRight)) + centerShift;
 	});
-var _user$project$Latte_Bar_Helper$barCenter = _user$project$Latte_Common_Style$barWidth / 2;
+var _s3k$latte_charts$Latte_Bar_Helper$barCenter = _s3k$latte_charts$Latte_Common_Style$barWidth / 2;
 
-var _user$project$Latte_Msg$HideTooltip = {ctor: 'HideTooltip'};
-var _user$project$Latte_Msg$ShowTooltip = F6(
+var _s3k$latte_charts$Latte_Msg$HideTooltip = {ctor: 'HideTooltip'};
+var _s3k$latte_charts$Latte_Msg$ShowTooltip = F6(
 	function (a, b, c, d, e, f) {
 		return {ctor: 'ShowTooltip', _0: a, _1: b, _2: c, _3: d, _4: e, _5: f};
 	});
 
-var _user$project$Latte_Common_Ticks$barTickAnimate = function (height) {
+var _s3k$latte_charts$Latte_Common_Ticks$barTickAnimate = function (height) {
 	return A2(
 		_elm_lang$svg$Svg$animate,
 		{
@@ -9778,33 +9526,20 @@ var _user$project$Latte_Common_Ticks$barTickAnimate = function (height) {
 		},
 		{ctor: '[]'});
 };
-var _user$project$Latte_Common_Ticks$barTickStyle = F2(
-	function (state, ptr) {
-		var baseColor = '#C0D6E4';
-		return _elm_lang$core$Native_Utils.eq(state.barChart.selected, ptr) ? _elm_lang$html$Html_Attributes$style(
-			{
-				ctor: '::',
-				_0: {
-					ctor: '_Tuple2',
-					_0: 'fill',
-					_1: _user$project$Latte_Common_Helper$darken(baseColor)
-				},
-				_1: {ctor: '[]'}
-			}) : _elm_lang$html$Html_Attributes$style(
-			{
-				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'fill', _1: baseColor},
-				_1: {ctor: '[]'}
-			});
+var _s3k$latte_charts$Latte_Common_Ticks$barTickStyle = _elm_lang$html$Html_Attributes$style(
+	{
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: 'fill', _1: '#C0D6E4'},
+		_1: {ctor: '[]'}
 	});
-var _user$project$Latte_Common_Ticks$subTickCircle = F4(
+var _s3k$latte_charts$Latte_Common_Ticks$subTickCircle = F4(
 	function (i, val, subWidth, model) {
 		return A2(
 			_elm_lang$svg$Svg$circle,
 			{
 				ctor: '::',
 				_0: _elm_lang$svg$Svg_Attributes$width(
-					_user$project$Latte_Common_Helper$toS(subWidth)),
+					_s3k$latte_charts$Latte_Common_Helper$toS(subWidth)),
 				_1: {
 					ctor: '::',
 					_0: _elm_lang$html$Html_Attributes$style(
@@ -9813,7 +9548,7 @@ var _user$project$Latte_Common_Ticks$subTickCircle = F4(
 							_0: {
 								ctor: '_Tuple2',
 								_0: 'fill',
-								_1: A2(_user$project$Latte_Common_Helper$stringByIndex, i, model.state.colors)
+								_1: A2(_s3k$latte_charts$Latte_Common_Helper$stringByIndex, i, model.state.colors)
 							},
 							_1: {ctor: '[]'}
 						}),
@@ -9826,8 +9561,8 @@ var _user$project$Latte_Common_Ticks$subTickCircle = F4(
 							_1: {
 								ctor: '::',
 								_0: _elm_lang$svg$Svg_Attributes$cy(
-									_user$project$Latte_Common_Helper$toS(
-										A2(_user$project$Latte_Bar_Helper$calcHeight, model.state, val))),
+									_s3k$latte_charts$Latte_Common_Helper$toS(
+										A2(_s3k$latte_charts$Latte_Bar_Helper$calcHeight, model.state, val))),
 								_1: {ctor: '[]'}
 							}
 						}
@@ -9847,8 +9582,8 @@ var _user$project$Latte_Common_Ticks$subTickCircle = F4(
 							_1: {
 								ctor: '::',
 								_0: _elm_lang$svg$Svg_Attributes$to(
-									_user$project$Latte_Common_Helper$toS(
-										A2(_user$project$Latte_Bar_Helper$calcHeight, model.state, val))),
+									_s3k$latte_charts$Latte_Common_Helper$toS(
+										A2(_s3k$latte_charts$Latte_Bar_Helper$calcHeight, model.state, val))),
 								_1: {
 									ctor: '::',
 									_0: _elm_lang$svg$Svg_Attributes$dur('0.2s'),
@@ -9865,14 +9600,14 @@ var _user$project$Latte_Common_Ticks$subTickCircle = F4(
 				_1: {ctor: '[]'}
 			});
 	});
-var _user$project$Latte_Common_Ticks$subTickRect = F5(
+var _s3k$latte_charts$Latte_Common_Ticks$subTickRect = F5(
 	function (i, val, right, subWidth, model) {
 		return A2(
 			_elm_lang$svg$Svg$rect,
 			{
 				ctor: '::',
 				_0: _elm_lang$svg$Svg_Attributes$width(
-					_user$project$Latte_Common_Helper$toS(subWidth)),
+					_s3k$latte_charts$Latte_Common_Helper$toS(subWidth)),
 				_1: {
 					ctor: '::',
 					_0: _elm_lang$html$Html_Attributes$style(
@@ -9881,7 +9616,7 @@ var _user$project$Latte_Common_Ticks$subTickRect = F5(
 							_0: {
 								ctor: '_Tuple2',
 								_0: 'fill',
-								_1: A2(_user$project$Latte_Common_Helper$stringByIndex, i, model.state.colors)
+								_1: A2(_s3k$latte_charts$Latte_Common_Helper$stringByIndex, i, model.state.colors)
 							},
 							_1: {ctor: '[]'}
 						}),
@@ -9893,7 +9628,7 @@ var _user$project$Latte_Common_Ticks$subTickRect = F5(
 								'translate(',
 								A2(
 									_elm_lang$core$Basics_ops['++'],
-									_user$project$Latte_Common_Helper$toS(right),
+									_s3k$latte_charts$Latte_Common_Helper$toS(right),
 									', 0)'))),
 						_1: {ctor: '[]'}
 					}
@@ -9901,29 +9636,29 @@ var _user$project$Latte_Common_Ticks$subTickRect = F5(
 			},
 			{
 				ctor: '::',
-				_0: _user$project$Latte_Common_Ticks$barTickAnimate(
-					A2(_user$project$Latte_Bar_Helper$calcHeight, model.state, val)),
+				_0: _s3k$latte_charts$Latte_Common_Ticks$barTickAnimate(
+					A2(_s3k$latte_charts$Latte_Bar_Helper$calcHeight, model.state, val)),
 				_1: {ctor: '[]'}
 			});
 	});
-var _user$project$Latte_Common_Ticks$subTick = F3(
+var _s3k$latte_charts$Latte_Common_Ticks$subTick = F3(
 	function (model, i, val) {
-		var subWidth = _user$project$Latte_Common_Style$barWidth / _elm_lang$core$Basics$toFloat(model.state.dsCount);
+		var subWidth = _s3k$latte_charts$Latte_Common_Style$barWidth / _elm_lang$core$Basics$toFloat(model.state.dsCount);
 		var right = _elm_lang$core$Basics$toFloat(i) * subWidth;
 		var _p0 = model.userData.chart;
 		if (_p0.ctor === 'Bar') {
-			return A5(_user$project$Latte_Common_Ticks$subTickRect, i, val, right, subWidth, model);
+			return A5(_s3k$latte_charts$Latte_Common_Ticks$subTickRect, i, val, right, subWidth, model);
 		} else {
-			return A4(_user$project$Latte_Common_Ticks$subTickCircle, i, val, subWidth, model);
+			return A4(_s3k$latte_charts$Latte_Common_Ticks$subTickCircle, i, val, subWidth, model);
 		}
 	});
-var _user$project$Latte_Common_Ticks$makeSubTicks = F2(
+var _s3k$latte_charts$Latte_Common_Ticks$makeSubTicks = F2(
 	function (model, ptr) {
 		return A2(
 			_elm_lang$core$List$map,
 			function (_p1) {
 				var _p2 = _p1;
-				return A3(_user$project$Latte_Common_Ticks$subTick, model, _p2._0, _p2._1);
+				return A3(_s3k$latte_charts$Latte_Common_Ticks$subTick, model, _p2._0, _p2._1);
 			},
 			A2(
 				_elm_lang$core$List$indexedMap,
@@ -9934,22 +9669,22 @@ var _user$project$Latte_Common_Ticks$makeSubTicks = F2(
 				A2(
 					_elm_lang$core$List$map,
 					function (dataset) {
-						return A2(_user$project$Latte_Common_Helper$floatByIndex, ptr, dataset.values);
+						return A2(_s3k$latte_charts$Latte_Common_Helper$floatByIndex, ptr, dataset.values);
 					},
 					model.userData.datasets)));
 	});
-var _user$project$Latte_Common_Ticks$lineTickItem = F2(
+var _s3k$latte_charts$Latte_Common_Ticks$lineTickItem = F2(
 	function (ly1, ly2) {
 		return A2(
 			_elm_lang$svg$Svg$line,
 			{
 				ctor: '::',
 				_0: _elm_lang$svg$Svg_Attributes$x1(
-					_user$project$Latte_Common_Helper$toS(_user$project$Latte_Bar_Helper$barCenter)),
+					_s3k$latte_charts$Latte_Common_Helper$toS(_s3k$latte_charts$Latte_Bar_Helper$barCenter)),
 				_1: {
 					ctor: '::',
 					_0: _elm_lang$svg$Svg_Attributes$x2(
-						_user$project$Latte_Common_Helper$toS(_user$project$Latte_Bar_Helper$barCenter)),
+						_s3k$latte_charts$Latte_Common_Helper$toS(_s3k$latte_charts$Latte_Bar_Helper$barCenter)),
 					_1: {
 						ctor: '::',
 						_0: _elm_lang$svg$Svg_Attributes$y1(ly1),
@@ -9976,27 +9711,27 @@ var _user$project$Latte_Common_Ticks$lineTickItem = F2(
 			},
 			{ctor: '[]'});
 	});
-var _user$project$Latte_Common_Ticks$rectTickItem = F7(
+var _s3k$latte_charts$Latte_Common_Ticks$rectTickItem = F7(
 	function (model, ptr, right, height, val, label, dsTitle) {
 		return A2(
 			_elm_lang$svg$Svg$rect,
 			{
 				ctor: '::',
-				_0: A2(_user$project$Latte_Common_Ticks$barTickStyle, model.state, ptr),
+				_0: _s3k$latte_charts$Latte_Common_Ticks$barTickStyle,
 				_1: {
 					ctor: '::',
 					_0: _elm_lang$svg$Svg_Attributes$width(
-						_user$project$Latte_Common_Helper$toS(_user$project$Latte_Common_Style$barWidth)),
+						_s3k$latte_charts$Latte_Common_Helper$toS(_s3k$latte_charts$Latte_Common_Style$barWidth)),
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$svg$Svg_Events$onMouseOut(_user$project$Latte_Msg$HideTooltip),
+						_0: _elm_lang$svg$Svg_Events$onMouseOut(_s3k$latte_charts$Latte_Msg$HideTooltip),
 						_1: {
 							ctor: '::',
 							_0: _elm_lang$svg$Svg_Attributes$opacity('0.0'),
 							_1: {
 								ctor: '::',
 								_0: _elm_lang$svg$Svg_Events$onMouseOver(
-									A6(_user$project$Latte_Msg$ShowTooltip, ptr, right, height, val, label, dsTitle)),
+									A6(_s3k$latte_charts$Latte_Msg$ShowTooltip, ptr, right, height, val, label, dsTitle)),
 								_1: {ctor: '[]'}
 							}
 						}
@@ -10005,11 +9740,11 @@ var _user$project$Latte_Common_Ticks$rectTickItem = F7(
 			},
 			{
 				ctor: '::',
-				_0: _user$project$Latte_Common_Ticks$barTickAnimate(height),
+				_0: _s3k$latte_charts$Latte_Common_Ticks$barTickAnimate(height),
 				_1: {ctor: '[]'}
 			});
 	});
-var _user$project$Latte_Common_Ticks$textTickItem = function (label) {
+var _s3k$latte_charts$Latte_Common_Ticks$textTickItem = function (label) {
 	return A2(
 		_elm_lang$svg$Svg$text_,
 		{
@@ -10023,7 +9758,7 @@ var _user$project$Latte_Common_Ticks$textTickItem = function (label) {
 					_0: _elm_lang$svg$Svg_Attributes$transform('scale(1,-1)'),
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$style(_user$project$Latte_Common_Style$svgFontStyle),
+						_0: _elm_lang$html$Html_Attributes$style(_s3k$latte_charts$Latte_Common_Style$svgFontStyle),
 						_1: {
 							ctor: '::',
 							_0: _elm_lang$svg$Svg_Attributes$textAnchor('middle'),
@@ -10039,11 +9774,11 @@ var _user$project$Latte_Common_Ticks$textTickItem = function (label) {
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Latte_Common_Ticks$barTick = F8(
+var _s3k$latte_charts$Latte_Common_Ticks$barTick = F8(
 	function (ptr, subTicks, dsTitle, val, right, height, label, model) {
-		var lineY1 = _elm_lang$core$Native_Utils.eq(model.userData.chart, _user$project$Latte_Model$Bar) ? '-1' : '1';
+		var lineY1 = _elm_lang$core$Native_Utils.eq(model.userData.chart, _s3k$latte_charts$Latte_Model$Bar) ? '-1' : '1';
 		var state = model.state;
-		var lineY2 = _elm_lang$core$Native_Utils.eq(model.userData.chart, _user$project$Latte_Model$Bar) ? '-5' : _user$project$Latte_Common_Helper$toS(state.height);
+		var lineY2 = _elm_lang$core$Native_Utils.eq(model.userData.chart, _s3k$latte_charts$Latte_Model$Bar) ? '-5' : _s3k$latte_charts$Latte_Common_Helper$toS(state.height);
 		return A2(
 			_elm_lang$svg$Svg$g,
 			{
@@ -10063,10 +9798,10 @@ var _user$project$Latte_Common_Ticks$barTick = F8(
 					ctor: '::',
 					_0: {
 						ctor: '::',
-						_0: A2(_user$project$Latte_Common_Ticks$lineTickItem, lineY1, lineY2),
+						_0: A2(_s3k$latte_charts$Latte_Common_Ticks$lineTickItem, lineY1, lineY2),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Latte_Common_Ticks$textTickItem(label),
+							_0: _s3k$latte_charts$Latte_Common_Ticks$textTickItem(label),
 							_1: {ctor: '[]'}
 						}
 					},
@@ -10077,7 +9812,7 @@ var _user$project$Latte_Common_Ticks$barTick = F8(
 							ctor: '::',
 							_0: {
 								ctor: '::',
-								_0: A7(_user$project$Latte_Common_Ticks$rectTickItem, model, ptr, right, height, val, label, dsTitle),
+								_0: A7(_s3k$latte_charts$Latte_Common_Ticks$rectTickItem, model, ptr, right, height, val, label, dsTitle),
 								_1: {ctor: '[]'}
 							},
 							_1: {ctor: '[]'}
@@ -10085,19 +9820,19 @@ var _user$project$Latte_Common_Ticks$barTick = F8(
 					}
 				}));
 	});
-var _user$project$Latte_Common_Ticks$toBarTicks = F2(
+var _s3k$latte_charts$Latte_Common_Ticks$toBarTicks = F2(
 	function (model, ds) {
 		return A2(
 			_elm_lang$core$List$map,
 			function (n) {
 				return A8(
-					_user$project$Latte_Common_Ticks$barTick,
+					_s3k$latte_charts$Latte_Common_Ticks$barTick,
 					n.ptr,
 					n.subTicks,
 					'TITLE',
 					n.val,
 					n.position,
-					A2(_user$project$Latte_Bar_Helper$calcHeight, model.state, n.val),
+					A2(_s3k$latte_charts$Latte_Bar_Helper$calcHeight, model.state, n.val),
 					n.label,
 					model);
 			},
@@ -10107,10 +9842,10 @@ var _user$project$Latte_Common_Ticks$toBarTicks = F2(
 					function (i, val, label) {
 						return {
 							ptr: i,
-							position: A2(_user$project$Latte_Bar_Helper$leftAlign, model.state, i),
+							position: A2(_s3k$latte_charts$Latte_Bar_Helper$leftAlign, model.state, i),
 							val: val,
 							label: label,
-							subTicks: A2(_user$project$Latte_Common_Ticks$makeSubTicks, model, i)
+							subTicks: A2(_s3k$latte_charts$Latte_Common_Ticks$makeSubTicks, model, i)
 						};
 					}),
 				A2(
@@ -10120,8 +9855,8 @@ var _user$project$Latte_Common_Ticks$toBarTicks = F2(
 				ds,
 				model.userData.labels));
 	});
-var _user$project$Latte_Common_Ticks$view = function (model) {
-	var maxDs = _user$project$Latte_Common_Helper$maxDsPoints(model);
+var _s3k$latte_charts$Latte_Common_Ticks$view = function (model) {
+	var maxDs = _s3k$latte_charts$Latte_Common_Helper$maxDsPoints(model);
 	return A2(
 		_elm_lang$svg$Svg$g,
 		{
@@ -10129,10 +9864,10 @@ var _user$project$Latte_Common_Ticks$view = function (model) {
 			_0: _elm_lang$svg$Svg_Attributes$class('bars-latte'),
 			_1: {ctor: '[]'}
 		},
-		A2(_user$project$Latte_Common_Ticks$toBarTicks, model, maxDs));
+		A2(_s3k$latte_charts$Latte_Common_Ticks$toBarTicks, model, maxDs));
 };
 
-var _user$project$Latte_Common_Title$titleStyle = _elm_lang$html$Html_Attributes$style(
+var _s3k$latte_charts$Latte_Common_Title$titleStyle = _elm_lang$html$Html_Attributes$style(
 	{
 		ctor: '::',
 		_0: {ctor: '_Tuple2', _0: 'margin-bottom', _1: '4px'},
@@ -10154,12 +9889,12 @@ var _user$project$Latte_Common_Title$titleStyle = _elm_lang$html$Html_Attributes
 			}
 		}
 	});
-var _user$project$Latte_Common_Title$view = function (model) {
+var _s3k$latte_charts$Latte_Common_Title$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _user$project$Latte_Common_Title$titleStyle,
+			_0: _s3k$latte_charts$Latte_Common_Title$titleStyle,
 			_1: {ctor: '[]'}
 		},
 		{
@@ -10169,9 +9904,9 @@ var _user$project$Latte_Common_Title$view = function (model) {
 		});
 };
 
-var _user$project$Latte_Common_Tooltip$arrowStyle = _elm_lang$html$Html$text('\n.tooltip-latte::after {\n    content: \"\";\n    position: absolute;\n    top: 100%;\n    left: 50%;\n    margin-left: -5px;\n    border-width: 5px;\n    border-bottom-width: 0px;\n    border-style: solid;\n    border-color: black transparent transparent transparent;\n}\n  ');
-var _user$project$Latte_Common_Tooltip$opacityStyle = {ctor: '_Tuple2', _0: 'opacity', _1: '0.8'};
-var _user$project$Latte_Common_Tooltip$ulStyle = _elm_lang$html$Html_Attributes$style(
+var _s3k$latte_charts$Latte_Common_Tooltip$arrowStyle = _elm_lang$html$Html$text('\n.tooltip-latte::after {\n    content: \"\";\n    position: absolute;\n    top: 100%;\n    left: 50%;\n    margin-left: -5px;\n    border-width: 5px;\n    border-bottom-width: 0px;\n    border-style: solid;\n    border-color: black transparent transparent transparent;\n}\n  ');
+var _s3k$latte_charts$Latte_Common_Tooltip$opacityStyle = {ctor: '_Tuple2', _0: 'opacity', _1: '0.8'};
+var _s3k$latte_charts$Latte_Common_Tooltip$ulStyle = _elm_lang$html$Html_Attributes$style(
 	{
 		ctor: '::',
 		_0: {ctor: '_Tuple2', _0: 'list-style-type', _1: 'none'},
@@ -10185,7 +9920,7 @@ var _user$project$Latte_Common_Tooltip$ulStyle = _elm_lang$html$Html_Attributes$
 			}
 		}
 	});
-var _user$project$Latte_Common_Tooltip$labelStyle = _elm_lang$html$Html_Attributes$style(
+var _s3k$latte_charts$Latte_Common_Tooltip$labelStyle = _elm_lang$html$Html_Attributes$style(
 	{
 		ctor: '::',
 		_0: {ctor: '_Tuple2', _0: 'padding', _1: '8px'},
@@ -10194,27 +9929,27 @@ var _user$project$Latte_Common_Tooltip$labelStyle = _elm_lang$html$Html_Attribut
 			_0: {ctor: '_Tuple2', _0: 'font-weight', _1: '600'},
 			_1: {
 				ctor: '::',
-				_0: _user$project$Latte_Common_Tooltip$opacityStyle,
+				_0: _s3k$latte_charts$Latte_Common_Tooltip$opacityStyle,
 				_1: {ctor: '[]'}
 			}
 		}
 	});
-var _user$project$Latte_Common_Tooltip$dsTitleStyle = _elm_lang$html$Html_Attributes$style(
+var _s3k$latte_charts$Latte_Common_Tooltip$dsTitleStyle = _elm_lang$html$Html_Attributes$style(
 	{
 		ctor: '::',
-		_0: _user$project$Latte_Common_Tooltip$opacityStyle,
+		_0: _s3k$latte_charts$Latte_Common_Tooltip$opacityStyle,
 		_1: {
 			ctor: '::',
 			_0: {ctor: '_Tuple2', _0: 'padding', _1: '10px 0px'},
 			_1: {ctor: '[]'}
 		}
 	});
-var _user$project$Latte_Common_Tooltip$tooltipStyle = F2(
+var _s3k$latte_charts$Latte_Common_Tooltip$tooltipStyle = F2(
 	function (state, width) {
 		return _elm_lang$html$Html_Attributes$style(
 			A2(
 				_elm_lang$core$Basics_ops['++'],
-				_user$project$Latte_Common_Style$fontStyle,
+				_s3k$latte_charts$Latte_Common_Style$fontStyle,
 				{
 					ctor: '::',
 					_0: {ctor: '_Tuple2', _0: 'position', _1: 'absolute'},
@@ -10223,14 +9958,14 @@ var _user$project$Latte_Common_Tooltip$tooltipStyle = F2(
 						_0: {
 							ctor: '_Tuple2',
 							_0: 'left',
-							_1: _user$project$Latte_Common_Helper$toPx(state.tooltip.x)
+							_1: _s3k$latte_charts$Latte_Common_Helper$toPx(state.tooltip.x)
 						},
 						_1: {
 							ctor: '::',
 							_0: {
 								ctor: '_Tuple2',
 								_0: 'top',
-								_1: _user$project$Latte_Common_Helper$toPx(state.tooltip.y)
+								_1: _s3k$latte_charts$Latte_Common_Helper$toPx(state.tooltip.y)
 							},
 							_1: {
 								ctor: '::',
@@ -10252,7 +9987,7 @@ var _user$project$Latte_Common_Tooltip$tooltipStyle = F2(
 													_0: {ctor: '_Tuple2', _0: 'text-align', _1: 'center'},
 													_1: {
 														ctor: '::',
-														_0: _user$project$Latte_Common_Tooltip$opacityStyle,
+														_0: _s3k$latte_charts$Latte_Common_Tooltip$opacityStyle,
 														_1: {ctor: '[]'}
 													}
 												}
@@ -10265,8 +10000,8 @@ var _user$project$Latte_Common_Tooltip$tooltipStyle = F2(
 					}
 				}));
 	});
-var _user$project$Latte_Common_Tooltip$liWidth = 70;
-var _user$project$Latte_Common_Tooltip$liStyle = F2(
+var _s3k$latte_charts$Latte_Common_Tooltip$liWidth = 70;
+var _s3k$latte_charts$Latte_Common_Tooltip$liStyle = F2(
 	function (i, state) {
 		return _elm_lang$html$Html_Attributes$style(
 			{
@@ -10277,7 +10012,7 @@ var _user$project$Latte_Common_Tooltip$liStyle = F2(
 					_1: A2(
 						_elm_lang$core$Basics_ops['++'],
 						'3px solid ',
-						A2(_user$project$Latte_Common_Helper$stringByIndex, i, state.colors))
+						A2(_s3k$latte_charts$Latte_Common_Helper$stringByIndex, i, state.colors))
 				},
 				_1: {
 					ctor: '::',
@@ -10290,7 +10025,7 @@ var _user$project$Latte_Common_Tooltip$liStyle = F2(
 							_0: {
 								ctor: '_Tuple2',
 								_0: 'width',
-								_1: _user$project$Latte_Common_Helper$toPx(_user$project$Latte_Common_Tooltip$liWidth)
+								_1: _s3k$latte_charts$Latte_Common_Helper$toPx(_s3k$latte_charts$Latte_Common_Tooltip$liWidth)
 							},
 							_1: {
 								ctor: '::',
@@ -10302,13 +10037,13 @@ var _user$project$Latte_Common_Tooltip$liStyle = F2(
 				}
 			});
 	});
-var _user$project$Latte_Common_Tooltip$showDataset = F4(
+var _s3k$latte_charts$Latte_Common_Tooltip$showDataset = F4(
 	function (i, state, val, title) {
 		return A2(
 			_elm_lang$html$Html$li,
 			{
 				ctor: '::',
-				_0: A2(_user$project$Latte_Common_Tooltip$liStyle, i, state),
+				_0: A2(_s3k$latte_charts$Latte_Common_Tooltip$liStyle, i, state),
 				_1: {ctor: '[]'}
 			},
 			{
@@ -10341,7 +10076,7 @@ var _user$project$Latte_Common_Tooltip$showDataset = F4(
 								_elm_lang$html$Html$strong,
 								{
 									ctor: '::',
-									_0: _user$project$Latte_Common_Tooltip$dsTitleStyle,
+									_0: _s3k$latte_charts$Latte_Common_Tooltip$dsTitleStyle,
 									_1: {ctor: '[]'}
 								},
 								{
@@ -10355,12 +10090,12 @@ var _user$project$Latte_Common_Tooltip$showDataset = F4(
 				_1: {ctor: '[]'}
 			});
 	});
-var _user$project$Latte_Common_Tooltip$showDatasets = function (state) {
+var _s3k$latte_charts$Latte_Common_Tooltip$showDatasets = function (state) {
 	return A2(
 		_elm_lang$core$List$map,
 		function (_p0) {
 			var _p1 = _p0;
-			return A4(_user$project$Latte_Common_Tooltip$showDataset, _p1._0, state, _p1._1._0, _p1._1._1);
+			return A4(_s3k$latte_charts$Latte_Common_Tooltip$showDataset, _p1._0, state, _p1._1._0, _p1._1._1);
 		},
 		A2(
 			_elm_lang$core$List$indexedMap,
@@ -10370,12 +10105,12 @@ var _user$project$Latte_Common_Tooltip$showDatasets = function (state) {
 				}),
 			state.tooltip.ds));
 };
-var _user$project$Latte_Common_Tooltip$viewPr = function (model) {
+var _s3k$latte_charts$Latte_Common_Tooltip$viewPr = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: A2(_user$project$Latte_Common_Tooltip$tooltipStyle, model.state, ''),
+			_0: A2(_s3k$latte_charts$Latte_Common_Tooltip$tooltipStyle, model.state, ''),
 			_1: {
 				ctor: '::',
 				_0: _elm_lang$html$Html_Attributes$class('tooltip-latte'),
@@ -10390,7 +10125,7 @@ var _user$project$Latte_Common_Tooltip$viewPr = function (model) {
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _user$project$Latte_Common_Tooltip$arrowStyle,
+					_0: _s3k$latte_charts$Latte_Common_Tooltip$arrowStyle,
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -10404,7 +10139,7 @@ var _user$project$Latte_Common_Tooltip$viewPr = function (model) {
 							_elm_lang$html$Html$div,
 							{
 								ctor: '::',
-								_0: _user$project$Latte_Common_Tooltip$labelStyle,
+								_0: _s3k$latte_charts$Latte_Common_Tooltip$labelStyle,
 								_1: {ctor: '[]'}
 							},
 							{
@@ -10426,15 +10161,15 @@ var _user$project$Latte_Common_Tooltip$viewPr = function (model) {
 			}
 		});
 };
-var _user$project$Latte_Common_Tooltip$view = function (model) {
+var _s3k$latte_charts$Latte_Common_Tooltip$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
 			_0: A2(
-				_user$project$Latte_Common_Tooltip$tooltipStyle,
+				_s3k$latte_charts$Latte_Common_Tooltip$tooltipStyle,
 				model.state,
-				_user$project$Latte_Common_Helper$toPx(_user$project$Latte_Common_Tooltip$liWidth * model.state.dsCount)),
+				_s3k$latte_charts$Latte_Common_Helper$toPx(_s3k$latte_charts$Latte_Common_Tooltip$liWidth * model.state.dsCount)),
 			_1: {
 				ctor: '::',
 				_0: _elm_lang$html$Html_Attributes$class('tooltip-latte'),
@@ -10449,7 +10184,7 @@ var _user$project$Latte_Common_Tooltip$view = function (model) {
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _user$project$Latte_Common_Tooltip$arrowStyle,
+					_0: _s3k$latte_charts$Latte_Common_Tooltip$arrowStyle,
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -10463,7 +10198,7 @@ var _user$project$Latte_Common_Tooltip$view = function (model) {
 							_elm_lang$html$Html$div,
 							{
 								ctor: '::',
-								_0: _user$project$Latte_Common_Tooltip$labelStyle,
+								_0: _s3k$latte_charts$Latte_Common_Tooltip$labelStyle,
 								_1: {ctor: '[]'}
 							},
 							{
@@ -10477,10 +10212,10 @@ var _user$project$Latte_Common_Tooltip$view = function (model) {
 								_elm_lang$html$Html$ul,
 								{
 									ctor: '::',
-									_0: _user$project$Latte_Common_Tooltip$ulStyle,
+									_0: _s3k$latte_charts$Latte_Common_Tooltip$ulStyle,
 									_1: {ctor: '[]'}
 								},
-								_user$project$Latte_Common_Tooltip$showDatasets(model.state)),
+								_s3k$latte_charts$Latte_Common_Tooltip$showDatasets(model.state)),
 							_1: {ctor: '[]'}
 						}
 					}),
@@ -10489,42 +10224,42 @@ var _user$project$Latte_Common_Tooltip$view = function (model) {
 		});
 };
 
-var _user$project$Latte_Bar$ticks = function (model) {
-	return _user$project$Latte_Common_Ticks$view(model);
+var _s3k$latte_charts$Latte_Bar$ticks = function (model) {
+	return _s3k$latte_charts$Latte_Common_Ticks$view(model);
 };
-var _user$project$Latte_Bar$area = function (model) {
-	return _user$project$Latte_Common_Area$view(model);
+var _s3k$latte_charts$Latte_Bar$area = function (model) {
+	return _s3k$latte_charts$Latte_Common_Area$view(model);
 };
-var _user$project$Latte_Bar$view = function (model) {
+var _s3k$latte_charts$Latte_Bar$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _user$project$Latte_Common_Style$boxStyle(model),
+			_0: _s3k$latte_charts$Latte_Common_Style$boxStyle(model),
 			_1: {ctor: '[]'}
 		},
 		{
 			ctor: '::',
-			_0: _user$project$Latte_Common_Title$view(model),
+			_0: _s3k$latte_charts$Latte_Common_Title$view(model),
 			_1: {
 				ctor: '::',
-				_0: _user$project$Latte_Common_Tooltip$view(model),
+				_0: _s3k$latte_charts$Latte_Common_Tooltip$view(model),
 				_1: {
 					ctor: '::',
 					_0: A2(
 						_elm_lang$svg$Svg$svg,
-						_user$project$Latte_Common_Style$chartStyle(model),
+						_s3k$latte_charts$Latte_Common_Style$chartStyle(model),
 						{
 							ctor: '::',
 							_0: A2(
 								_elm_lang$svg$Svg$g,
-								_user$project$Latte_Common_Style$viewportStyle(model),
+								_s3k$latte_charts$Latte_Common_Style$viewportStyle(model),
 								{
 									ctor: '::',
-									_0: _user$project$Latte_Bar$area(model),
+									_0: _s3k$latte_charts$Latte_Bar$area(model),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Latte_Bar$ticks(model),
+										_0: _s3k$latte_charts$Latte_Bar$ticks(model),
 										_1: {ctor: '[]'}
 									}
 								}),
@@ -10536,7 +10271,188 @@ var _user$project$Latte_Bar$view = function (model) {
 		});
 };
 
-var _user$project$Latte_Percentage$legendItem = F2(
+var _s3k$latte_charts$Latte_Common_Lines$pair = F3(
+	function (state, i, val) {
+		var coordType = _elm_lang$core$Native_Utils.eq(i, 0) ? 'M' : 'L';
+		return A2(
+			F2(
+				function (x, y) {
+					return A2(_elm_lang$core$Basics_ops['++'], x, y);
+				}),
+			coordType,
+			A2(
+				_elm_lang$core$String$join,
+				',',
+				{
+					ctor: '::',
+					_0: _elm_lang$core$Basics$toString(
+						A2(_s3k$latte_charts$Latte_Bar_Helper$leftAlign, state, i) + (_s3k$latte_charts$Latte_Common_Style$barWidth / 2)),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$core$Basics$toString(
+							A2(_s3k$latte_charts$Latte_Bar_Helper$calcHeight, state, val) + 18),
+						_1: {ctor: '[]'}
+					}
+				}));
+	});
+var _s3k$latte_charts$Latte_Common_Lines$makeCoords = F2(
+	function (state, dsValues) {
+		return A2(
+			_elm_lang$core$String$join,
+			' ',
+			A2(
+				_elm_lang$core$List$map,
+				function (_p0) {
+					var _p1 = _p0;
+					return A3(_s3k$latte_charts$Latte_Common_Lines$pair, state, _p1._0, _p1._1);
+				},
+				A2(
+					_elm_lang$core$List$indexedMap,
+					F2(
+						function (v0, v1) {
+							return {ctor: '_Tuple2', _0: v0, _1: v1};
+						}),
+					dsValues)));
+	});
+var _s3k$latte_charts$Latte_Common_Lines$makePath = F3(
+	function (state, color, dsValues) {
+		return A2(
+			_elm_lang$svg$Svg$path,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$d(
+					A2(_s3k$latte_charts$Latte_Common_Lines$makeCoords, state, dsValues)),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$style(
+						{
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'stroke', _1: color},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'stroke-width', _1: '2'},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'fill', _1: 'none'},
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$svg$Svg$animate,
+					{
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$attributeName('d'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$from(
+								A2(
+									_s3k$latte_charts$Latte_Common_Lines$makeCoords,
+									state,
+									A2(
+										_elm_lang$core$List$map,
+										function (n) {
+											return 0;
+										},
+										dsValues))),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$to(
+									A2(_s3k$latte_charts$Latte_Common_Lines$makeCoords, state, dsValues)),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$dur('0.2s'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$fill('freeze'),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					},
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			});
+	});
+var _s3k$latte_charts$Latte_Common_Lines$drawPathes = function (model) {
+	var datasets = model.userData.datasets;
+	return A3(
+		_elm_lang$core$List$map2,
+		F2(
+			function (color, dataset) {
+				return A3(_s3k$latte_charts$Latte_Common_Lines$makePath, model.state, color, dataset.values);
+			}),
+		model.state.colors,
+		datasets);
+};
+var _s3k$latte_charts$Latte_Common_Lines$view = function (model) {
+	return A2(
+		_elm_lang$svg$Svg$g,
+		{ctor: '[]'},
+		_s3k$latte_charts$Latte_Common_Lines$drawPathes(model));
+};
+
+var _s3k$latte_charts$Latte_Line$lines = function (model) {
+	return _s3k$latte_charts$Latte_Common_Lines$view(model);
+};
+var _s3k$latte_charts$Latte_Line$ticks = function (model) {
+	return _s3k$latte_charts$Latte_Common_Ticks$view(model);
+};
+var _s3k$latte_charts$Latte_Line$area = function (model) {
+	return _s3k$latte_charts$Latte_Common_Area$view(model);
+};
+var _s3k$latte_charts$Latte_Line$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _s3k$latte_charts$Latte_Common_Style$boxStyle(model),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _s3k$latte_charts$Latte_Common_Title$view(model),
+			_1: {
+				ctor: '::',
+				_0: _s3k$latte_charts$Latte_Common_Tooltip$view(model),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$svg$Svg$svg,
+						_s3k$latte_charts$Latte_Common_Style$chartStyle(model),
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$svg$Svg$g,
+								_s3k$latte_charts$Latte_Common_Style$viewportStyle(model),
+								{
+									ctor: '::',
+									_0: _s3k$latte_charts$Latte_Line$area(model),
+									_1: {
+										ctor: '::',
+										_0: _s3k$latte_charts$Latte_Line$lines(model),
+										_1: {
+											ctor: '::',
+											_0: _s3k$latte_charts$Latte_Line$ticks(model),
+											_1: {ctor: '[]'}
+										}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+
+var _s3k$latte_charts$Latte_Percentage$legendItem = F2(
 	function (color, title) {
 		return A2(
 			_elm_lang$html$Html$span,
@@ -10579,7 +10495,7 @@ var _user$project$Latte_Percentage$legendItem = F2(
 						_elm_lang$html$Html$span,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$style(_user$project$Latte_Common_Style$fontStyle),
+							_0: _elm_lang$html$Html_Attributes$style(_s3k$latte_charts$Latte_Common_Style$fontStyle),
 							_1: {ctor: '[]'}
 						},
 						{
@@ -10591,26 +10507,26 @@ var _user$project$Latte_Percentage$legendItem = F2(
 				}
 			});
 	});
-var _user$project$Latte_Percentage$legend = function (model) {
+var _s3k$latte_charts$Latte_Percentage$legend = function (model) {
 	var labels = model.userData.labels;
 	var colors = model.state.colors;
 	return A2(
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _user$project$Latte_Common_Style$legendStyle,
+			_0: _s3k$latte_charts$Latte_Common_Style$legendStyle,
 			_1: {ctor: '[]'}
 		},
 		A3(
 			_elm_lang$core$List$map2,
 			F2(
 				function (color, label) {
-					return A2(_user$project$Latte_Percentage$legendItem, color, label);
+					return A2(_s3k$latte_charts$Latte_Percentage$legendItem, color, label);
 				}),
 			colors,
 			labels));
 };
-var _user$project$Latte_Percentage$barItem = F4(
+var _s3k$latte_charts$Latte_Percentage$barItem = F4(
 	function (ptr, color, percent, label) {
 		var attrs = _elm_lang$html$Html_Attributes$style(
 			{
@@ -10625,7 +10541,7 @@ var _user$project$Latte_Percentage$barItem = F4(
 					_0: {
 						ctor: '_Tuple2',
 						_0: 'width',
-						_1: _user$project$Latte_Common_Helper$toPr(percent)
+						_1: _s3k$latte_charts$Latte_Common_Helper$toPr(percent)
 					},
 					_1: {
 						ctor: '::',
@@ -10647,7 +10563,7 @@ var _user$project$Latte_Percentage$barItem = F4(
 					ctor: '::',
 					_0: _elm_lang$svg$Svg_Events$onMouseOver(
 						A6(
-							_user$project$Latte_Msg$ShowTooltip,
+							_s3k$latte_charts$Latte_Msg$ShowTooltip,
 							ptr,
 							50,
 							0,
@@ -10656,22 +10572,22 @@ var _user$project$Latte_Percentage$barItem = F4(
 							A2(_myrho$elm_round$Round$round, 2, percent))),
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$svg$Svg_Events$onMouseOut(_user$project$Latte_Msg$HideTooltip),
+						_0: _elm_lang$svg$Svg_Events$onMouseOut(_s3k$latte_charts$Latte_Msg$HideTooltip),
 						_1: {ctor: '[]'}
 					}
 				}
 			},
 			{ctor: '[]'});
 	});
-var _user$project$Latte_Percentage$makeBars = function (model) {
+var _s3k$latte_charts$Latte_Percentage$makeBars = function (model) {
 	var labels = model.userData.labels;
-	var percents = _user$project$Latte_Common_Helper$calcFirstDsPercents(model);
+	var percents = _s3k$latte_charts$Latte_Common_Helper$calcFirstDsPercents(model);
 	var colors = model.state.colors;
 	return A5(
 		_elm_lang$core$List$map4,
 		F4(
 			function (ptr, color, percent, label) {
-				return A4(_user$project$Latte_Percentage$barItem, ptr, color, percent, label);
+				return A4(_s3k$latte_charts$Latte_Percentage$barItem, ptr, color, percent, label);
 			}),
 		A2(
 			_elm_lang$core$List$range,
@@ -10681,20 +10597,20 @@ var _user$project$Latte_Percentage$makeBars = function (model) {
 		percents,
 		labels);
 };
-var _user$project$Latte_Percentage$view = function (model) {
+var _s3k$latte_charts$Latte_Percentage$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _user$project$Latte_Common_Style$boxStyle(model),
+			_0: _s3k$latte_charts$Latte_Common_Style$boxStyle(model),
 			_1: {ctor: '[]'}
 		},
 		{
 			ctor: '::',
-			_0: _user$project$Latte_Common_Title$view(model),
+			_0: _s3k$latte_charts$Latte_Common_Title$view(model),
 			_1: {
 				ctor: '::',
-				_0: _user$project$Latte_Common_Tooltip$viewPr(model),
+				_0: _s3k$latte_charts$Latte_Common_Tooltip$viewPr(model),
 				_1: {
 					ctor: '::',
 					_0: A2(
@@ -10704,14 +10620,14 @@ var _user$project$Latte_Percentage$view = function (model) {
 							_0: _elm_lang$html$Html_Attributes$class('latte-percentage'),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Latte_Common_Style$percentageAreaStyle,
+								_0: _s3k$latte_charts$Latte_Common_Style$percentageAreaStyle,
 								_1: {ctor: '[]'}
 							}
 						},
-						_user$project$Latte_Percentage$makeBars(model)),
+						_s3k$latte_charts$Latte_Percentage$makeBars(model)),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Latte_Percentage$legend(model),
+						_0: _s3k$latte_charts$Latte_Percentage$legend(model),
 						_1: {ctor: '[]'}
 					}
 				}
@@ -10719,226 +10635,45 @@ var _user$project$Latte_Percentage$view = function (model) {
 		});
 };
 
-var _user$project$Latte_Common_Lines$pair = F3(
-	function (state, i, val) {
-		var coordType = _elm_lang$core$Native_Utils.eq(i, 0) ? 'M' : 'L';
-		return A2(
-			F2(
-				function (x, y) {
-					return A2(_elm_lang$core$Basics_ops['++'], x, y);
-				}),
-			coordType,
-			A2(
-				_elm_lang$core$String$join,
-				',',
-				{
-					ctor: '::',
-					_0: _elm_lang$core$Basics$toString(
-						A2(_user$project$Latte_Bar_Helper$leftAlign, state, i) + (_user$project$Latte_Common_Style$barWidth / 2)),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$core$Basics$toString(
-							A2(_user$project$Latte_Bar_Helper$calcHeight, state, val) + 18),
-						_1: {ctor: '[]'}
-					}
-				}));
-	});
-var _user$project$Latte_Common_Lines$makeCoords = F2(
-	function (state, dsValues) {
-		return A2(
-			_elm_lang$core$String$join,
-			' ',
-			A2(
-				_elm_lang$core$List$map,
-				function (_p0) {
-					var _p1 = _p0;
-					return A3(_user$project$Latte_Common_Lines$pair, state, _p1._0, _p1._1);
-				},
-				A2(
-					_elm_lang$core$List$indexedMap,
-					F2(
-						function (v0, v1) {
-							return {ctor: '_Tuple2', _0: v0, _1: v1};
-						}),
-					dsValues)));
-	});
-var _user$project$Latte_Common_Lines$makePath = F3(
-	function (state, color, dsValues) {
-		return A2(
-			_elm_lang$svg$Svg$path,
-			{
-				ctor: '::',
-				_0: _elm_lang$svg$Svg_Attributes$d(
-					A2(_user$project$Latte_Common_Lines$makeCoords, state, dsValues)),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$style(
-						{
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'stroke', _1: color},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'stroke-width', _1: '2'},
-								_1: {
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'fill', _1: 'none'},
-									_1: {ctor: '[]'}
-								}
-							}
-						}),
-					_1: {ctor: '[]'}
-				}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$svg$Svg$animate,
-					{
-						ctor: '::',
-						_0: _elm_lang$svg$Svg_Attributes$attributeName('d'),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$svg$Svg_Attributes$from(
-								A2(
-									_user$project$Latte_Common_Lines$makeCoords,
-									state,
-									A2(
-										_elm_lang$core$List$map,
-										function (n) {
-											return 0;
-										},
-										dsValues))),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$svg$Svg_Attributes$to(
-									A2(_user$project$Latte_Common_Lines$makeCoords, state, dsValues)),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$svg$Svg_Attributes$dur('0.2s'),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$svg$Svg_Attributes$fill('freeze'),
-										_1: {ctor: '[]'}
-									}
-								}
-							}
-						}
-					},
-					{ctor: '[]'}),
-				_1: {ctor: '[]'}
-			});
-	});
-var _user$project$Latte_Common_Lines$drawPathes = function (model) {
-	var datasets = model.userData.datasets;
-	return A3(
-		_elm_lang$core$List$map2,
-		F2(
-			function (color, dataset) {
-				return A3(_user$project$Latte_Common_Lines$makePath, model.state, color, dataset.values);
-			}),
-		model.state.colors,
-		datasets);
+var _s3k$latte_charts$Latte_Scatter$lines = function (model) {
+	return _s3k$latte_charts$Latte_Common_Lines$view(model);
 };
-var _user$project$Latte_Common_Lines$view = function (model) {
-	return A2(
-		_elm_lang$svg$Svg$g,
-		{ctor: '[]'},
-		_user$project$Latte_Common_Lines$drawPathes(model));
+var _s3k$latte_charts$Latte_Scatter$ticks = function (model) {
+	return _s3k$latte_charts$Latte_Common_Ticks$view(model);
 };
-
-var _user$project$Latte_Line$lines = function (model) {
-	return _user$project$Latte_Common_Lines$view(model);
+var _s3k$latte_charts$Latte_Scatter$area = function (model) {
+	return _s3k$latte_charts$Latte_Common_Area$view(model);
 };
-var _user$project$Latte_Line$ticks = function (model) {
-	return _user$project$Latte_Common_Ticks$view(model);
-};
-var _user$project$Latte_Line$area = function (model) {
-	return _user$project$Latte_Common_Area$view(model);
-};
-var _user$project$Latte_Line$view = function (model) {
+var _s3k$latte_charts$Latte_Scatter$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _user$project$Latte_Common_Style$boxStyle(model),
+			_0: _s3k$latte_charts$Latte_Common_Style$boxStyle(model),
 			_1: {ctor: '[]'}
 		},
 		{
 			ctor: '::',
-			_0: _user$project$Latte_Common_Title$view(model),
+			_0: _s3k$latte_charts$Latte_Common_Title$view(model),
 			_1: {
 				ctor: '::',
-				_0: _user$project$Latte_Common_Tooltip$view(model),
+				_0: _s3k$latte_charts$Latte_Common_Tooltip$view(model),
 				_1: {
 					ctor: '::',
 					_0: A2(
 						_elm_lang$svg$Svg$svg,
-						_user$project$Latte_Common_Style$chartStyle(model),
+						_s3k$latte_charts$Latte_Common_Style$chartStyle(model),
 						{
 							ctor: '::',
 							_0: A2(
 								_elm_lang$svg$Svg$g,
-								_user$project$Latte_Common_Style$viewportStyle(model),
+								_s3k$latte_charts$Latte_Common_Style$viewportStyle(model),
 								{
 									ctor: '::',
-									_0: _user$project$Latte_Line$area(model),
+									_0: _s3k$latte_charts$Latte_Scatter$area(model),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Latte_Line$lines(model),
-										_1: {
-											ctor: '::',
-											_0: _user$project$Latte_Line$ticks(model),
-											_1: {ctor: '[]'}
-										}
-									}
-								}),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}
-			}
-		});
-};
-
-var _user$project$Latte_Scatter$lines = function (model) {
-	return _user$project$Latte_Common_Lines$view(model);
-};
-var _user$project$Latte_Scatter$ticks = function (model) {
-	return _user$project$Latte_Common_Ticks$view(model);
-};
-var _user$project$Latte_Scatter$area = function (model) {
-	return _user$project$Latte_Common_Area$view(model);
-};
-var _user$project$Latte_Scatter$view = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _user$project$Latte_Common_Style$boxStyle(model),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: _user$project$Latte_Common_Title$view(model),
-			_1: {
-				ctor: '::',
-				_0: _user$project$Latte_Common_Tooltip$view(model),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$svg$Svg$svg,
-						_user$project$Latte_Common_Style$chartStyle(model),
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$svg$Svg$g,
-								_user$project$Latte_Common_Style$viewportStyle(model),
-								{
-									ctor: '::',
-									_0: _user$project$Latte_Scatter$area(model),
-									_1: {
-										ctor: '::',
-										_0: _user$project$Latte_Scatter$ticks(model),
+										_0: _s3k$latte_charts$Latte_Scatter$ticks(model),
 										_1: {ctor: '[]'}
 									}
 								}),
@@ -10950,7 +10685,7 @@ var _user$project$Latte_Scatter$view = function (model) {
 		});
 };
 
-var _user$project$Latte_Update$hideTooltip = function (state) {
+var _s3k$latte_charts$Latte_Update$hideTooltip = function (state) {
 	var barChart = state.barChart;
 	var newBarChart = _elm_lang$core$Native_Utils.update(
 		barChart,
@@ -10963,7 +10698,7 @@ var _user$project$Latte_Update$hideTooltip = function (state) {
 		state,
 		{tooltip: newTooltip, barChart: newBarChart});
 };
-var _user$project$Latte_Update$makeTooltipDataset = F2(
+var _s3k$latte_charts$Latte_Update$makeTooltipDataset = F2(
 	function (ptr, ds) {
 		return A2(
 			_elm_lang$core$List$map,
@@ -10971,32 +10706,42 @@ var _user$project$Latte_Update$makeTooltipDataset = F2(
 				return {
 					ctor: '_Tuple2',
 					_0: n.title,
-					_1: _user$project$Latte_Common_Helper$toS(
-						A2(_user$project$Latte_Common_Helper$floatByIndex, ptr, n.values))
+					_1: _s3k$latte_charts$Latte_Common_Helper$toS(
+						A2(_s3k$latte_charts$Latte_Common_Helper$floatByIndex, ptr, n.values))
 				};
 			},
 			ds);
 	});
-var _user$project$Latte_Update$showTooltip = F7(
+var _s3k$latte_charts$Latte_Update$showTooltip = F7(
 	function (ptr, x, y, val, label, dsTitle, model) {
-		var commonTpX = ((x - 3.5) + (_user$project$Latte_Common_Style$chartPaddingLeft / 2)) - (_user$project$Latte_Common_Style$barWidth * _elm_lang$core$Basics$toFloat(
+		var commonTpX = ((x - 3.5) + (_s3k$latte_charts$Latte_Common_Style$chartPaddingLeft / 2)) - (_s3k$latte_charts$Latte_Common_Style$barWidth * _elm_lang$core$Basics$toFloat(
 			_elm_lang$core$List$length(model.userData.datasets)));
 		var tooltipX = function () {
 			var _p0 = model.userData.chart;
-			if (_p0.ctor === 'Percentage') {
-				return A2(_user$project$Latte_Common_Helper$percentageOffset, ptr, model);
-			} else {
-				return commonTpX;
+			switch (_p0.ctor) {
+				case 'Bar':
+					return commonTpX;
+				case 'Line':
+					return commonTpX;
+				case 'Scatter':
+					return commonTpX;
+				default:
+					return A2(_s3k$latte_charts$Latte_Common_Helper$percentageOffset, ptr, model);
 			}
 		}();
 		var state = model.state;
 		var tooltip = state.tooltip;
 		var tooltipY = function () {
 			var _p1 = model.userData.chart;
-			if (_p1.ctor === 'Percentage') {
-				return 6;
-			} else {
-				return ((state.height - y) - 62) - 10;
+			switch (_p1.ctor) {
+				case 'Bar':
+					return ((state.height - y) - 62) - 1;
+				case 'Line':
+					return ((state.height - y) - 62) - 5;
+				case 'Scatter':
+					return ((state.height - y) - 62) - 5;
+				default:
+					return 8;
 			}
 		}();
 		var newTooltip = _elm_lang$core$Native_Utils.update(
@@ -11007,7 +10752,7 @@ var _user$project$Latte_Update$showTooltip = F7(
 				label: label,
 				title: dsTitle,
 				display: 'block',
-				ds: A2(_user$project$Latte_Update$makeTooltipDataset, ptr, model.userData.datasets)
+				ds: A2(_s3k$latte_charts$Latte_Update$makeTooltipDataset, ptr, model.userData.datasets)
 			});
 		var barChart = state.barChart;
 		var newBarChart = _elm_lang$core$Native_Utils.update(
@@ -11017,52 +10762,51 @@ var _user$project$Latte_Update$showTooltip = F7(
 			state,
 			{tooltip: newTooltip, barChart: newBarChart});
 	});
-var _user$project$Latte_Update$update = F2(
+var _s3k$latte_charts$Latte_Update$update = F2(
 	function (msg, model) {
 		var _p2 = msg;
 		if (_p2.ctor === 'ShowTooltip') {
 			return _elm_lang$core$Native_Utils.update(
 				model,
 				{
-					state: A7(_user$project$Latte_Update$showTooltip, _p2._0, _p2._1, _p2._2, _p2._3, _p2._4, _p2._5, model)
+					state: A7(_s3k$latte_charts$Latte_Update$showTooltip, _p2._0, _p2._1, _p2._2, _p2._3, _p2._4, _p2._5, model)
 				});
 		} else {
 			return _elm_lang$core$Native_Utils.update(
 				model,
 				{
-					state: _user$project$Latte_Update$hideTooltip(model.state)
+					state: _s3k$latte_charts$Latte_Update$hideTooltip(model.state)
 				});
 		}
 	});
 
-var _user$project$Latte$latteDraw = function (model) {
+var _s3k$latte_charts$Latte$latteView = function (model) {
 	var _p0 = model.userData.chart;
 	switch (_p0.ctor) {
 		case 'Bar':
-			return _user$project$Latte_Bar$view(model);
+			return _s3k$latte_charts$Latte_Bar$view(model);
 		case 'Line':
-			return _user$project$Latte_Line$view(model);
+			return _s3k$latte_charts$Latte_Line$view(model);
 		case 'Scatter':
-			return _user$project$Latte_Scatter$view(model);
-		case 'Percentage':
-			return _user$project$Latte_Percentage$view(model);
+			return _s3k$latte_charts$Latte_Scatter$view(model);
 		default:
-			return A2(
-				_elm_lang$svg$Svg$svg,
-				{ctor: '[]'},
-				{ctor: '[]'});
+			return _s3k$latte_charts$Latte_Percentage$view(model);
 	}
 };
-var _user$project$Latte$latteMake = F3(
+var _s3k$latte_charts$Latte$latteUpdate = F2(
+	function (msg, model) {
+		return A2(_s3k$latte_charts$Latte_Update$update, msg, model);
+	});
+var _s3k$latte_charts$Latte$latteInit = F3(
 	function (width, height, data) {
 		return {
 			userData: data,
 			state: {
 				width: width,
 				height: height,
-				maxDsValue: _user$project$Latte_Common_Helper$scaleY(
-					_user$project$Latte_Common_Helper$maxDsValue(data)),
-				maxBarLines: _user$project$Latte_Common_Helper$maxBarLines(height),
+				maxDsValue: _s3k$latte_charts$Latte_Common_Helper$scaleY(
+					_s3k$latte_charts$Latte_Common_Helper$maxDsValue(data)),
+				maxBarLines: _s3k$latte_charts$Latte_Common_Helper$maxBarLines(height),
 				elemCount: _elm_lang$core$List$length(data.labels),
 				dsCount: _elm_lang$core$List$length(data.datasets),
 				tooltip: {
@@ -11138,10 +10882,15 @@ var _user$project$Latte$latteMake = F3(
 			}
 		};
 	});
-var _user$project$Latte$latteUpdate = F2(
-	function (msg, model) {
-		return A2(_user$project$Latte_Update$update, msg, model);
-	});
+
+var _user$project$LandingDesc$view = A2(
+	_evancz$elm_markdown$Markdown$toHtml,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('content'),
+		_1: {ctor: '[]'}
+	},
+	'\n\n#### Hello\n\n\nIt is an experimental Elm charting library. Here I’m attempting to figure out how to use Elm language in practice. At this moment my project goes through pre-alpha version, so your feedback, suggestions and pull requests are welcome ;)\n\n#### TL; DR\n\n1. Add Latte Chart package to your project with `$ elm package install s3k/latte-charts`\n1. Import functions and types from Latte package\n1. Describe new latte state in your Html.program (The Elm Architecture pattern). Use **latteInit** helper\n1. Connect all chart events in **update** section\n1. To render Latte Chart component in your view use **latteView** function through **Html.map**\n\nDownload full [example here](https://github.com/s3k/latte-charts/tree/master/example).\n\n#### How to install?\n\nJust add a new package by running the following command:\n\n```\n$ elm package install s3k/latte-charts\n```\n\nAnd import main functions and types.\n\n```\nimport Latte exposing (..)\nimport Latte.Model as LatteModel exposing (Chart(..), Dataset)\nimport Latte.Msg as LatteMsg\n```\n\n#### Model. Data preparation\n\nUse helper **latteInit** to create Latte Chart model:\n\n1. Set rendering options: hight x width\n1. Choose the chart type: **Bar | Line | Scatter | Percentage**\n1. Fill labels and datasets. Labels are Strings and datasets are Floats\n\n```\ntype alias Model =\n    { latte : LatteModel.Model\n    }\n\n\ninit : ( Model, Cmd Msg )\ninit =\n    let\n        model =\n            { latte =\n                latteInit 950 200 <|\n                    { chart = Bar\n                    , labels =\n                        [ \"Io\", \"Europa\", \"Ganymede\", \"Callisto\", \"Fake\" ]\n                    , datasets =\n                        [ Dataset \"Mass\" [ 8931900, 4800000, 14819000, 10759000, 10759000 ]\n                        , Dataset \"Diameter\" <|\n                            List.map ( -> n * 1000) [ 3660.0, 3121.6, 5262.4, 4820.6, 4000 ]\n                        , Dataset \"Semi-Major\" [ 421700, 671034, 1070412, 1882709, 1882709 ]\n                        ]\n                    , title = \"Biggest Moons of Jupiter\"\n                    }\n            }\n    in\n        model ! []\n```\n\n\n#### Update. Connect latte chart to update event loop\n\nCreate new message type and add handler in update section\n\n```\ntype Msg\n    = Latte LatteMsg.Msg\n\n\nupdate : Msg -> Model -> ( Model, Cmd Msg )\nupdate msg model =\n    case msg of\n        Latte msg ->\n            ( { model | latte = latteUpdate msg model.latte }, Cmd.none )\n\n\n```\n\n#### View. Render a component\n\nUse **latteView** function to render a chart through **Html.map** function to route all events in a component.\n\n```\nview : Model -> Html Msg\nview model =\n    div []\n        [ Html.map Latte (latteView model.latte)]\n\n```\n\n#### Outro\n\nAs I told before — it’s a pre-alpha, which is very far from production.\nThe next steps are adding negative values, fixing bugs with tooltip position and realization of based on width auto-scaling.\nIf someone have ideas of how to do that, let me know! Also PR\'s are welcome)\n\n');
 
 var _user$project$Landing$update = F2(
 	function (msg, model) {
@@ -11152,7 +10901,7 @@ var _user$project$Landing$update = F2(
 				_0: _elm_lang$core$Native_Utils.update(
 					model,
 					{
-						latte: A2(_user$project$Latte$latteUpdate, _p0._0, model.latte)
+						latte: A2(_s3k$latte_charts$Latte$latteUpdate, _p0._0, model.latte)
 					}),
 				_1: _elm_lang$core$Platform_Cmd$none
 			};
@@ -11194,11 +10943,11 @@ var _user$project$Landing$subscriptions = function (model) {
 var _user$project$Landing$init = function () {
 	var model = {
 		latte: A3(
-			_user$project$Latte$latteMake,
+			_s3k$latte_charts$Latte$latteInit,
 			800,
 			200,
 			{
-				chart: _user$project$Latte_Model$Bar,
+				chart: _s3k$latte_charts$Latte_Model$Bar,
 				labels: {
 					ctor: '::',
 					_0: 'Io',
@@ -11219,7 +10968,7 @@ var _user$project$Landing$init = function () {
 				datasets: {
 					ctor: '::',
 					_0: A2(
-						_user$project$Latte_Model$Dataset,
+						_s3k$latte_charts$Latte_Model$Dataset,
 						'Mass',
 						{
 							ctor: '::',
@@ -11241,7 +10990,7 @@ var _user$project$Landing$init = function () {
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_user$project$Latte_Model$Dataset,
+							_s3k$latte_charts$Latte_Model$Dataset,
 							'Diameter',
 							A2(
 								_elm_lang$core$List$map,
@@ -11268,7 +11017,7 @@ var _user$project$Landing$init = function () {
 						_1: {
 							ctor: '::',
 							_0: A2(
-								_user$project$Latte_Model$Dataset,
+								_s3k$latte_charts$Latte_Model$Dataset,
 								'Semi-Major',
 								{
 									ctor: '::',
@@ -11295,16 +11044,16 @@ var _user$project$Landing$init = function () {
 			}),
 		chartBtns: {
 			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: _user$project$Latte_Model$Bar, _1: 'active'},
+			_0: {ctor: '_Tuple2', _0: _s3k$latte_charts$Latte_Model$Bar, _1: 'active'},
 			_1: {
 				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: _user$project$Latte_Model$Line, _1: ''},
+				_0: {ctor: '_Tuple2', _0: _s3k$latte_charts$Latte_Model$Line, _1: ''},
 				_1: {
 					ctor: '::',
-					_0: {ctor: '_Tuple2', _0: _user$project$Latte_Model$Scatter, _1: ''},
+					_0: {ctor: '_Tuple2', _0: _s3k$latte_charts$Latte_Model$Scatter, _1: ''},
 					_1: {
 						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: _user$project$Latte_Model$Percentage, _1: ''},
+						_0: {ctor: '_Tuple2', _0: _s3k$latte_charts$Latte_Model$Percentage, _1: ''},
 						_1: {ctor: '[]'}
 					}
 				}
@@ -11404,7 +11153,7 @@ var _user$project$Landing$mainChart = function (model) {
 						_0: A2(
 							_elm_lang$html$Html$map,
 							_user$project$Landing$Latte,
-							_user$project$Latte$latteDraw(model.latte)),
+							_s3k$latte_charts$Latte$latteView(model.latte)),
 						_1: {
 							ctor: '::',
 							_0: A2(
