@@ -1,2 +1,2 @@
 #!/bin/bash
-elm-live example/Landing.elm --output=www/js/landing.js --pushstate
+elm-live src/Landing.elm --output=www/js/landing.js --pushstate
