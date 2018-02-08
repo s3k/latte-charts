@@ -58,7 +58,7 @@ footer {
 }
 
 .content pre code {
-  overflow: scroll;
+  overflow: hidden;
 }
 
 
