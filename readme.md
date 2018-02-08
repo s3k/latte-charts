@@ -54,7 +54,7 @@ $ elm package install s3k/latte
 
 And import main functions and types:
 
-```
+```elm
 import Latte exposing (..)
 import Latte.Model as LatteModel exposing (Chart(..), Dataset)
 import Latte.Msg as LatteMsg
@@ -68,7 +68,7 @@ Use helper **latteInit** to create Latte Chart model:
 1. Choose the chart type: **Bar | Line | Scatter | Percentage**
 1. Fill labels and datasets. Labels are Strings and datasets are Floats
 
-```
+```elm
 type alias Model =
     { latte : LatteModel.Model
     }
@@ -101,7 +101,7 @@ init =
 
 Create new message type and add handler in an update section:
 
-```
+```elm
 type Msg
     = Latte LatteMsg.Msg
 
@@ -119,7 +119,7 @@ update msg model =
 
 Use **latteView** function to render a chart through **Html.map** function to route all events in a component:
 
-```
+```elm
 view : Model -> Html Msg
 view model =
     div []
