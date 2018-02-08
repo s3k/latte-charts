@@ -52,7 +52,7 @@ Just add a new package by running the following command:
 $ elm package install s3k/latte
 ```
 
-And import main functions and types.
+And import main functions and types:
 
 ```
 import Latte exposing (..)
@@ -99,7 +99,7 @@ init =
 
 ### Update. Connect latte chart to update event loop
 
-Create new message type and add handler in an update section
+Create new message type and add handler in an update section:
 
 ```
 type Msg
@@ -117,7 +117,7 @@ update msg model =
 
 ### View. Render a component
 
-Use **latteView** function to render a chart through **Html.map** function to route all events in a component.
+Use **latteView** function to render a chart through **Html.map** function to route all events in a component:
 
 ```
 view : Model -> Html Msg

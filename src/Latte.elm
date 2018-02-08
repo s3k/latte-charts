@@ -90,7 +90,7 @@ latteInit width height data =
     }
 
 
-{-| Create new message type and add handler in an update section.
+{-| Create new message type and add handler in an update section:
 
     type Msg
         = Latte LatteMsg.Msg
@@ -107,7 +107,7 @@ latteUpdate msg model =
     update msg model
 
 
-{-| Use this function to render a chart through **Html.map** function to route all events in a component.
+{-| Use this function to render a chart through **Html.map** function to route all events in a component:
 
     view : Model -> Html Msg
     view model =
