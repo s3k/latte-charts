@@ -16,20 +16,20 @@ It is an experimental Elm charting library. Here I’m attempting to figure out 
 
 #### TL; DR
 
-1. Add Latte Chart package to your project with `$ elm package install s3k/latte`
+1. Add Latte Chart package to your project with `$ elm package install s3k/latte-charts`
 1. Import functions and types from Latte package
-1. Describe new latte state in your Html.program (The Elm Architecture pattern). Use **latteMake** helper
+1. Describe new latte state in your Html.program (The Elm Architecture pattern). Use **latteInit** helper
 1. Connect all chart events in **update** section
-1. To render Latte Chart component in your view use **latteDraw** function through **Html.map**
+1. To render Latte Chart component in your view use **latteView** function through **Html.map**
 
-Download full [example here](https://github.com/s3k/latte/blob/master/example/BarChart.elm).
+Download full [example here](https://github.com/s3k/latte-charts/tree/master/example).
 
 #### How to install?
 
 Just add a new package by running the following command:
 
 ```
-$ elm package install s3k/latte
+$ elm package install s3k/latte-charts
 ```
 
 And import main functions and types.
@@ -42,7 +42,7 @@ import Latte.Msg as LatteMsg
 
 #### Model. Data preparation
 
-Use helper **latteMake** to create Latte Chart model:
+Use helper **latteInit** to create Latte Chart model:
 
 1. Set rendering options: hight x width
 1. Choose the chart type: **Bar | Line | Scatter | Percentage**
@@ -59,7 +59,7 @@ init =
     let
         model =
             { latte =
-                latteMake 950 200 <|
+                latteInit 950 200 <|
                     { chart = Bar
                     , labels =
                         [ "Io", "Europa", "Ganymede", "Callisto", "Fake" ]
@@ -97,13 +97,13 @@ update msg model =
 
 #### View. Render a component
 
-Use **latteDraw** function to render a chart through **Html.map** function to route all events in a component.
+Use **latteView** function to render a chart through **Html.map** function to route all events in a component.
 
 ```
 view : Model -> Html Msg
 view model =
     div []
-        [ Html.map Latte (latteDraw model.latte)]
+        [ Html.map Latte (latteView model.latte)]
 
 ```
 
