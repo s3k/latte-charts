@@ -129,7 +129,6 @@ view model =
 
 ### Outro
 
-As I told before -- it’s an alpha version, which is very far from production.  
 The next steps are:
 
 - adding negative values
