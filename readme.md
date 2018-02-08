@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="274" src="https://s3k.github.io/latte/www/images/logo.svg">
+  <img width="274" src="https://s3k.github.io/latte-charts/www/images/logo.svg">
 </p>
 
 ### Hello
@@ -7,32 +7,32 @@
 It is an experimental Elm charting library. Here I’m attempting to figure out how to use Elm language in practice.  
 At this moment my project goes through **alpha** version, so your feedback, suggestions and pull requests are welcome!
 
-Check [Interactive Demo](https://s3k.github.io/latte/).  
-Or clone this repo to your local machine and explore [examples](https://github.com/s3k/latte/tree/master/example) through `elm-reactor`.
+Check [Interactive Demo](https://s3k.github.io/latte-charts/).  
+Or clone this repo to your local machine and explore [examples](https://github.com/s3k/latte-charts/tree/master/example) through `elm-reactor`.
 
 **Multiple Bar Chart**
 <p align="left">
-  <img width="640px" src="https://s3k.github.io/latte/www/images/chart.png">
+  <img width="640px" src="https://s3k.github.io/latte-charts/www/images/chart.png">
 </p>
 
 **Line Chart**
 <p align="left">
-  <img width="640px" src="https://s3k.github.io/latte/www/images/line-chart.png">
+  <img width="640px" src="https://s3k.github.io/latte-charts/www/images/line-chart.png">
 </p>
 
 **Scatter Chart**
 <p align="left">
-  <img width="640px" src="https://s3k.github.io/latte/www/images/scatter-chart.png">
+  <img width="640px" src="https://s3k.github.io/latte-charts/www/images/scatter-chart.png">
 </p>
 
 **Percentage Chart**
 <p align="left">
-  <img width="640px" src="https://s3k.github.io/latte/www/images/percentage-chart.png">
+  <img width="640px" src="https://s3k.github.io/latte-charts/www/images/percentage-chart.png">
 </p>
 
 **Simple Bar Chart**
 <p align="left">
-  <img width="640px" src="https://s3k.github.io/latte/www/images/bar-chart.png">
+  <img width="640px" src="https://s3k.github.io/latte-charts/www/images/bar-chart.png">
 </p>
 
 ### TL; DR

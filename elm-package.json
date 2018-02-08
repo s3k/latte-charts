@@ -1,7 +1,7 @@
 {
     "version": "1.0.0",
-    "summary": "Simple charts for Elm Html.program",
-    "repository": "https://github.com/s3k/project.git",
+    "summary": "Simple charts for your Html.program",
+    "repository": "https://github.com/s3k/latte-charts",
     "license": "BSD3",
     "source-directories": [
         "src",

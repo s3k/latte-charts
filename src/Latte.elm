@@ -2,27 +2,28 @@ module Latte exposing (latteInit, latteUpdate, latteView)
 
 {-| With this module you can create, update and draw chart in your `Html.program`.
 
-For more details watch [Live Demo](https://s3k.github.io/latte/)
+For more details watch [Live Demo](https://s3k.github.io/latte-charts/)
 
 @docs latteInit, latteUpdate, latteView
+
 -}
 
 import Latte.Bar
-import Latte.Percentage
-import Latte.Line
-import Latte.Scatter
 import Latte.Common.Helper exposing (..)
+import Latte.Line
 import Latte.Model exposing (..)
 import Latte.Msg exposing (..)
+import Latte.Percentage
+import Latte.Scatter
 import Latte.Update exposing (update)
 import Svg exposing (Svg, svg)
 
 
 {-| Use helper **latteInit** to create Latte Chart state:
 
-1. Set rendering options: hight x width
-1. Choose the chart type: **Bar | Line | Scatter | Percentage**
-1. Fill labels and datasets. Labels are Strings and datasets are Floats
+1.  Set rendering options: hight x width
+2.  Choose the chart type: **Bar | Line | Scatter | Percentage**
+3.  Fill labels and datasets. Labels are Strings and datasets are Floats
 
 ```
 init : ( Model, Cmd Msg )
@@ -43,9 +44,9 @@ init =
                     }
             }
     in
-        model ! []
-
+    model ! []
 ```
+
 -}
 latteInit : Float -> Float -> UserData -> Model
 latteInit width height data =
@@ -91,19 +92,15 @@ latteInit width height data =
 
 {-| Create new message type and add handler in update section.
 
-```
-type Msg
-    = Latte LatteMsg.Msg
+    type Msg
+        = Latte LatteMsg.Msg
 
+    update : Msg -> Model -> ( Model, Cmd Msg )
+    update msg model =
+        case msg of
+            Latte msg ->
+                ( { model | latte = latteUpdate msg model.latte }, Cmd.none )
 
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
-        Latte msg ->
-            ( { model | latte = latteUpdate msg model.latte }, Cmd.none )
-
-
-```
 -}
 latteUpdate : Msg -> Model -> Model
 latteUpdate msg model =
@@ -112,13 +109,11 @@ latteUpdate msg model =
 
 {-| Use this function to render a chart through **Html.map** function to route all events in a component.
 
-```
-view : Model -> Html Msg
-view model =
-    div []
-        [ Html.map Latte (latteDraw model.latte)]
+    view : Model -> Html Msg
+    view model =
+        div []
+            [ Html.map Latte (latteDraw model.latte) ]
 
-```
 -}
 latteView : Model -> Svg Msg
 latteView model =
