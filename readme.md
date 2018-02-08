@@ -99,7 +99,7 @@ init =
 
 ### Update. Connect latte chart to update event loop
 
-Create new message type and add handler in update section
+Create new message type and add handler in an update section
 
 ```
 type Msg

@@ -90,7 +90,7 @@ latteInit width height data =
     }
 
 
-{-| Create new message type and add handler in update section.
+{-| Create new message type and add handler in an update section.
 
     type Msg
         = Latte LatteMsg.Msg
