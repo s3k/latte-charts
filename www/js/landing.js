@@ -9277,7 +9277,11 @@ var _s3k$latte_charts$Latte_Common_Style$boxStyle = function (model) {
 							_1: {
 								ctor: '::',
 								_0: {ctor: '_Tuple2', _0: 'border-radius', _1: '3px'},
-								_1: {ctor: '[]'}
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'overflow-y', _1: 'auto'},
+									_1: {ctor: '[]'}
+								}
 							}
 						}
 					}
