@@ -10944,7 +10944,7 @@ var _user$project$Landing$init = function () {
 	var model = {
 		latte: A3(
 			_s3k$latte_charts$Latte$latteInit,
-			800,
+			950,
 			200,
 			{
 				chart: _s3k$latte_charts$Latte_Model$Bar,

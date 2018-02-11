@@ -34,7 +34,7 @@ init =
     let
         model =
             { latte =
-                latteInit 800 200 <|
+                latteInit 950 200 <|
                     { chart = Bar
                     , labels =
                         [ "Io", "Europa", "Ganymede", "Callisto" ]
@@ -54,7 +54,7 @@ init =
                 ]
             }
     in
-    model ! []
+        model ! []
 
 
 subscriptions : Model -> Sub Msg
@@ -103,7 +103,7 @@ update msg model =
                                 )
                             )
             in
-            ( { model | latte = lt_, chartBtns = chartBtns }, Cmd.none )
+                ( { model | latte = lt_, chartBtns = chartBtns }, Cmd.none )
 
 
 
