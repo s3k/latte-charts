@@ -51,6 +51,7 @@ boxStyle model =
         , ( "border", "1px solid #ccc" )
         , ( "max-width", toPx model.state.width )
         , ( "border-radius", "3px" )
+        , ( "overflow-y", "auto" )
         ]
 
 
